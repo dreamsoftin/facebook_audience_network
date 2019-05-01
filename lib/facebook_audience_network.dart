@@ -1,18 +1,27 @@
 library facebook_audience_network;
 
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+export 'ad/ad_banner.dart';
+export 'ad/ad_native.dart';
+
 class FacebookAudienceNetwork {
+  static const _channel = const MethodChannel("fb.audience.network.io");
 
-  static const _battery = const MethodChannel("fb.audience.network.io");
+  static Future<bool> init({
+    String placementId = "YOUR_PLACEMENT_ID",
+    String testingId = "",
+  }) async {
+    Map<String, String> initValues = {
+      "placementId": placementId,
+      "testingId": testingId,
+    };
 
-  static Future<int> getBatteryLevel() async {
     try {
-      final int result = await _battery.invokeMethod('getBatteryLevel');
+      final result = await _channel.invokeMethod("init", initValues);
       return result;
-    } on PlatformException catch (e) {
-      throw "Failed to get battery level: '${e.message}'.";
+    } on PlatformException {
+      return false;
     }
   }
 }

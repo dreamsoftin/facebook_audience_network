@@ -32,3 +32,7 @@ android {
         disable 'InvalidPackage'
     }
 }
+
+dependencies {
+    implementation 'com.facebook.android:audience-network-sdk:5.1.0'
+}
