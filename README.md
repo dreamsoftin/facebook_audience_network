@@ -63,4 +63,3 @@ FacebookAudienceNetwork.loadInterstitialAd(
 ## Future Work
 Implement for iOS platform.
 
-
