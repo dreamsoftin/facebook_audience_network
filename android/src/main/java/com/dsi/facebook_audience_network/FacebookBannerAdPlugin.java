@@ -39,10 +39,10 @@ class FacebookBannerAdView implements PlatformView, AdListener {
 
     FacebookBannerAdView(Context context, int id, HashMap args, BinaryMessenger messenger) {
 
-        channel = new MethodChannel(messenger, "fb.audience.network.io/bannerAd_" + id);
+        channel = new MethodChannel(messenger, FacebookConstants.BANNER_AD_CHANNEL + "_" + id);
 
         adView = new AdView(context,
-                FacebookAudienceNetworkPlugin.placementId,
+                (String) args.get("id"),
                 getBannerSize(args));
 
         adView.setAdListener(this);
@@ -68,30 +68,46 @@ class FacebookBannerAdView implements PlatformView, AdListener {
 
     @Override
     public void dispose() {
-        adView.destroy();
+        if (adView != null)
+            adView.destroy();
     }
 
     @Override
     public void onError(Ad ad, AdError adError) {
-        channel.invokeMethod("error", adError.getErrorMessage());
+        HashMap<String, Object> args = new HashMap<>();
+        args.put("placement_id", ad.getPlacementId());
+        args.put("invalidated", ad.isAdInvalidated());
+        args.put("error_code", adError.getErrorCode());
+        args.put("error_message", adError.getErrorMessage());
+
+        channel.invokeMethod(FacebookConstants.ERROR_METHOD, args);
     }
 
     @Override
     public void onAdLoaded(Ad ad) {
-        channel.invokeMethod("success",
-                "Banner Ad Loaded successfully!");
+        HashMap<String, Object> args = new HashMap<>();
+        args.put("placement_id", ad.getPlacementId());
+        args.put("invalidated", ad.isAdInvalidated());
+
+        channel.invokeMethod(FacebookConstants.LOADED_METHOD, args);
     }
 
     @Override
     public void onAdClicked(Ad ad) {
-        channel.invokeMethod("clicked",
-                "Banner Ad clicked");
+        HashMap<String, Object> args = new HashMap<>();
+        args.put("placement_id", ad.getPlacementId());
+        args.put("invalidated", ad.isAdInvalidated());
+
+        channel.invokeMethod(FacebookConstants.CLICKED_METHOD, args);
     }
 
     @Override
     public void onLoggingImpression(Ad ad) {
-        channel.invokeMethod("logging_impression",
-                "Banner Ad logging impression");
+        HashMap<String, Object> args = new HashMap<>();
+        args.put("placement_id", ad.getPlacementId());
+        args.put("invalidated", ad.isAdInvalidated());
+
+        channel.invokeMethod(FacebookConstants.LOGGING_IMPRESSION_METHOD, args);
     }
 }
 

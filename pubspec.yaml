@@ -1,8 +1,8 @@
 name: facebook_audience_network
 description: Facebook Audience Network plugin for Flutter application
-version: 0.0.1
-author:
-homepage:
+version: 0.1.0
+author: Dreamsoft
+homepage: https://github.com/dreamsoftin/facebook_audience_network
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
