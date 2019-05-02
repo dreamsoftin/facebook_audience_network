@@ -4,7 +4,7 @@ version: 0.0.1
 authors:
 - Suraj Shettigar <suraj@dreamsoftin.com>
 - Sachin Ganesh <sachin@dreamsoftin.com>
-homepage:
+homepage: https://github.com/dreamsoftin/facebook_audience_network
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
