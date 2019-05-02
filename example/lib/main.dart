@@ -9,12 +9,27 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
+  bool showBannerAd = true;
+
   @override
   void initState() {
+    super.initState();
     FacebookAudienceNetwork.init(
       testingId: "37b1da9d-b48c-4103-a393-2e095e734bd6",
     );
-    super.initState();
+
+    FacebookAudienceNetwork.loadInterstitialAd(
+      listener: (result, value) {
+        if (result == InterstitialAdResult.LOADED)
+          FacebookAudienceNetwork.showInterstitialAd(delay: 5000);
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    FacebookAudienceNetwork.destroyInterstitialAd();
   }
 
   @override
@@ -35,7 +50,20 @@ class MyAppState extends State<MyApp> {
           child: FacebookBannerAd(
             bannerSize: BannerSize.STANDARD,
             listener: (result, value) {
-              print("Facebook Banner Ad Result: $result Value: $value");
+              switch (result) {
+                case BannerAdResult.ERROR:
+                  print("Error: $value");
+                  break;
+                case BannerAdResult.LOADED:
+                  print("Loaded: $value");
+                  break;
+                case BannerAdResult.CLICKED:
+                  print("Clicked: $value");
+                  break;
+                case BannerAdResult.LOGGING_IMPRESSION:
+                  print("Logging Impression: $value");
+                  break;
+              }
             },
           ),
         ),

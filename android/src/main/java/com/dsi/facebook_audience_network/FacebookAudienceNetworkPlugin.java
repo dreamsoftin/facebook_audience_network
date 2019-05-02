@@ -1,6 +1,7 @@
 package com.dsi.facebook_audience_network;
 
 import android.app.Activity;
+import android.media.FaceDetector;
 
 import com.facebook.ads.*;
 
@@ -17,8 +18,6 @@ import io.flutter.plugin.common.PluginRegistry;
  */
 public class FacebookAudienceNetworkPlugin implements MethodCallHandler {
 
-    static String placementId = "YOUR_PLACEMENT_ID";
-
     private Activity mActivity;
 
     private FacebookAudienceNetworkPlugin(Activity activity) {
@@ -30,38 +29,39 @@ public class FacebookAudienceNetworkPlugin implements MethodCallHandler {
      */
     public static void registerWith(PluginRegistry.Registrar registrar) {
 
-
-        registrar.platformViewRegistry().registerViewFactory("fb.audience.network.io/bannerAd",
-                new FacebookBannerAdPlugin(registrar.messenger()));
-
+        // Main channel for initialization
         final MethodChannel channel = new MethodChannel(registrar.messenger(),
-                "fb.audience.network.io");
+                FacebookConstants.MAIN_CHANNEL);
         channel.setMethodCallHandler(new FacebookAudienceNetworkPlugin(registrar.activity()));
+
+        // Interstitial Ad channel
+        final MethodChannel interstitialAdChannel = new MethodChannel(registrar.messenger(),
+                FacebookConstants.INTERSTITIAL_AD_CHANNEL);
+        interstitialAdChannel
+                .setMethodCallHandler(new FacebookInterstitialAdPlugin(registrar.context(),
+                        interstitialAdChannel));
+
+        // Banner Ad PlatformView channel
+        registrar.platformViewRegistry().registerViewFactory(FacebookConstants.BANNER_AD_CHANNEL,
+                new FacebookBannerAdPlugin(registrar.messenger()));
     }
 
     @Override
     public void onMethodCall(MethodCall call, Result result) {
 
-        switch (call.method) {
-            case "init":
-                result.success(init((HashMap) call.arguments));
-                break;
-            default:
-                result.notImplemented();
-        }
+        if (call.method.equals(FacebookConstants.INIT_METHOD))
+            result.success(init((HashMap) call.arguments));
+        else
+            result.notImplemented();
     }
-    
+
     private boolean init(HashMap initVals) {
-        final String placementId = (String) initVals.get("placementId");
         final String testingId = (String) initVals.get("testingId");
 
         AudienceNetworkAds.initialize(mActivity.getApplicationContext());
 
-        if(testingId != null) {
+        if (testingId != null) {
             AdSettings.addTestDevice(testingId);
-        }
-        if(placementId != null) {
-            FacebookAudienceNetworkPlugin.placementId = placementId;
         }
         return true;
     }
