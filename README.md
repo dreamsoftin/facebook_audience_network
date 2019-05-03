@@ -4,6 +4,8 @@
 
 **Note: Currently only Android platform is supported.** 
 
+![Pub](https://img.shields.io/pub/v/facebook_audience_network.svg) ![GitHub](https://img.shields.io/github/license/dreamsoftin/facebook_audience_network.svg)
+
 ## Getting Started
 
 ### 1. Initialization:
