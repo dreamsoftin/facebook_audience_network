@@ -2,9 +2,12 @@ package com.dsi.facebook_audience_network;
 
 import android.content.Context;
 import android.os.Handler;
+import android.util.DisplayMetrics;
 
 import com.facebook.ads.Ad;
 import com.facebook.ads.AdError;
+import com.facebook.ads.AdSize;
+import com.facebook.ads.InstreamVideoAdView;
 import com.facebook.ads.RewardedVideoAd;
 import com.facebook.ads.RewardedVideoAdListener;
 
@@ -99,6 +102,7 @@ class FacebookRewardedVideoAdPlugin implements MethodChannel.MethodCallHandler,
         if (rewardedVideoAd == null)
             return false;
         else {
+            rewardedVideoAd.setAdListener(null);
             rewardedVideoAd.destroy();
             rewardedVideoAd = null;
         }

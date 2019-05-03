@@ -2,7 +2,7 @@ import 'package:flutter/services.dart';
 
 import 'package:facebook_audience_network/constants.dart';
 
-enum RewardedVideoResult {
+enum RewardedVideoAdResult {
   /// Rewarded video error.
   ERROR,
 
@@ -23,14 +23,14 @@ enum RewardedVideoResult {
 }
 
 class FacebookRewardedVideoAd {
-  static void Function(RewardedVideoResult, dynamic) _listener;
+  static void Function(RewardedVideoAdResult, dynamic) _listener;
 
   static const _channel = const MethodChannel(REWARDED_VIDEO_CHANNEL);
 
   /// Loads a rewarded video Ad in background. Replace the default [placementId]
   /// with the one which you obtain by signing-up for Facebook Audience Network.
   ///
-  /// [listener] passes [RewardedVideoResult] and information associated with
+  /// [listener] passes [RewardedVideoAdResult] and information associated with
   /// the result to the implemented callback.
   ///
   /// Information will generally be of type Map with details such as:
@@ -45,7 +45,7 @@ class FacebookRewardedVideoAd {
   /// ```
   static Future<bool> loadRewardedVideoAd({
     String placementId = "YOUR_PLACEMENT_ID",
-    Function(RewardedVideoResult, dynamic) listener,
+    Function(RewardedVideoAdResult, dynamic) listener,
   }) async {
     try {
       final args = <String, dynamic>{
@@ -74,7 +74,7 @@ class FacebookRewardedVideoAd {
   /// ```dart
   /// FacebookRewardedVideoAd.loadRewardedVideoAd(
   ///   listener: (result, value) {
-  ///     if(result == RewardedVideoResult.LOADED)
+  ///     if(result == RewardedVideoAdResult.LOADED)
   ///       FacebookRewardedVideoAd.showRewardedVideoAd();
   ///   },
   /// );
@@ -110,27 +110,27 @@ class FacebookRewardedVideoAd {
     switch (call.method) {
       case REWARDED_VIDEO_COMPLETE_METHOD:
         if (_listener != null)
-          _listener(RewardedVideoResult.VIDEO_COMPLETE, call.arguments);
+          _listener(RewardedVideoAdResult.VIDEO_COMPLETE, call.arguments);
         break;
       case REWARDED_VIDEO_CLOSED_METHOD:
         if (_listener != null)
-          _listener(RewardedVideoResult.VIDEO_CLOSED, call.arguments);
+          _listener(RewardedVideoAdResult.VIDEO_CLOSED, call.arguments);
         break;
       case ERROR_METHOD:
         if (_listener != null)
-          _listener(RewardedVideoResult.ERROR, call.arguments);
+          _listener(RewardedVideoAdResult.ERROR, call.arguments);
         break;
       case LOADED_METHOD:
         if (_listener != null)
-          _listener(RewardedVideoResult.LOADED, call.arguments);
+          _listener(RewardedVideoAdResult.LOADED, call.arguments);
         break;
       case CLICKED_METHOD:
         if (_listener != null)
-          _listener(RewardedVideoResult.CLICKED, call.arguments);
+          _listener(RewardedVideoAdResult.CLICKED, call.arguments);
         break;
       case LOGGING_IMPRESSION_METHOD:
         if (_listener != null)
-          _listener(RewardedVideoResult.LOGGING_IMPRESSION, call.arguments);
+          _listener(RewardedVideoAdResult.LOGGING_IMPRESSION, call.arguments);
         break;
     }
     return Future.value(true);

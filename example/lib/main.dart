@@ -9,7 +9,7 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
-  bool showBannerAd = true;
+  bool _videoComplete = false;
 
   @override
   void initState() {
@@ -17,7 +17,7 @@ class MyAppState extends State<MyApp> {
     FacebookAudienceNetwork.init(
       testingId: "37b1da9d-b48c-4103-a393-2e095e734bd6",
     );
-
+    _videoComplete = false;
     FacebookInterstitialAd.loadInterstitialAd(
       placementId: "YOUR_PLACEMENT_ID",
       listener: (result, value) {
@@ -29,9 +29,9 @@ class MyAppState extends State<MyApp> {
     FacebookRewardedVideoAd.loadRewardedVideoAd(
       placementId: "YOUR_PLACEMENT_ID",
       listener: (result, value) {
-        if(result == RewardedVideoResult.LOADED)
+        if (result == RewardedVideoAdResult.LOADED)
           FacebookRewardedVideoAd.showRewardedVideoAd();
-        if(result == RewardedVideoResult.VIDEO_COMPLETE)
+        if (result == RewardedVideoAdResult.VIDEO_COMPLETE)
           print("Video completed");
       },
     );
@@ -56,27 +56,37 @@ class MyAppState extends State<MyApp> {
             "FB Audience Network Example",
           ),
         ),
-        body: Container(
-          alignment: Alignment(0.5, 1),
-          child: FacebookBannerAd(
-            bannerSize: BannerSize.STANDARD,
-            listener: (result, value) {
-              switch (result) {
-                case BannerAdResult.ERROR:
-                  print("Error: $value");
-                  break;
-                case BannerAdResult.LOADED:
-                  print("Loaded: $value");
-                  break;
-                case BannerAdResult.CLICKED:
-                  print("Clicked: $value");
-                  break;
-                case BannerAdResult.LOGGING_IMPRESSION:
-                  print("Logging Impression: $value");
-                  break;
-              }
-            },
-          ),
+        body: Stack(
+          children: <Widget>[
+            _videoComplete == false
+                ? Container(
+                    alignment: Alignment(0.5, -1.0),
+                    child: FacebookInStreamVideoAd(
+                      placementId: "YOUR_PLACEMENT_ID",
+                      height: 300,
+                      listener: (result, value) {
+                        if (result == InStreamVideoAdResult.VIDEO_COMPLETE) {
+                          setState(() {
+                            _videoComplete = true;
+                          });
+                        }
+                      },
+                    ),
+                  )
+                : SizedBox(
+                    width: 0,
+                    height: 0,
+                  ),
+            Container(
+              alignment: Alignment(0.5, 1),
+              child: FacebookBannerAd(
+                bannerSize: BannerSize.STANDARD,
+                listener: (result, value) {
+                  print("Banner Ad: $result --> $value");
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );
