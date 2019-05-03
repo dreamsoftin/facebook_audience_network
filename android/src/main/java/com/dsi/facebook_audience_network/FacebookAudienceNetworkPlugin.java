@@ -2,6 +2,7 @@ package com.dsi.facebook_audience_network;
 
 import android.app.Activity;
 import android.media.FaceDetector;
+import android.util.DisplayMetrics;
 
 import com.facebook.ads.*;
 
@@ -18,7 +19,7 @@ import io.flutter.plugin.common.PluginRegistry;
  */
 public class FacebookAudienceNetworkPlugin implements MethodCallHandler {
 
-    private Activity mActivity;
+    private final Activity mActivity;
 
     private FacebookAudienceNetworkPlugin(Activity activity) {
         this.mActivity = activity;
@@ -49,8 +50,17 @@ public class FacebookAudienceNetworkPlugin implements MethodCallHandler {
                         rewardedAdChannel));
 
         // Banner Ad PlatformView channel
-        registrar.platformViewRegistry().registerViewFactory(FacebookConstants.BANNER_AD_CHANNEL,
-                new FacebookBannerAdPlugin(registrar.messenger()));
+        registrar.
+                platformViewRegistry().
+                registerViewFactory(FacebookConstants.BANNER_AD_CHANNEL,
+                        new FacebookBannerAdPlugin(registrar.messenger()));
+
+        // InStream Video Ad PlatformView channel
+        registrar.
+                platformViewRegistry().
+                registerViewFactory(FacebookConstants.IN_STREAM_VIDEO_CHANNEL,
+                        new FacebookInStreamVideoAdPlugin(registrar.messenger()));
+
     }
 
     @Override

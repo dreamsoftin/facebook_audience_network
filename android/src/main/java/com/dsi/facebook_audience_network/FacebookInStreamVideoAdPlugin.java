@@ -1,14 +1,15 @@
 package com.dsi.facebook_audience_network;
 
+import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
+import android.util.DisplayMetrics;
 import android.view.View;
 
 import com.facebook.ads.Ad;
 import com.facebook.ads.AdError;
-import com.facebook.ads.AdListener;
 import com.facebook.ads.AdSize;
-import com.facebook.ads.AdView;
+import com.facebook.ads.InstreamVideoAdListener;
+import com.facebook.ads.InstreamVideoAdView;
 
 import java.util.HashMap;
 
@@ -18,53 +19,34 @@ import io.flutter.plugin.common.StandardMessageCodec;
 import io.flutter.plugin.platform.PlatformView;
 import io.flutter.plugin.platform.PlatformViewFactory;
 
-public class FacebookBannerAdPlugin extends PlatformViewFactory {
-
+class FacebookInStreamVideoAdPlugin extends PlatformViewFactory {
     private final BinaryMessenger messenger;
 
 
-    FacebookBannerAdPlugin(BinaryMessenger messenger) {
+    FacebookInStreamVideoAdPlugin(BinaryMessenger messenger) {
         super(StandardMessageCodec.INSTANCE);
         this.messenger = messenger;
     }
 
     @Override
     public PlatformView create(Context context, int id, Object args) {
-        return new FacebookBannerAdView(context, id, (HashMap) args, this.messenger);
+        return new FacebookInStreamVideoAdView(context, id,
+                (HashMap) args, this.messenger);
     }
 }
 
-class FacebookBannerAdView implements PlatformView, AdListener {
-    private final AdView adView;
+class FacebookInStreamVideoAdView implements PlatformView, InstreamVideoAdListener {
+    private final InstreamVideoAdView adView;
     private final MethodChannel channel;
 
-//    private final boolean isDisposable;
+    FacebookInStreamVideoAdView(Context context, int id, HashMap args, BinaryMessenger messenger) {
 
-    FacebookBannerAdView(Context context, int id, HashMap args, BinaryMessenger messenger) {
+        this.channel = new MethodChannel(messenger,
+                FacebookConstants.IN_STREAM_VIDEO_CHANNEL + "_" + id);
 
-        channel = new MethodChannel(messenger,
-                FacebookConstants.BANNER_AD_CHANNEL + "_" + id);
-
-//        isDisposable = (boolean) args.get("dispose");
-
-        adView = new AdView(context,
-                (String) args.get("id"),
-                getBannerSize(args));
-
+        adView = new InstreamVideoAdView(context, (String) args.get("id"), getSize(args));
         adView.setAdListener(this);
         adView.loadAd();
-    }
-
-    private AdSize getBannerSize(HashMap args) {
-//        final int width = (int) args.get("width");
-        final int height = (int) args.get("height");
-
-        if (height >= 250)
-            return AdSize.RECTANGLE_HEIGHT_250;
-        if (height >= 90)
-            return AdSize.BANNER_HEIGHT_90;
-        else
-            return AdSize.BANNER_HEIGHT_50;
     }
 
     @Override
@@ -74,12 +56,27 @@ class FacebookBannerAdView implements PlatformView, AdListener {
 
     @Override
     public void dispose() {
-//        if (adView != null && isDisposable)
+//        if (adView != null)
 //        {
-//            Log.d("FacebookBannerAdPlugin", "Banner Ad disposed");
 //            adView.setAdListener(null);
 //            adView.destroy();
 //        }
+    }
+
+    private AdSize getSize(HashMap args) {
+        int width = (int) args.get("width");
+        int height = (int) args.get("height");
+
+        return new AdSize(width, height);
+    }
+
+    @Override
+    public void onAdVideoComplete(Ad ad) {
+        HashMap<String, Object> args = new HashMap<>();
+        args.put("placement_id", ad.getPlacementId());
+        args.put("invalidated", ad.isAdInvalidated());
+
+        channel.invokeMethod(FacebookConstants.IN_STREAM_VIDEO_COMPLETE_METHOD, args);
     }
 
     @Override
@@ -100,6 +97,11 @@ class FacebookBannerAdView implements PlatformView, AdListener {
         args.put("invalidated", ad.isAdInvalidated());
 
         channel.invokeMethod(FacebookConstants.LOADED_METHOD, args);
+
+        if (adView == null || !adView.isAdLoaded())
+            return;
+
+        adView.show();
     }
 
     @Override
@@ -120,5 +122,3 @@ class FacebookBannerAdView implements PlatformView, AdListener {
         channel.invokeMethod(FacebookConstants.LOGGING_IMPRESSION_METHOD, args);
     }
 }
-
-

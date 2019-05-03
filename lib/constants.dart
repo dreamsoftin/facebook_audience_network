@@ -3,6 +3,7 @@ const String BANNER_AD_CHANNEL = MAIN_CHANNEL + "/bannerAd";
 const String INTERSTITIAL_AD_CHANNEL = MAIN_CHANNEL + "/interstitialAd";
 const String NATIVE_AD_CHANNEL = MAIN_CHANNEL + "/nativeAd";
 const String REWARDED_VIDEO_CHANNEL = MAIN_CHANNEL + "/rewardedAd";
+const String IN_STREAM_VIDEO_CHANNEL = MAIN_CHANNEL + "/inStreamAd";
 
 const String INIT_METHOD = "init";
 
@@ -20,5 +21,8 @@ const String ERROR_METHOD = "error";
 const String LOADED_METHOD = "loaded";
 const String CLICKED_METHOD = "clicked";
 const String LOGGING_IMPRESSION_METHOD = "logging_impression";
+
 const String REWARDED_VIDEO_COMPLETE_METHOD = "rewarded_complete";
 const String REWARDED_VIDEO_CLOSED_METHOD = "rewarded_closed";
+
+const String IN_STREAM_VIDEO_COMPLETE_METHOD = "in_stream_complete";

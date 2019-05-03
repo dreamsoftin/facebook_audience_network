@@ -15,6 +15,7 @@ import 'ad/ad_rewarded.dart';
 export 'ad/ad_banner.dart';
 export 'ad/ad_interstitial.dart';
 export 'ad/ad_rewarded.dart';
+export 'ad/ad_instream.dart';
 
 /// All non-widget functions such as initialization, loading interstitial,
 /// in-stream and reward video ads are enclosed in this class.
@@ -94,7 +95,7 @@ class FacebookAudienceNetwork {
   /// Loads a rewarded video Ad in background. Replace the default [placementId]
   /// with the one which you obtain by signing-up for Facebook Audience Network.
   ///
-  /// [listener] passes [RewardedVideoResult] and information associated with
+  /// [listener] passes [RewardedVideoAdResult] and information associated with
   /// the result to the implemented callback.
   ///
   /// Information will generally be of type Map with details such as:
@@ -109,7 +110,7 @@ class FacebookAudienceNetwork {
   /// ```
   static Future<bool> loadRewardedVideoAd({
     String placementId = "YOUR_PLACEMENT_ID",
-    Function(RewardedVideoResult, dynamic) listener,
+    Function(RewardedVideoAdResult, dynamic) listener,
   }) async {
     return await FacebookRewardedVideoAd.loadRewardedVideoAd(
       placementId: placementId,
@@ -126,7 +127,7 @@ class FacebookAudienceNetwork {
   /// ```dart
   /// FacebookAudienceNetwork.loadRewardedVideoAd(
   ///   listener: (result, value) {
-  ///     if(result == RewardedVideoResult.LOADED)
+  ///     if(result == RewardedVideoAdResult.LOADED)
   ///       FacebookAudienceNetwork.showRewardedVideoAd();
   ///   },
   /// );

@@ -1,6 +1,6 @@
 # facebook_audience_network
 
-[Facebook Audience Network](https://developers.facebook.com/docs/audience-network) plugin for Flutter application.
+[Facebook Audience Network](https://developers.facebook.com/docs/audience-network) plugin for Flutter applications.
 
 **Note: Currently only Android platform is supported.** 
 
@@ -72,6 +72,23 @@ FacebookRewardedVideoAd.loadRewardedVideoAd(
       print("Video completed");
   },
 );
+```
+
+### 5. Show In-Stream Video Ad:
+Make sure to give proper width and height.
+
+```dart
+FacebookInStreamVideoAd(
+  placementId: "YOUR_PLACEMENT_ID",
+  height: 300,
+  listener: (result, value) {
+    if (result == InStreamVideoAdResult.VIDEO_COMPLETE) {
+      setState(() {
+        _videoComplete = true;
+      });
+    }
+  },
+)
 ```
 
 **Check out the [example](https://github.com/dreamsoftin/facebook_audience_network/tree/master/example) for complete implementation.**

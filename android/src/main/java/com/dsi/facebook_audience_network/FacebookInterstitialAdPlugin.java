@@ -100,6 +100,7 @@ class FacebookInterstitialAdPlugin implements MethodChannel.MethodCallHandler, I
             return false;
         else
         {
+            interstitialAd.setAdListener(null);
             interstitialAd.destroy();
             interstitialAd = null;
         }

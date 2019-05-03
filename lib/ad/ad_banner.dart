@@ -25,20 +25,22 @@ class BannerSize {
 }
 
 enum BannerAdResult {
-  /// Banner Ad error
+  /// Banner Ad error.
   ERROR,
 
-  /// Banner Ad loaded successfully
+  /// Banner Ad loaded successfully.
   LOADED,
 
-  /// Banner Ad clicked
+  /// Banner Ad clicked.
   CLICKED,
 
-  /// Banner Ad impression logged
+  /// Banner Ad impression logged.
   LOGGING_IMPRESSION,
 }
 
 class FacebookBannerAd extends StatefulWidget {
+  final Key key;
+
   /// Replace the default one with your placement ID for the release build.
   final String placementId;
 
@@ -64,10 +66,11 @@ class FacebookBannerAd extends StatefulWidget {
   /// }
   /// ```
   FacebookBannerAd({
+    this.key,
     this.placementId = "YOUR_PLACEMENT_ID",
     this.bannerSize = BannerSize.STANDARD,
     this.listener,
-  });
+  }) : super(key: key);
 
   @override
   _FacebookBannerAdState createState() => _FacebookBannerAdState();
