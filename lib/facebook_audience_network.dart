@@ -10,10 +10,11 @@ import 'package:flutter/services.dart';
 
 import 'constants.dart';
 import 'ad/ad_interstitial.dart';
+import 'ad/ad_rewarded.dart';
 
 export 'ad/ad_banner.dart';
 export 'ad/ad_interstitial.dart';
-
+export 'ad/ad_rewarded.dart';
 
 /// All non-widget functions such as initialization, loading interstitial,
 /// in-stream and reward video ads are enclosed in this class.
@@ -88,5 +89,54 @@ class FacebookAudienceNetwork {
   /// Removes the Ad.
   static Future<bool> destroyInterstitialAd() async {
     return await FacebookInterstitialAd.destroyInterstitialAd();
+  }
+
+  /// Loads a rewarded video Ad in background. Replace the default [placementId]
+  /// with the one which you obtain by signing-up for Facebook Audience Network.
+  ///
+  /// [listener] passes [RewardedVideoResult] and information associated with
+  /// the result to the implemented callback.
+  ///
+  /// Information will generally be of type Map with details such as:
+  ///
+  /// ```dart
+  /// {
+  ///   'placement\_id': "YOUR\_PLACEMENT\_ID",
+  ///   'invalidated': false,
+  ///   'error\_code': 2,
+  ///   'error\_message': "No internet connection",
+  /// }
+  /// ```
+  static Future<bool> loadRewardedVideoAd({
+    String placementId = "YOUR_PLACEMENT_ID",
+    Function(RewardedVideoResult, dynamic) listener,
+  }) async {
+    return await FacebookRewardedVideoAd.loadRewardedVideoAd(
+      placementId: placementId,
+      listener: listener,
+    );
+  }
+
+  /// Shows a rewarded video Ad after it has been loaded. (This needs to be
+  /// called only after calling [loadRewardedVideoAd] function). [delay] is in
+  /// milliseconds.
+  ///
+  /// Example:
+  ///
+  /// ```dart
+  /// FacebookAudienceNetwork.loadRewardedVideoAd(
+  ///   listener: (result, value) {
+  ///     if(result == RewardedVideoResult.LOADED)
+  ///       FacebookAudienceNetwork.showRewardedVideoAd();
+  ///   },
+  /// );
+  /// ```
+  static Future<bool> showRewardedVideoAd({int delay = 0}) async {
+    return await FacebookRewardedVideoAd.showRewardedVideoAd(delay: delay);
+  }
+
+  /// Removes the rewarded video Ad.
+  static Future<bool> destroyRewardedVideoAd() async {
+    return await FacebookRewardedVideoAd.destroyRewardedVideoAd();
   }
 }

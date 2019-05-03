@@ -27,6 +27,7 @@ FacebookAudienceNetwork.init(
 Container(
   alignment: Alignment(0.5, 1),
   child: FacebookBannerAd(
+    placementId: "YOUR_PLACEMENT_ID",
     bannerSize: BannerSize.STANDARD,
     listener: (result, value) {
       switch (result) {
@@ -51,13 +52,28 @@ Container(
 ### 3. Show Interstitial Ad:
 
 ```dart
-FacebookAudienceNetwork.loadInterstitialAd(
+FacebookInterstitialAd.loadInterstitialAd(
+  placementId: "YOUR_PLACEMENT_ID",
   listener: (result, value) {
     if (result == InterstitialAdResult.LOADED)
-      FacebookAudienceNetwork.showInterstitialAd(delay: 5000);
+      FacebookInterstitialAd.showInterstitialAd(delay: 5000);
   },
 );
 ```
+### 4. Show Rewarded Video Ad:
+
+```dart
+FacebookRewardedVideoAd.loadRewardedVideoAd(
+  placementId: "YOUR_PLACEMENT_ID",
+  listener: (result, value) {
+    if(result == RewardedVideoResult.LOADED)
+      FacebookRewardedVideoAd.showRewardedVideoAd();
+    if(result == RewardedVideoResult.VIDEO_COMPLETE)
+      print("Video completed");
+  },
+);
+```
+
 **Check out the [example](https://github.com/dreamsoftin/facebook_audience_network/tree/master/example) for complete implementation.**
 
 ## Future Work
