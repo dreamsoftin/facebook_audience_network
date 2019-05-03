@@ -48,8 +48,5 @@ class _FaceBookNativeAdState extends State<FacebookNativeAdBuilder> {
     }
   }
 
-  void _onNativeAdViewCreated(int id) {
-
-
-  }
+  void _onNativeAdViewCreated(int id) {}
 }

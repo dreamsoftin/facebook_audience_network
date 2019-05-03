@@ -118,28 +118,30 @@ class _FacebookBannerAdState extends State<FacebookBannerAd> {
   void _onBannerAdViewCreated(int id) async {
     final channel = MethodChannel('${BANNER_AD_CHANNEL}_$id');
 
-    if (widget.listener != null) {
-      channel.setMethodCallHandler((MethodCall call) {
-        switch (call.method) {
-          case ERROR_METHOD:
+    channel.setMethodCallHandler((MethodCall call) {
+      switch (call.method) {
+        case ERROR_METHOD:
+          if (widget.listener != null)
             widget.listener(BannerAdResult.ERROR, call.arguments);
-            break;
-          case LOADED_METHOD:
-            setState(() {
-              containerHeight = widget.bannerSize.height <= -1
-                  ? double.infinity
-                  : widget.bannerSize.height.toDouble();
-            });
+          break;
+        case LOADED_METHOD:
+          setState(() {
+            containerHeight = widget.bannerSize.height <= -1
+                ? double.infinity
+                : widget.bannerSize.height.toDouble();
+          });
+          if (widget.listener != null)
             widget.listener(BannerAdResult.LOADED, call.arguments);
-            break;
-          case CLICKED_METHOD:
+          break;
+        case CLICKED_METHOD:
+          if (widget.listener != null)
             widget.listener(BannerAdResult.CLICKED, call.arguments);
-            break;
-          case LOGGING_IMPRESSION_METHOD:
+          break;
+        case LOGGING_IMPRESSION_METHOD:
+          if (widget.listener != null)
             widget.listener(BannerAdResult.LOGGING_IMPRESSION, call.arguments);
-            break;
-        }
-      });
-    }
+          break;
+      }
+    });
   }
 }

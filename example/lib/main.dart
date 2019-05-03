@@ -18,10 +18,21 @@ class MyAppState extends State<MyApp> {
       testingId: "37b1da9d-b48c-4103-a393-2e095e734bd6",
     );
 
-    FacebookAudienceNetwork.loadInterstitialAd(
+    FacebookInterstitialAd.loadInterstitialAd(
+      placementId: "YOUR_PLACEMENT_ID",
       listener: (result, value) {
         if (result == InterstitialAdResult.LOADED)
-          FacebookAudienceNetwork.showInterstitialAd(delay: 5000);
+          FacebookInterstitialAd.showInterstitialAd();
+      },
+    );
+
+    FacebookRewardedVideoAd.loadRewardedVideoAd(
+      placementId: "YOUR_PLACEMENT_ID",
+      listener: (result, value) {
+        if(result == RewardedVideoResult.LOADED)
+          FacebookRewardedVideoAd.showRewardedVideoAd();
+        if(result == RewardedVideoResult.VIDEO_COMPLETE)
+          print("Video completed");
       },
     );
   }

@@ -72,10 +72,10 @@ class FacebookInterstitialAd {
   /// Example:
   ///
   /// ```dart
-  /// FacebookAudienceNetwork.loadInterstitialAd(
+  /// FacebookInterstitialAd.loadInterstitialAd(
   ///   listener: (result, value) {
   ///     if (result == InterstitialAdResult.LOADED)
-  ///       FacebookAudienceNetwork.showInterstitialAd(delay: 5000);
+  ///       FacebookInterstitialAd.showInterstitialAd(delay: 5000);
   ///   },
   /// );
   /// ```
@@ -107,27 +107,31 @@ class FacebookInterstitialAd {
   }
 
   static Future<dynamic> _interstitialMethodCall(MethodCall call) {
-    if (_listener != null) {
-      switch (call.method) {
-        case DISPLAYED_METHOD:
+    switch (call.method) {
+      case DISPLAYED_METHOD:
+        if (_listener != null)
           _listener(InterstitialAdResult.DISPLAYED, call.arguments);
-          break;
-        case DISMISSED_METHOD:
+        break;
+      case DISMISSED_METHOD:
+        if (_listener != null)
           _listener(InterstitialAdResult.DISMISSED, call.arguments);
-          break;
-        case ERROR_METHOD:
+        break;
+      case ERROR_METHOD:
+        if (_listener != null)
           _listener(InterstitialAdResult.ERROR, call.arguments);
-          break;
-        case LOADED_METHOD:
+        break;
+      case LOADED_METHOD:
+        if (_listener != null)
           _listener(InterstitialAdResult.LOADED, call.arguments);
-          break;
-        case CLICKED_METHOD:
+        break;
+      case CLICKED_METHOD:
+        if (_listener != null)
           _listener(InterstitialAdResult.CLICKED, call.arguments);
-          break;
-        case LOGGING_IMPRESSION_METHOD:
+        break;
+      case LOGGING_IMPRESSION_METHOD:
+        if (_listener != null)
           _listener(InterstitialAdResult.LOGGING_IMPRESSION, call.arguments);
-          break;
-      }
+        break;
     }
     return Future.value(true);
   }

@@ -41,6 +41,13 @@ public class FacebookAudienceNetworkPlugin implements MethodCallHandler {
                 .setMethodCallHandler(new FacebookInterstitialAdPlugin(registrar.context(),
                         interstitialAdChannel));
 
+        // Rewarded video Ad channel
+        final MethodChannel rewardedAdChannel = new MethodChannel(registrar.messenger(),
+                FacebookConstants.REWARDED_VIDEO_CHANNEL);
+        rewardedAdChannel
+                .setMethodCallHandler(new FacebookRewardedVideoAdPlugin(registrar.context(),
+                        rewardedAdChannel));
+
         // Banner Ad PlatformView channel
         registrar.platformViewRegistry().registerViewFactory(FacebookConstants.BANNER_AD_CHANNEL,
                 new FacebookBannerAdPlugin(registrar.messenger()));
@@ -55,8 +62,8 @@ public class FacebookAudienceNetworkPlugin implements MethodCallHandler {
             result.notImplemented();
     }
 
-    private boolean init(HashMap initVals) {
-        final String testingId = (String) initVals.get("testingId");
+    private boolean init(HashMap initValues) {
+        final String testingId = (String) initValues.get("testingId");
 
         AudienceNetworkAds.initialize(mActivity.getApplicationContext());
 
