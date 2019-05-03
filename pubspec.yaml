@@ -1,7 +1,7 @@
 name: facebook_audience_network
 description: Facebook Audience Network plugin for Flutter application
 
-version: 0.1.0
+version: 0.1.1
 authors:
 - Suraj Shettigar <suraj@dreamsoftin.com>
 - Sachin Ganesh <sachin@dreamsoftin.com>
