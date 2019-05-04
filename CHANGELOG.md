@@ -1,3 +1,6 @@
+## 0.3.0
+* Implemented Native Ad & Native Banner Ad
+
 ## 0.2.0
 
 * Implemented in-stream video ad.
