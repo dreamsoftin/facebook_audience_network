@@ -27,4 +27,6 @@ final class FacebookConstants {
     static final String REWARDED_VIDEO_CLOSED_METHOD = "rewarded_closed";
 
     static final String IN_STREAM_VIDEO_COMPLETE_METHOD = "in_stream_complete";
+
+    static final String MEDIA_DOWNLOADED_METHOD = "media_downloaded";
 }

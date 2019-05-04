@@ -77,7 +77,7 @@ FacebookRewardedVideoAd.loadRewardedVideoAd(
 ```
 
 ### 5. Show In-Stream Video Ad:
-Make sure to give proper width and height.
+Make sure the width and height is 300 at minimum.
 
 ```dart
 FacebookInStreamVideoAd(
@@ -91,6 +91,47 @@ FacebookInStreamVideoAd(
     }
   },
 )
+```
+
+### 6. Show Native Ad:
+
+```dart
+FacebookNativeAd(
+  placementId: "YOUR_PLACEMENT_ID",
+  adType: NativeAdType.NATIVE_AD,
+  width: double.infinity,
+  height: 300,
+  backgroundColor: Colors.blue,
+  titleColor: Colors.white,
+  descriptionColor: Colors.white,
+  buttonColor: Colors.deepPurple,
+  buttonTitleColor: Colors.white,
+  buttonBorderColor: Colors.white,
+  listener: (result, value) {
+    print("Native Ad: $result --> $value");
+  },
+),
+```
+
+### 7. Show Native Banner Ad:
+Use `NativeBannerAdSize` to choose the height for Native banner ads. `height` property is ignored for native banner ads.
+
+```dart
+FacebookNativeAd(
+  placementId: "YOUR_PLACEMENT_ID",
+  adType: NativeAdType.NATIVE_BANNER_AD,
+  bannerAdSize: NativeBannerAdSize.HEIGHT_100,
+  width: double.infinity,
+  backgroundColor: Colors.blue,
+  titleColor: Colors.white,
+  descriptionColor: Colors.white,
+  buttonColor: Colors.deepPurple,
+  buttonTitleColor: Colors.white,
+  buttonBorderColor: Colors.white,
+  listener: (result, value) {
+    print("Native Ad: $result --> $value");
+  },
+),
 ```
 
 **Check out the [example](https://github.com/dreamsoftin/facebook_audience_network/tree/master/example) for complete implementation.**

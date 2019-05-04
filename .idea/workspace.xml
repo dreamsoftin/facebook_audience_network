@@ -11,23 +11,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0ea0c790-aa02-417c-b103-9a075306af80" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/android/src/main/java/com/dsi/facebook_audience_network/FacebookInStreamVideoAdPlugin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/ad/ad_instream.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/src/main/java/com/dsi/facebook_audience_network/FacebookNativeAdPlugin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/src/main/java/com/dsi/facebook_audience_network/FacebookAudienceNetworkPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/com/dsi/facebook_audience_network/FacebookAudienceNetworkPlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/com/dsi/facebook_audience_network/FacebookBannerAdPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/com/dsi/facebook_audience_network/FacebookBannerAdPlugin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/src/main/java/com/dsi/facebook_audience_network/FacebookConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/com/dsi/facebook_audience_network/FacebookConstants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/com/dsi/facebook_audience_network/FacebookInterstitialAdPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/com/dsi/facebook_audience_network/FacebookInterstitialAdPlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/com/dsi/facebook_audience_network/FacebookRewardedVideoAdPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/com/dsi/facebook_audience_network/FacebookRewardedVideoAdPlugin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/test/widget_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/test/widget_test.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/ad/ad_banner.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ad/ad_banner.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ad/ad_rewarded.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ad/ad_rewarded.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ad/ad_instream.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ad/ad_instream.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ad/ad_native.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ad/ad_native.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/constants.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/facebook_audience_network.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/facebook_audience_network.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/facebook_audience_network_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/facebook_audience_network_test.dart" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -46,8 +41,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/ad/ad_banner.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="149">
-              <caret line="84" column="13" selection-start-line="84" selection-start-column="13" selection-end-line="84" selection-end-column="13" />
+            <state relative-caret-position="347">
+              <caret line="150" selection-start-line="150" selection-end-line="150" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -58,8 +53,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/example/lib/main.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="64" column="55" selection-start-line="64" selection-start-column="55" selection-end-line="64" selection-end-column="55" />
+            <state relative-caret-position="256">
+              <caret line="59" column="14" selection-start-line="59" selection-start-column="14" selection-end-line="73" selection-end-column="10" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -68,22 +63,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/README.md">
+        <entry file="file://$PROJECT_DIR$/lib/constants.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="245">
-              <caret line="77" column="42" selection-start-line="77" selection-start-column="42" selection-end-line="77" selection-end-column="42" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/ad/ad_instream.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="748">
-              <caret line="53" column="34" selection-start-line="53" selection-start-column="34" selection-end-line="53" selection-end-column="34" />
-              <folding>
-                <element signature="e#0#32#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="330">
+              <caret line="28" selection-start-line="28" selection-end-line="29" selection-end-column="58" />
             </state>
           </provider>
         </entry>
@@ -113,6 +96,7 @@
       <find>BannerAdResult</find>
       <find>InStream</find>
       <find>Banner</find>
+      <find>Native Ad</find>
     </findStrings>
     <replaceStrings>
       <replace>&lt;=</replace>
@@ -138,16 +122,16 @@
         <option value="$PROJECT_DIR$/android/src/main/java/com/dsi/facebook_audience_network/FacebookAudienceNetworkPlugin.java" />
         <option value="$PROJECT_DIR$/lib/ads/banner.dart" />
         <option value="$PROJECT_DIR$/lib/ads/ad_native.dart" />
-        <option value="$PROJECT_DIR$/lib/ad/ad_native.dart" />
         <option value="$PROJECT_DIR$/lib/ad/ad_interstitial.dart" />
         <option value="$PROJECT_DIR$/pubspec.yaml" />
         <option value="$PROJECT_DIR$/test/facebook_audience_network_test.dart" />
         <option value="$PROJECT_DIR$/lib/ad/ad_rewarded.dart" />
-        <option value="$PROJECT_DIR$/lib/constants.dart" />
-        <option value="$PROJECT_DIR$/lib/ad/ad_banner.dart" />
-        <option value="$PROJECT_DIR$/lib/facebook_audience_network.dart" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/lib/ad/ad_banner.dart" />
+        <option value="$PROJECT_DIR$/lib/constants.dart" />
+        <option value="$PROJECT_DIR$/lib/facebook_audience_network.dart" />
         <option value="$PROJECT_DIR$/lib/ad/ad_instream.dart" />
+        <option value="$PROJECT_DIR$/lib/ad/ad_native.dart" />
         <option value="$PROJECT_DIR$/example/lib/main.dart" />
       </list>
     </option>
@@ -180,6 +164,17 @@
             <path>
               <item name="facebook_audience_network" type="b2602c69:ProjectViewProjectNode" />
               <item name="facebook_audience_network" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="facebook_audience_network" type="b2602c69:ProjectViewProjectNode" />
+              <item name="facebook_audience_network" type="462c0819:PsiDirectoryNode" />
+              <item name="example" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="facebook_audience_network" type="b2602c69:ProjectViewProjectNode" />
+              <item name="facebook_audience_network" type="462c0819:PsiDirectoryNode" />
+              <item name="example" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -255,7 +250,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49858356" visible="true" weight="0.20469798" />
       <window_info id="Captures" order="1" side_tool="true" />
@@ -267,13 +261,13 @@
       <window_info id="Capture Tool" order="7" />
       <window_info id="Favorites" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Dart Analysis" order="0" weight="0.3286119" />
-      <window_info anchor="bottom" id="Run" order="1" sideWeight="0.49932885" weight="0.3286119" />
+      <window_info anchor="bottom" id="Run" order="1" sideWeight="0.4986577" weight="0.3286119" />
       <window_info anchor="bottom" id="TODO" order="2" weight="0.3286119" />
       <window_info anchor="bottom" id="Android Profiler" order="3" show_stripe_button="false" />
       <window_info anchor="bottom" id="Logcat" order="4" weight="0.3286119" />
       <window_info anchor="bottom" id="Debug" order="5" weight="0.3286119" />
       <window_info anchor="bottom" id="Terminal" order="6" sideWeight="0.49932885" weight="0.3286119" />
-      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50067115" side_tool="true" weight="0.3286119" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5013423" side_tool="true" weight="0.3286119" />
       <window_info anchor="bottom" id="Flutter Performance" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.3286119" />
       <window_info anchor="bottom" id="Find" order="10" weight="0.3286119" />
@@ -351,16 +345,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/ad/ad_native.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="884">
-          <caret line="52" lean-forward="true" selection-start-line="52" selection-end-line="52" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/example/pubspec.yaml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -404,10 +388,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/constants.dart">
+    <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
+        <state relative-caret-position="1309">
+          <caret line="77" column="42" selection-start-line="77" selection-start-column="42" selection-end-line="77" selection-end-column="42" />
         </state>
       </provider>
     </entry>
@@ -418,9 +402,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/lib/facebook_audience_network.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="18" column="27" selection-start-line="18" selection-start-column="27" selection-end-line="18" selection-end-column="27" />
+          <folding>
+            <element signature="e#331#370#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/constants.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="28" selection-start-line="28" selection-end-line="29" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/lib/ad/ad_interstitial.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="415">
+        <state relative-caret-position="187">
           <caret line="77" column="34" selection-start-line="77" selection-start-column="34" selection-end-line="77" selection-end-column="34" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
@@ -428,47 +429,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/facebook_audience_network.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="17" column="29" selection-start-line="17" selection-start-column="29" selection-end-line="17" selection-end-column="29" />
-          <folding>
-            <element signature="e#331#370#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/ad/ad_banner.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="84" column="13" selection-start-line="84" selection-start-column="13" selection-end-line="84" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="77" column="42" selection-start-line="77" selection-start-column="42" selection-end-line="77" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/ad/ad_instream.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="748">
-          <caret line="53" column="34" selection-start-line="53" selection-start-column="34" selection-end-line="53" selection-end-column="34" />
+        <state relative-caret-position="340">
+          <caret line="42" column="53" selection-start-line="42" selection-start-column="53" selection-end-line="42" selection-end-column="53" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/lib/ad/ad_native.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="90" column="18" selection-start-line="90" selection-start-column="18" selection-end-line="90" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/ad/ad_banner.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="347">
+          <caret line="150" selection-start-line="150" selection-end-line="150" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/example/lib/main.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="64" column="55" selection-start-line="64" selection-start-column="55" selection-end-line="64" selection-end-column="55" />
+        <state relative-caret-position="256">
+          <caret line="59" column="14" selection-start-line="59" selection-start-column="14" selection-end-line="73" selection-end-column="10" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>

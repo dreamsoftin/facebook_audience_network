@@ -15,10 +15,11 @@ class MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     FacebookAudienceNetwork.init(
-      testingId: "37b1da9d-b48c-4103-a393-2e095e734bd6",
+      testingId: "de650e48-8d5d-4561-8409-558ef490e303",
     );
     _videoComplete = false;
-    FacebookInterstitialAd.loadInterstitialAd(
+
+    /*FacebookInterstitialAd.loadInterstitialAd(
       placementId: "YOUR_PLACEMENT_ID",
       listener: (result, value) {
         if (result == InterstitialAdResult.LOADED)
@@ -34,7 +35,7 @@ class MyAppState extends State<MyApp> {
         if (result == RewardedVideoAdResult.VIDEO_COMPLETE)
           print("Video completed");
       },
-    );
+    );*/
   }
 
   @override
@@ -56,37 +57,20 @@ class MyAppState extends State<MyApp> {
             "FB Audience Network Example",
           ),
         ),
-        body: Stack(
-          children: <Widget>[
-            _videoComplete == false
-                ? Container(
-                    alignment: Alignment(0.5, -1.0),
-                    child: FacebookInStreamVideoAd(
-                      placementId: "YOUR_PLACEMENT_ID",
-                      height: 300,
-                      listener: (result, value) {
-                        if (result == InStreamVideoAdResult.VIDEO_COMPLETE) {
-                          setState(() {
-                            _videoComplete = true;
-                          });
-                        }
-                      },
-                    ),
-                  )
-                : SizedBox(
-                    width: 0,
-                    height: 0,
-                  ),
-            Container(
-              alignment: Alignment(0.5, 1),
-              child: FacebookBannerAd(
-                bannerSize: BannerSize.STANDARD,
-                listener: (result, value) {
-                  print("Banner Ad: $result --> $value");
-                },
-              ),
-            ),
-          ],
+        body: FacebookNativeAd(
+          placementId: "YOUR_PLACEMENT_ID",
+          adType: NativeAdType.NATIVE_AD,
+          width: double.infinity,
+          height: 300,
+          backgroundColor: Colors.blue,
+          titleColor: Colors.white,
+          descriptionColor: Colors.white,
+          buttonColor: Colors.deepPurple,
+          buttonTitleColor: Colors.white,
+          buttonBorderColor: Colors.white,
+          listener: (result, value) {
+            print("Native Ad: $result --> $value");
+          },
         ),
       ),
     );

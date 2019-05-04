@@ -1,6 +1,7 @@
 package com.dsi.facebook_audience_network;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.media.FaceDetector;
 import android.util.DisplayMetrics;
 
@@ -60,6 +61,12 @@ public class FacebookAudienceNetworkPlugin implements MethodCallHandler {
                 platformViewRegistry().
                 registerViewFactory(FacebookConstants.IN_STREAM_VIDEO_CHANNEL,
                         new FacebookInStreamVideoAdPlugin(registrar.messenger()));
+
+        // Native Ad PlatformView channel
+        registrar.
+                platformViewRegistry().
+                registerViewFactory(FacebookConstants.NATIVE_AD_CHANNEL,
+                        new FacebookNativeAdPlugin(registrar.messenger()));
 
     }
 

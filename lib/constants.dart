@@ -26,3 +26,5 @@ const String REWARDED_VIDEO_COMPLETE_METHOD = "rewarded_complete";
 const String REWARDED_VIDEO_CLOSED_METHOD = "rewarded_closed";
 
 const String IN_STREAM_VIDEO_COMPLETE_METHOD = "in_stream_complete";
+
+const String MEDIA_DOWNLOADED_METHOD = "media_downloaded";
