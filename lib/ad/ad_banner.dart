@@ -103,7 +103,7 @@ class _FacebookBannerAdState extends State<FacebookBannerAd> {
             ? double.infinity
             : widget.bannerSize.height.toDouble(),
         child: Center(
-          child: Text("BannerAds for iOS is currently not supported"),
+          child: Text("Banner Ads for iOS is currently not supported"),
         ),
       );
     } else {
@@ -112,7 +112,7 @@ class _FacebookBannerAdState extends State<FacebookBannerAd> {
             ? double.infinity
             : widget.bannerSize.height.toDouble(),
         child: Center(
-          child: Text("BannerAds for this platform is currently not supported"),
+          child: Text("Banner Ads for this platform is currently not supported"),
         ),
       );
     }

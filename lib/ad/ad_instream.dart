@@ -24,15 +24,27 @@ enum InStreamVideoAdResult {
 
 class FacebookInStreamVideoAd extends StatefulWidget {
   final Key key;
+
+  /// Replace the default one with your placement ID for the release build.
   final String placementId;
+
+  /// The recommended minimum width is **300**. By default, the width is
+  /// [double.infinity] to make it fit to the parent widget's width.
   final double width;
+
+  /// The recommended minimum width is **300**.
   final double height;
+
+  /// In Stream video ad listener.
   final void Function(InStreamVideoAdResult, dynamic) listener;
 
+  /// This widget can be used to show in-stream video ads. Check out the
+  /// [guidelines](https://developers.facebook.com/docs/audience-network/guidelines/native-ads/#instreamvideo)
+  /// to know best practices for In-Stream video ads.
   FacebookInStreamVideoAd({
     this.key,
     this.placementId = "YOUR_PLACEMENT_ID",
-    this.width=double.infinity,
+    this.width = double.infinity,
     @required this.height,
     this.listener,
   }) : super(key: key);
