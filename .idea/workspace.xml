@@ -11,18 +11,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0ea0c790-aa02-417c-b103-9a075306af80" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/android/src/main/java/com/dsi/facebook_audience_network/FacebookNativeAdPlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/com/dsi/facebook_audience_network/FacebookAudienceNetworkPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/com/dsi/facebook_audience_network/FacebookAudienceNetworkPlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/com/dsi/facebook_audience_network/FacebookConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/com/dsi/facebook_audience_network/FacebookConstants.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ad/ad_banner.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ad/ad_banner.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ad/ad_instream.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ad/ad_instream.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ad/ad_native.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ad/ad_native.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/constants.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/facebook_audience_network.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/facebook_audience_network.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/test/widget_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/test/widget_test.dart" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -38,35 +28,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/ad/ad_banner.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="347">
-              <caret line="150" selection-start-line="150" selection-end-line="150" />
-              <folding>
-                <element signature="e#0#41#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/example/lib/main.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="59" column="14" selection-start-line="59" selection-start-column="14" selection-end-line="73" selection-end-column="10" />
+            <state relative-caret-position="245">
+              <caret line="232" column="49" selection-start-line="232" selection-start-column="49" selection-end-line="232" selection-end-column="49" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/constants.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="28" selection-start-line="28" selection-end-line="29" selection-end-column="58" />
             </state>
           </provider>
         </entry>
@@ -147,34 +116,13 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
-          <expand>
-            <path>
-              <item name="facebook_audience_network" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="facebook_audience_network" type="b2602c69:ProjectViewProjectNode" />
               <item name="facebook_audience_network" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="facebook_audience_network" type="b2602c69:ProjectViewProjectNode" />
-              <item name="facebook_audience_network" type="462c0819:PsiDirectoryNode" />
-              <item name="example" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="facebook_audience_network" type="b2602c69:ProjectViewProjectNode" />
-              <item name="facebook_audience_network" type="462c0819:PsiDirectoryNode" />
-              <item name="example" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -196,7 +144,17 @@
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
+      <pane id="Scope">
+        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
+          <expand>
+            <path>
+              <item name="facebook_audience_network" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -250,8 +208,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49858356" visible="true" weight="0.20469798" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49858356" visible="true" weight="0.20469798" />
       <window_info id="Captures" order="1" side_tool="true" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Image Layers" order="3" />
@@ -261,7 +220,7 @@
       <window_info id="Capture Tool" order="7" />
       <window_info id="Favorites" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Dart Analysis" order="0" weight="0.3286119" />
-      <window_info anchor="bottom" id="Run" order="1" sideWeight="0.4986577" weight="0.3286119" />
+      <window_info active="true" anchor="bottom" id="Run" order="1" sideWeight="0.4986577" visible="true" weight="0.3286119" />
       <window_info anchor="bottom" id="TODO" order="2" weight="0.3286119" />
       <window_info anchor="bottom" id="Android Profiler" order="3" show_stripe_button="false" />
       <window_info anchor="bottom" id="Logcat" order="4" weight="0.3286119" />
@@ -412,13 +371,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/constants.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="28" selection-start-line="28" selection-end-line="29" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/ad/ad_interstitial.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
@@ -451,7 +403,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/ad/ad_banner.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="347">
+        <state relative-caret-position="2482">
           <caret line="150" selection-start-line="150" selection-end-line="150" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
@@ -459,10 +411,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/lib/constants.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="28" selection-start-line="28" selection-end-line="29" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/example/lib/main.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="59" column="14" selection-start-line="59" selection-start-column="14" selection-end-line="73" selection-end-column="10" />
+        <state relative-caret-position="245">
+          <caret line="232" column="49" selection-start-line="232" selection-start-column="49" selection-end-line="232" selection-end-column="49" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
