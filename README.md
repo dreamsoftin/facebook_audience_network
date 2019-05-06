@@ -1,8 +1,10 @@
 # facebook_audience_network
+![Pub](https://img.shields.io/pub/v/facebook_audience_network.svg) ![GitHub](https://img.shields.io/github/license/dreamsoftin/facebook_audience_network.svg)
 
 [Facebook Audience Network](https://developers.facebook.com/docs/audience-network) plugin for Flutter applications.
 
 **Note: Currently only Android platform is supported.** 
+
 
 | Banner Ad | Native Banner Ad | Native Ad |
 | - | - | - |
@@ -11,6 +13,7 @@
 | Interstitial Ad | Rewarded Video Ad | In-Stream Video Ad |
 | - | - | - |
 | ![Interstitial Ad](https://raw.githubusercontent.com/dreamsoftin/facebook_audience_network/master/example/gifs/interstitial.gif "Interstitial Ad") | ![Rewarded Ad](https://raw.githubusercontent.com/dreamsoftin/facebook_audience_network/master/example/gifs/rewarded.gif "Rewarded Video Ad") | ![InStream Ad](https://raw.githubusercontent.com/dreamsoftin/facebook_audience_network/master/example/gifs/instream.gif "InStream Video Ad") |
+
 
 ## Getting Started
 
