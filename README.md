@@ -29,8 +29,8 @@ The hased id will be in printed to the logcat. Paste that onto the `testingId` p
 
 ```dart
 FacebookAudienceNetwork.init(
-      testingId: "37b1da9d-b48c-4103-a393-2e095e734bd6",
-      );
+  testingId: "37b1da9d-b48c-4103-a393-2e095e734bd6",
+);
 ```
 ### 2. Show Banner Ad:
 
