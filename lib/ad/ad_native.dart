@@ -88,7 +88,7 @@ class FacebookNativeAd extends StatefulWidget {
   final Color buttonBorderColor;
 
   /// This widget can be used to display customizable native ads and native
-  /// banner ads. 
+  /// banner ads.
   FacebookNativeAd({
     Key key,
     this.placementId = "YOUR_PLACEMENT_ID",
@@ -110,13 +110,14 @@ class FacebookNativeAd extends StatefulWidget {
 }
 
 class _FacebookNativeAdState extends State<FacebookNativeAd> {
+  double containerHeight = 0.5;
   @override
   Widget build(BuildContext context) {
     if (defaultTargetPlatform == TargetPlatform.android) {
       return Container(
         width: widget.width,
         height: widget.adType == NativeAdType.NATIVE_AD
-            ? widget.height
+            ? containerHeight
             : widget.bannerAdSize.height.toDouble(),
         child: AndroidView(
           viewType: NATIVE_AD_CHANNEL,
@@ -178,6 +179,11 @@ class _FacebookNativeAdState extends State<FacebookNativeAd> {
             widget.listener(NativeAdResult.ERROR, call.arguments);
           break;
         case LOADED_METHOD:
+          setState(() {
+            containerHeight = widget.adType == NativeAdType.NATIVE_AD
+                ? widget.height
+                : widget.bannerAdSize.height.toDouble();
+          });
           if (widget.listener != null)
             widget.listener(NativeAdResult.LOADED, call.arguments);
           setState(() {});
