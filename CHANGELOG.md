@@ -1,3 +1,7 @@
+## 0.3.2
+* Added keepalive
+* Bumped build.gradle version to 3.3.1
+
 ## 0.3.1
 * Updated ReadMe
 
