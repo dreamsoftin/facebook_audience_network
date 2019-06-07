@@ -87,6 +87,9 @@ class FacebookNativeAd extends StatefulWidget {
   /// This defines the button border color of the Native Ad.
   final Color buttonBorderColor;
 
+  /// This defines if the ad view to be kept alive.
+  final bool keepAlive;
+
   /// This widget can be used to display customizable native ads and native
   /// banner ads.
   FacebookNativeAd({
@@ -103,14 +106,21 @@ class FacebookNativeAd extends StatefulWidget {
     this.buttonColor,
     this.buttonTitleColor,
     this.buttonBorderColor,
+    this.keepAlive = false,
   }) : super(key: key);
 
   @override
   _FacebookNativeAdState createState() => _FacebookNativeAdState();
 }
 
-class _FacebookNativeAdState extends State<FacebookNativeAd> {
+class _FacebookNativeAdState extends State<FacebookNativeAd>
+    with AutomaticKeepAliveClientMixin {
   double containerHeight = 0.5;
+  // bool keepAlive = false;
+
+  @override
+  bool get wantKeepAlive => widget.keepAlive;
+
   @override
   Widget build(BuildContext context) {
     if (defaultTargetPlatform == TargetPlatform.android) {

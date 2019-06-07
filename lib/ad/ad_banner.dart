@@ -50,6 +50,9 @@ class FacebookBannerAd extends StatefulWidget {
   /// Banner Ad listener
   final void Function(BannerAdResult, dynamic) listener;
 
+  /// This defines if the ad view to be kept alive.
+  final bool keepAlive;
+
   /// This widget is used to contain Banner Ads. [listener] is used to monitor
   /// Banner Ad. [BannerAdResult] is passed to the callback function along with
   /// other information based on result such as placement id, error code, error
@@ -70,14 +73,19 @@ class FacebookBannerAd extends StatefulWidget {
     this.placementId = "YOUR_PLACEMENT_ID",
     this.bannerSize = BannerSize.STANDARD,
     this.listener,
+    this.keepAlive = false,
   }) : super(key: key);
 
   @override
   _FacebookBannerAdState createState() => _FacebookBannerAdState();
 }
 
-class _FacebookBannerAdState extends State<FacebookBannerAd> {
+class _FacebookBannerAdState extends State<FacebookBannerAd>
+    with AutomaticKeepAliveClientMixin {
   double containerHeight = 0.5;
+
+  @override
+  bool get wantKeepAlive => widget.keepAlive;
 
   @override
   Widget build(BuildContext context) {
@@ -112,7 +120,8 @@ class _FacebookBannerAdState extends State<FacebookBannerAd> {
             ? double.infinity
             : widget.bannerSize.height.toDouble(),
         child: Center(
-          child: Text("Banner Ads for this platform is currently not supported"),
+          child:
+              Text("Banner Ads for this platform is currently not supported"),
         ),
       );
     }
