@@ -115,7 +115,7 @@ class FacebookNativeAd extends StatefulWidget {
 
 class _FacebookNativeAdState extends State<FacebookNativeAd>
     with AutomaticKeepAliveClientMixin {
-  double containerHeight = 0.5;
+//  double containerHeight = 0.5;
   // bool keepAlive = false;
 
   @override
@@ -127,7 +127,7 @@ class _FacebookNativeAdState extends State<FacebookNativeAd>
       return Container(
         width: widget.width,
         height: widget.adType == NativeAdType.NATIVE_AD
-            ? containerHeight
+            ? /*containerHeight*/ widget.height
             : widget.bannerAdSize.height.toDouble(),
         child: AndroidView(
           viewType: NATIVE_AD_CHANNEL,
@@ -189,14 +189,12 @@ class _FacebookNativeAdState extends State<FacebookNativeAd>
             widget.listener(NativeAdResult.ERROR, call.arguments);
           break;
         case LOADED_METHOD:
-          setState(() {
-            containerHeight = widget.adType == NativeAdType.NATIVE_AD
-                ? widget.height
-                : widget.bannerAdSize.height.toDouble();
-          });
           if (widget.listener != null)
             widget.listener(NativeAdResult.LOADED, call.arguments);
-          setState(() {});
+          /// ISSUE: Changing height on Ad load causes the ad button to not work
+          /*setState(() {
+            containerHeight = widget.height;
+          });*/
           break;
         case CLICKED_METHOD:
           if (widget.listener != null)

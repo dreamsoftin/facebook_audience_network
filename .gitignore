@@ -4,5 +4,6 @@
 .packages
 .pub/
 .idea/
+.vscode/
 
 build/
