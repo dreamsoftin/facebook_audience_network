@@ -70,6 +70,9 @@ class FacebookNativeAdView implements PlatformView, NativeAdListener {
             nativeAd.setAdListener(this);
             nativeAd.loadAd();
         }
+
+        // if (args.get("bg_color") != null)
+        //     adView.setBackgroundColor(Color.parseColor((String) args.get("bg_color")));
     }
 
     private NativeAdViewAttributes getViewAttributes(Context context, HashMap args) {
@@ -138,7 +141,16 @@ class FacebookNativeAdView implements PlatformView, NativeAdListener {
         HashMap<String, Object> args = new HashMap<>();
         args.put("placement_id", ad.getPlacementId());
         args.put("invalidated", ad.isAdInvalidated());
+                channel.invokeMethod(FacebookConstants.LOAD_SUCCESS_METHOD, args);
+        adView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                showNativeAd();
+            }
+        }, 200);
+    }
 
+    private void showNativeAd(){
         if(adView.getChildCount() > 0)
             adView.removeAllViews();
 

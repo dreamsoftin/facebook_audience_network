@@ -115,9 +115,8 @@ class FacebookNativeAd extends StatefulWidget {
 
 class _FacebookNativeAdState extends State<FacebookNativeAd>
     with AutomaticKeepAliveClientMixin {
-//  double containerHeight = 0.5;
-  // bool keepAlive = false;
-
+  double containerHeight = 0.5;
+  bool isLoadStart = false;
   @override
   bool get wantKeepAlive => widget.keepAlive;
 
@@ -127,7 +126,7 @@ class _FacebookNativeAdState extends State<FacebookNativeAd>
       return Container(
         width: widget.width,
         height: widget.adType == NativeAdType.NATIVE_AD
-            ? /*containerHeight*/ widget.height
+            ? (isLoadStart ? widget.height : containerHeight)
             : widget.bannerAdSize.height.toDouble(),
         child: AndroidView(
           viewType: NATIVE_AD_CHANNEL,
@@ -195,6 +194,13 @@ class _FacebookNativeAdState extends State<FacebookNativeAd>
           /*setState(() {
             containerHeight = widget.height;
           });*/
+           break;
+        case LOAD_SUCCESS_METHOD:
+          if(!isLoadStart){
+            setState(() {
+              isLoadStart = true;
+            });
+          }
           break;
         case CLICKED_METHOD:
           if (widget.listener != null)

@@ -29,4 +29,5 @@ final class FacebookConstants {
     static final String IN_STREAM_VIDEO_COMPLETE_METHOD = "in_stream_complete";
 
     static final String MEDIA_DOWNLOADED_METHOD = "media_downloaded";
+    static final String LOAD_SUCCESS_METHOD = "load_success";
 }
