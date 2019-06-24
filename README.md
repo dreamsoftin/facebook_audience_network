@@ -1,5 +1,7 @@
 # facebook_audience_network
-![Pub](https://img.shields.io/pub/v/facebook_audience_network.svg) ![GitHub](https://img.shields.io/github/license/dreamsoftin/facebook_audience_network.svg)
+![Pub](https://img.shields.io/pub/v/facebook_audience_network.svg) ![GitHub](https://img.shields.io/github/license/dreamsoftin/facebook_audience_network.svg)<a href="https://github.com/Solido/awesome-flutter">
+   <img alt="Awesome Flutter" src="https://img.shields.io/badge/Awesome-Flutter-blue.svg?longCache=true&style=flat-square" />
+</a>
 
 [Facebook Audience Network](https://developers.facebook.com/docs/audience-network) plugin for Flutter applications.
 
