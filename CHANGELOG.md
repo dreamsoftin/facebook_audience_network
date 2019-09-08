@@ -1,3 +1,6 @@
+## 0.4.0
+* Upgraded to AndroidX #22
+
 ## 0.3.3
 * Add Native Ad On Load Success & Dynamic Height
 
