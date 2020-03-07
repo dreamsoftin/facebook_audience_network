@@ -1,8 +1,6 @@
 package com.dsi.facebook_audience_network;
 
-import android.app.Activity;
 import android.content.Context;
-import android.util.DisplayMetrics;
 import android.view.View;
 
 import com.facebook.ads.Ad;
@@ -45,8 +43,9 @@ class FacebookInStreamVideoAdView implements PlatformView, InstreamVideoAdListen
                 FacebookConstants.IN_STREAM_VIDEO_CHANNEL + "_" + id);
 
         adView = new InstreamVideoAdView(context, (String) args.get("id"), getSize(args));
-        adView.setAdListener(this);
-        adView.loadAd();
+        InstreamVideoAdView.InstreamVideoLoadAdConfig loadAdConfig = adView.buildLoadAdConfig().withAdListener(this).build();
+
+        adView.loadAd(loadAdConfig);
     }
 
     @Override

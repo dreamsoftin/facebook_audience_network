@@ -8,7 +8,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.0'
+        classpath 'com.android.tools.build:gradle:3.6.0'
     }
 }
 
@@ -34,6 +34,7 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.lifecycle:lifecycle-runtime:2.0.0'
-    implementation 'com.facebook.android:audience-network-sdk:5.5.0'
+    implementation 'androidx.lifecycle:lifecycle-runtime:2.2.0'
+    implementation 'com.facebook.android:audience-network-sdk:5.7.1'
+    implementation 'androidx.annotation:annotation:1.0.0'
 }

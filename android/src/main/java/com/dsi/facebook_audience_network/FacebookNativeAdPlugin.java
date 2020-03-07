@@ -7,7 +7,6 @@ import android.widget.LinearLayout;
 
 import com.facebook.ads.Ad;
 import com.facebook.ads.AdError;
-import com.facebook.ads.AdView;
 import com.facebook.ads.NativeAd;
 import com.facebook.ads.NativeAdBase;
 import com.facebook.ads.NativeAdListener;
@@ -63,12 +62,14 @@ class FacebookNativeAdView implements PlatformView, NativeAdListener {
 
         if ((boolean) args.get("banner_ad")) {
             bannerAd = new NativeBannerAd(context, (String) this.args.get("id"));
-            bannerAd.setAdListener(this);
-            bannerAd.loadAd();
+            NativeAdBase.NativeLoadAdConfig loadAdConfig = bannerAd.buildLoadAdConfig().withAdListener(this).withMediaCacheFlag(NativeAdBase.MediaCacheFlag.ALL).build();
+
+            bannerAd.loadAd(loadAdConfig);
         } else {
             nativeAd = new NativeAd(context, (String) this.args.get("id"));
-            nativeAd.setAdListener(this);
-            nativeAd.loadAd();
+            NativeAdBase.NativeLoadAdConfig loadAdConfig = nativeAd.buildLoadAdConfig().withAdListener(this).withMediaCacheFlag(NativeAdBase.MediaCacheFlag.ALL).build();
+
+            nativeAd.loadAd(loadAdConfig);
         }
 
         // if (args.get("bg_color") != null)
@@ -141,7 +142,7 @@ class FacebookNativeAdView implements PlatformView, NativeAdListener {
         HashMap<String, Object> args = new HashMap<>();
         args.put("placement_id", ad.getPlacementId());
         args.put("invalidated", ad.isAdInvalidated());
-                channel.invokeMethod(FacebookConstants.LOAD_SUCCESS_METHOD, args);
+        channel.invokeMethod(FacebookConstants.LOAD_SUCCESS_METHOD, args);
         adView.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -150,8 +151,8 @@ class FacebookNativeAdView implements PlatformView, NativeAdListener {
         }, 200);
     }
 
-    private void showNativeAd(){
-        if(adView.getChildCount() > 0)
+    private void showNativeAd() {
+        if (adView.getChildCount() > 0)
             adView.removeAllViews();
 
         if ((boolean) this.args.get("banner_ad")) {

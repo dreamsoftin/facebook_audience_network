@@ -1,9 +1,6 @@
 package com.dsi.facebook_audience_network;
 
 import android.app.Activity;
-import android.graphics.Color;
-import android.media.FaceDetector;
-import android.util.DisplayMetrics;
 
 import com.facebook.ads.*;
 
