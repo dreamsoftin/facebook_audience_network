@@ -1,3 +1,6 @@
+## 0.5.0
+* Bumped up audience network sdk version to 5.7.1
+
 ## 0.4.0
 * Upgraded to AndroidX #22
 
