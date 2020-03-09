@@ -2,12 +2,10 @@ package com.dsi.facebook_audience_network;
 
 import android.content.Context;
 import android.os.Handler;
-import android.util.DisplayMetrics;
+import android.util.Log;
 
 import com.facebook.ads.Ad;
 import com.facebook.ads.AdError;
-import com.facebook.ads.AdSize;
-import com.facebook.ads.InstreamVideoAdView;
 import com.facebook.ads.RewardedVideoAd;
 import com.facebook.ads.RewardedVideoAdListener;
 
@@ -57,12 +55,15 @@ class FacebookRewardedVideoAdPlugin implements MethodChannel.MethodCallHandler,
 
         if (rewardedVideoAd == null) {
             rewardedVideoAd = new RewardedVideoAd(context, placementId);
-            rewardedVideoAd.setAdListener(this);
         }
         try {
-            if (!rewardedVideoAd.isAdLoaded())
-                rewardedVideoAd.loadAd();
+            if (!rewardedVideoAd.isAdLoaded()) {
+                RewardedVideoAd.RewardedVideoLoadAdConfig loadAdConfig = rewardedVideoAd.buildLoadAdConfig().withAdListener(this).build();
+
+                rewardedVideoAd.loadAd(loadAdConfig);
+            }
         } catch (Exception e) {
+            Log.e("RewardedVideoAdError", e.getMessage());
             return false;
         }
 
@@ -78,9 +79,11 @@ class FacebookRewardedVideoAdPlugin implements MethodChannel.MethodCallHandler,
         if (rewardedVideoAd.isAdInvalidated())
             return false;
 
-        if (delay <= 0)
-            rewardedVideoAd.show();
-        else {
+        if (delay <= 0) {
+            RewardedVideoAd.RewardedVideoShowAdConfig showAdConfig = rewardedVideoAd.buildShowAdConfig().build();
+
+            rewardedVideoAd.show(showAdConfig);
+        } else {
             _delayHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -90,8 +93,9 @@ class FacebookRewardedVideoAdPlugin implements MethodChannel.MethodCallHandler,
 
                     if (rewardedVideoAd.isAdInvalidated())
                         return;
+                    RewardedVideoAd.RewardedVideoShowAdConfig showAdConfig = rewardedVideoAd.buildShowAdConfig().build();
 
-                    rewardedVideoAd.show();
+                    rewardedVideoAd.show(showAdConfig);
                 }
             }, delay);
         }
@@ -102,7 +106,6 @@ class FacebookRewardedVideoAdPlugin implements MethodChannel.MethodCallHandler,
         if (rewardedVideoAd == null)
             return false;
         else {
-            rewardedVideoAd.setAdListener(null);
             rewardedVideoAd.destroy();
             rewardedVideoAd = null;
         }

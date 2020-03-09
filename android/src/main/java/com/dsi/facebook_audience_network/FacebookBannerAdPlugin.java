@@ -1,7 +1,6 @@
 package com.dsi.facebook_audience_network;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 
 import com.facebook.ads.Ad;
@@ -50,9 +49,9 @@ class FacebookBannerAdView implements PlatformView, AdListener {
         adView = new AdView(context,
                 (String) args.get("id"),
                 getBannerSize(args));
+        AdView.AdViewLoadConfig loadAdConfig = adView.buildLoadAdConfig().withAdListener(this).build();
 
-        adView.setAdListener(this);
-        adView.loadAd();
+        adView.loadAd(loadAdConfig);
     }
 
     private AdSize getBannerSize(HashMap args) {
@@ -77,7 +76,6 @@ class FacebookBannerAdView implements PlatformView, AdListener {
 //        if (adView != null && isDisposable)
 //        {
 //            Log.d("FacebookBannerAdPlugin", "Banner Ad disposed");
-//            adView.setAdListener(null);
 //            adView.destroy();
 //        }
     }

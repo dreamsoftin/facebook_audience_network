@@ -3,9 +3,11 @@ package com.dsi.facebook_audience_network;
 
 import android.content.Context;
 import android.os.Handler;
+import android.util.Log;
 
 import com.facebook.ads.Ad;
 import com.facebook.ads.AdError;
+import com.facebook.ads.CacheFlag;
 import com.facebook.ads.InterstitialAd;
 import com.facebook.ads.InterstitialAdListener;
 
@@ -54,12 +56,15 @@ class FacebookInterstitialAdPlugin implements MethodChannel.MethodCallHandler, I
 
         if (interstitialAd == null) {
             interstitialAd = new InterstitialAd(context, placementId);
-            interstitialAd.setAdListener(this);
         }
-        try{
-            if(!interstitialAd.isAdLoaded())
-                interstitialAd.loadAd();
-        }catch(Exception e) {
+        try {
+            if (!interstitialAd.isAdLoaded()) {
+                InterstitialAd.InterstitialLoadAdConfig loadAdConfig = interstitialAd.buildLoadAdConfig().withAdListener(this).withCacheFlags(CacheFlag.ALL).build();
+
+                interstitialAd.loadAd(loadAdConfig);
+            }
+        } catch (Exception e) {
+            Log.e("InterstitialLoadAdError", e.getCause().getMessage());
             return false;
         }
 
@@ -75,9 +80,10 @@ class FacebookInterstitialAdPlugin implements MethodChannel.MethodCallHandler, I
         if (interstitialAd.isAdInvalidated())
             return false;
 
-        if (delay <= 0)
-            interstitialAd.show();
-        else {
+        if (delay <= 0) {
+            InterstitialAd.InterstitialShowAdConfig showAdConfig = interstitialAd.buildShowAdConfig().build();
+            interstitialAd.show(showAdConfig);
+        } else {
             _delayHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -87,8 +93,9 @@ class FacebookInterstitialAdPlugin implements MethodChannel.MethodCallHandler, I
 
                     if (interstitialAd.isAdInvalidated())
                         return;
+                    InterstitialAd.InterstitialShowAdConfig showAdConfig = interstitialAd.buildShowAdConfig().build();
 
-                    interstitialAd.show();
+                    interstitialAd.show(showAdConfig);
                 }
             }, delay);
         }
@@ -96,11 +103,9 @@ class FacebookInterstitialAdPlugin implements MethodChannel.MethodCallHandler, I
     }
 
     private boolean destroyAd() {
-        if(interstitialAd == null)
+        if (interstitialAd == null)
             return false;
-        else
-        {
-            interstitialAd.setAdListener(null);
+        else {
             interstitialAd.destroy();
             interstitialAd = null;
         }

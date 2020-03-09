@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:facebook_audience_network/facebook_audience_network.dart';
+import 'package:flutter/material.dart';
 
 void main() => runApp(AdExampleApp());
 
@@ -65,6 +65,7 @@ class AdsPageState extends State<AdsPage> {
         print("Interstitial Ad: $result --> $value");
         if (result == InterstitialAdResult.LOADED)
           _isInterstitialAdLoaded = true;
+
         /// Once an Interstitial Ad has been dismissed and becomes invalidated,
         /// load a fresh Ad by calling this function.
         if (result == InterstitialAdResult.DISMISSED &&
@@ -84,6 +85,7 @@ class AdsPageState extends State<AdsPage> {
         if (result == RewardedVideoAdResult.LOADED) _isRewardedAdLoaded = true;
         if (result == RewardedVideoAdResult.VIDEO_COMPLETE)
           _isRewardedVideoComplete = true;
+
         /// Once a Rewarded Ad has been closed and becomes invalidated,
         /// load a fresh Ad by calling this function.
         if (result == RewardedVideoAdResult.VIDEO_CLOSED &&
@@ -132,7 +134,8 @@ class AdsPageState extends State<AdsPage> {
       children: <Widget>[
         _getRaisedButton(title: "Banner Ad", onPressed: _showBannerAd),
         _getRaisedButton(title: "Native Ad", onPressed: _showNativeAd),
-        _getRaisedButton(title: "Native Banner Ad", onPressed: _showNativeBannerAd),
+        _getRaisedButton(
+            title: "Native Banner Ad", onPressed: _showNativeBannerAd),
         _getRaisedButton(
             title: "Intestitial Ad", onPressed: _showInterstitialAd),
         _getRaisedButton(title: "Rewarded Ad", onPressed: _showRewardedAd),
