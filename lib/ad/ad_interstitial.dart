@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/services.dart';
 
 import 'package:facebook_audience_network/constants.dart';
@@ -25,7 +27,7 @@ enum InterstitialAdResult {
 class FacebookInterstitialAd {
   static void Function(InterstitialAdResult, dynamic) _listener;
 
-  static const _channel = const MethodChannel(INTERSTITIAL_AD_CHANNEL);
+  static final _channel =  MethodChannel(Platform.isIOS ? MAIN_CHANNEL : INTERSTITIAL_AD_CHANNEL);
 
   /// Loads an Interstitial Ad in background. Replace the default [placementId]
   /// with the one which you obtain by signing-up for Facebook Audience Network.
