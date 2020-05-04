@@ -161,6 +161,8 @@ class FacebookNativeAdView implements PlatformView, NativeAdListener {
                     getBannerSize(this.args),
                     getViewAttributes(this.context, this.args)));
         } else {
+            //View view = inflateView();
+            // adView.addView(view);
             adView.addView(NativeAdView.render(this.context,
                     this.nativeAd,
                     getViewAttributes(this.context, this.args)));

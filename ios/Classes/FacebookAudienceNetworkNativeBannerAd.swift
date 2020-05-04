@@ -50,7 +50,7 @@ class FacebookAudienceNetworkNativeBannerAdView: NSObject, FlutterPlatformView, 
         registrar = _registrar
         params = _params!
         channel = FlutterMethodChannel(
-            name: "\(FbConstant.NATIVE_BANNER_AD_CHANNEL)_\(viewId)",
+            name: "\(FANConstant.NATIVE_BANNER_AD_CHANNEL)_\(viewId)",
             binaryMessenger: registrar.messenger()
         )
         
@@ -195,10 +195,10 @@ class FacebookAudienceNetworkNativeBannerAdView: NSObject, FlutterPlatformView, 
         let placement_id: String = nativeBannerAd.placementID
         let invalidated: Bool = nativeBannerAd.isAdValid
         let arg: [String: Any] = [
-            FbConstant.PLACEMENT_ID_ARG: placement_id,
-            FbConstant.INVALIDATED_ARG: invalidated,
+            FANConstant.PLACEMENT_ID_ARG: placement_id,
+            FANConstant.INVALIDATED_ARG: invalidated,
         ]
-        self.channel.invokeMethod(FbConstant.LOADED_METHOD, arguments: arg)
+        self.channel.invokeMethod(FANConstant.LOADED_METHOD, arguments: arg)
     }
     
     /**
@@ -218,10 +218,10 @@ class FacebookAudienceNetworkNativeBannerAdView: NSObject, FlutterPlatformView, 
         let placement_id: String = nativeBannerAd.placementID
         let invalidated: Bool = nativeBannerAd.isAdValid
         let arg: [String: Any] = [
-            FbConstant.PLACEMENT_ID_ARG: placement_id,
-            FbConstant.INVALIDATED_ARG: invalidated,
+            FANConstant.PLACEMENT_ID_ARG: placement_id,
+            FANConstant.INVALIDATED_ARG: invalidated,
         ]
-        self.channel.invokeMethod(FbConstant.LOGGING_IMPRESSION_METHOD, arguments: arg)
+        self.channel.invokeMethod(FANConstant.LOGGING_IMPRESSION_METHOD, arguments: arg)
     }
     
     /**
@@ -236,10 +236,10 @@ class FacebookAudienceNetworkNativeBannerAdView: NSObject, FlutterPlatformView, 
         let invalidated: Bool = nativeBannerAd.isAdValid
 //        let errorStr: String = error as! String
         let arg: [String: Any] = [
-            FbConstant.PLACEMENT_ID_ARG: placement_id,
-            FbConstant.INVALIDATED_ARG: invalidated,
+            FANConstant.PLACEMENT_ID_ARG: placement_id,
+            FANConstant.INVALIDATED_ARG: invalidated,
         ]
-        self.channel.invokeMethod(FbConstant.ERROR_METHOD, arguments: arg)
+        self.channel.invokeMethod(FANConstant.ERROR_METHOD, arguments: arg)
     }
     
     /**
@@ -252,10 +252,10 @@ class FacebookAudienceNetworkNativeBannerAdView: NSObject, FlutterPlatformView, 
         let placement_id: String = nativeBannerAd.placementID
         let invalidated: Bool = nativeBannerAd.isAdValid
         let arg: [String: Any] = [
-            FbConstant.PLACEMENT_ID_ARG: placement_id,
-            FbConstant.INVALIDATED_ARG: invalidated,
+            FANConstant.PLACEMENT_ID_ARG: placement_id,
+            FANConstant.INVALIDATED_ARG: invalidated,
         ]
-        self.channel.invokeMethod(FbConstant.CLICKED_METHOD, arguments: arg)
+        self.channel.invokeMethod(FANConstant.CLICKED_METHOD, arguments: arg)
     }
     
     /**

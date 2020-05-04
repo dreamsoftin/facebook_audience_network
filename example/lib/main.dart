@@ -51,7 +51,7 @@ class AdsPageState extends State<AdsPage> {
     super.initState();
 
     FacebookAudienceNetwork.init(
-      testingId: "35e92a63-8102-46a4-b0f5-4fd269e6a13c",
+      testingId: "b9f2908b-1a6b-4a5b-b862-ded7ce289e41",
     );
 
     _loadInterstitialAd();
@@ -60,9 +60,10 @@ class AdsPageState extends State<AdsPage> {
 
   void _loadInterstitialAd() {
     FacebookInterstitialAd.loadInterstitialAd(
-      placementId: "YOUR_PLACEMENT_ID",
+      placementId:
+          "IMG_16_9_APP_INSTALL#2312433698835503_2650502525028617", //"IMG_16_9_APP_INSTALL#2312433698835503_2650502525028617" YOUR_PLACEMENT_ID
       listener: (result, value) {
-        print("Interstitial Ad: $result --> $value");
+        print(">> FAN > Interstitial Ad: $result --> $value");
         if (result == InterstitialAdResult.LOADED)
           _isInterstitialAdLoaded = true;
 
@@ -114,6 +115,11 @@ class AdsPageState extends State<AdsPage> {
           fit: FlexFit.tight,
           flex: 2,
         ),
+        // Column(children: <Widget>[
+        //   _nativeAd(),
+        //   // _nativeBannerAd(),
+        //   _nativeAd(),
+        // ],),
         Flexible(
           child: Align(
             alignment: Alignment(0, 1.0),
@@ -193,6 +199,8 @@ class AdsPageState extends State<AdsPage> {
   _showBannerAd() {
     setState(() {
       _currentAd = FacebookBannerAd(
+        placementId:
+            "IMG_16_9_APP_INSTALL#2312433698835503_2964944860251047", //testid
         bannerSize: BannerSize.STANDARD,
         listener: (result, value) {
           print("Banner Ad: $result -->  $value");
@@ -203,39 +211,51 @@ class AdsPageState extends State<AdsPage> {
 
   _showNativeBannerAd() {
     setState(() {
-      _currentAd = FacebookNativeAd(
-        adType: NativeAdType.NATIVE_BANNER_AD,
-        bannerAdSize: NativeBannerAdSize.HEIGHT_100,
-        width: double.infinity,
-        backgroundColor: Colors.blue,
-        titleColor: Colors.white,
-        descriptionColor: Colors.white,
-        buttonColor: Colors.deepPurple,
-        buttonTitleColor: Colors.white,
-        buttonBorderColor: Colors.white,
-        listener: (result, value) {
-          print("Native Banner Ad: $result --> $value");
-        },
-      );
+      _currentAd = _nativeBannerAd();
     });
+  }
+
+  Widget _nativeBannerAd() {
+    return FacebookNativeAd(
+      placementId: "IMG_16_9_APP_INSTALL#2312433698835503_2964953543583512",
+      adType: NativeAdType.NATIVE_BANNER_AD,
+      bannerAdSize: NativeBannerAdSize.HEIGHT_100,
+      width: double.infinity,
+      backgroundColor: Colors.blue,
+      titleColor: Colors.white,
+      descriptionColor: Colors.white,
+      buttonColor: Colors.deepPurple,
+      buttonTitleColor: Colors.white,
+      buttonBorderColor: Colors.white,
+      listener: (result, value) {
+        print("Native Banner Ad: $result --> $value");
+      },
+    );
   }
 
   _showNativeAd() {
     setState(() {
-      _currentAd = FacebookNativeAd(
-        adType: NativeAdType.NATIVE_AD,
-        width: double.infinity,
-        height: 300,
-        backgroundColor: Colors.blue,
-        titleColor: Colors.white,
-        descriptionColor: Colors.white,
-        buttonColor: Colors.deepPurple,
-        buttonTitleColor: Colors.white,
-        buttonBorderColor: Colors.white,
-        listener: (result, value) {
-          print("Native Ad: $result --> $value");
-        },
-      );
+      _currentAd = _nativeAd();
     });
+  }
+
+  Widget _nativeAd() {
+    return FacebookNativeAd(
+      placementId: "IMG_16_9_APP_INSTALL#2312433698835503_2964952163583650",
+      adType: NativeAdType.NATIVE_AD,
+      width: double.infinity,
+      height: 300,
+      backgroundColor: Colors.blue,
+      titleColor: Colors.white,
+      descriptionColor: Colors.white,
+      buttonColor: Colors.deepPurple,
+      buttonTitleColor: Colors.white,
+      buttonBorderColor: Colors.white,
+      listener: (result, value) {
+        print("Native Ad: $result --> $value");
+      },
+      keepExpanedWhileLoading: false,
+      expandAnimationDuraion: 1000,
+    );
   }
 }

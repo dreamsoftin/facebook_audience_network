@@ -27,7 +27,7 @@ enum RewardedVideoAdResult {
 class FacebookRewardedVideoAd {
   static void Function(RewardedVideoAdResult, dynamic) _listener;
 
-  static final _channel = MethodChannel(Platform.isIOS ? MAIN_CHANNEL : REWARDED_VIDEO_CHANNEL);
+  static const _channel = const MethodChannel(REWARDED_VIDEO_CHANNEL);
 
   /// Loads a rewarded video Ad in background. Replace the default [placementId]
   /// with the one which you obtain by signing-up for Facebook Audience Network.
@@ -53,6 +53,9 @@ class FacebookRewardedVideoAd {
       final args = <String, dynamic>{
         "id": placementId,
       };
+      
+      if(Platform.isIOS)
+        return false;
 
       final result = await _channel.invokeMethod(
         LOAD_REWARDED_VIDEO_METHOD,

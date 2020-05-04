@@ -1,6 +1,6 @@
 import Foundation
 
-struct FbConstant{
+struct FANConstant{
     static let MAIN_CHANNEL = "fb.audience.network.io";
     static let BANNER_AD_CHANNEL = MAIN_CHANNEL + "/bannerAd";
     static let NATIVE_AD_CHANNEL = MAIN_CHANNEL + "/nativeAd";
@@ -14,6 +14,7 @@ struct FbConstant{
     
     static let PLACEMENT_ID_ARG = "placement_id";
     static let INVALIDATED_ARG = "invalidated";
+    static let CODE_ARG = "code";
     static let ERROR_ARG = "error";
 
     static let NATIVE_AD_HORIZONTAL = 0;

@@ -2,6 +2,7 @@ const String MAIN_CHANNEL = "fb.audience.network.io";
 const String BANNER_AD_CHANNEL = MAIN_CHANNEL + "/bannerAd";
 const String INTERSTITIAL_AD_CHANNEL = MAIN_CHANNEL + "/interstitialAd";
 const String NATIVE_AD_CHANNEL = MAIN_CHANNEL + "/nativeAd";
+const String NATIVE_BANNER_AD_CHANNEL = MAIN_CHANNEL + "/nativeBannerAd";
 const String REWARDED_VIDEO_CHANNEL = MAIN_CHANNEL + "/rewardedAd";
 const String IN_STREAM_VIDEO_CHANNEL = MAIN_CHANNEL + "/inStreamAd";
 

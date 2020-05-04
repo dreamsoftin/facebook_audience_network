@@ -79,6 +79,9 @@ class FacebookNativeAd extends StatefulWidget {
   final Color descriptionColor;
 
   /// This defines the button color of the Native Ad.
+  final Color labelColor;
+
+  /// This defines the button color of the Native Ad.
   final Color buttonColor;
 
   /// This defines the button text color of the Native Ad.
@@ -87,8 +90,16 @@ class FacebookNativeAd extends StatefulWidget {
   /// This defines the button border color of the Native Ad.
   final Color buttonBorderColor;
 
+  final bool isMediaCover;
+
   /// This defines if the ad view to be kept alive.
   final bool keepAlive;
+
+  /// This defines if the ad view should be collapsed while loading
+  final bool keepExpanedWhileLoading;
+
+  /// Expand animation duration in milliseconds
+  final int expandAnimationDuraion;
 
   /// This widget can be used to display customizable native ads and native
   /// banner ads.
@@ -103,10 +114,14 @@ class FacebookNativeAd extends StatefulWidget {
     this.backgroundColor,
     this.titleColor,
     this.descriptionColor,
+    this.labelColor,
     this.buttonColor,
     this.buttonTitleColor,
     this.buttonBorderColor,
+    this.isMediaCover = false,
     this.keepAlive = false,
+    this.keepExpanedWhileLoading = true,
+    this.expandAnimationDuraion = 0,
   }) : super(key: key);
 
   @override
@@ -116,17 +131,54 @@ class FacebookNativeAd extends StatefulWidget {
 class _FacebookNativeAdState extends State<FacebookNativeAd>
     with AutomaticKeepAliveClientMixin {
   double containerHeight = 0.5;
-  bool isLoadStart = false;
+  bool isAdReady = false;
   @override
   bool get wantKeepAlive => widget.keepAlive;
 
-  @override
+  String _getChannelRegisterId() {
+    String channel = NATIVE_AD_CHANNEL;
+    if (defaultTargetPlatform == TargetPlatform.iOS &&
+        widget.adType == NativeAdType.NATIVE_BANNER_AD) {
+      channel = NATIVE_BANNER_AD_CHANNEL;
+    }
+    return channel;
+  }
+
   Widget build(BuildContext context) {
+    return AnimatedContainer(
+      color: Colors.transparent,
+      width: widget.width,
+      height: isAdReady || widget.keepExpanedWhileLoading ? widget.height : 0.1,
+      duration: Duration(milliseconds: widget.expandAnimationDuraion),
+      child: Stack(
+        alignment: Alignment.center,
+        children: <Widget>[
+          Positioned(
+            top: isAdReady || widget.keepExpanedWhileLoading ? 0 : -(widget.height - 0.1),
+            child: ConstrainedBox(
+              constraints: new BoxConstraints(
+                maxHeight: widget.width,
+                maxWidth: widget.width == double.infinity
+                    ? MediaQuery.of(context).size.width
+                    : widget.width,
+              ),
+              child: buildPlatformView(),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget build2(BuildContext context) {
     if (defaultTargetPlatform == TargetPlatform.android) {
       return Container(
         width: widget.width,
         height: widget.adType == NativeAdType.NATIVE_AD
-            ? (isLoadStart ? widget.height : containerHeight)
+            ? (isAdReady
+                ? widget.height
+                : widget.keepExpanedWhileLoading ? containerHeight : widget.height)
             : widget.bannerAdSize.height.toDouble(),
         child: AndroidView(
           viewType: NATIVE_AD_CHANNEL,
@@ -148,6 +200,9 @@ class _FacebookNativeAdState extends State<FacebookNativeAd>
             "desc_color": widget.descriptionColor == null
                 ? null
                 : _getHexStringFromColor(widget.descriptionColor),
+            "label_color": widget.labelColor == null
+                ? null
+                : _getHexStringFromColor(widget.labelColor),
             "button_color": widget.buttonColor == null
                 ? null
                 : _getHexStringFromColor(widget.buttonColor),
@@ -162,15 +217,209 @@ class _FacebookNativeAdState extends State<FacebookNativeAd>
       );
     } else if (defaultTargetPlatform == TargetPlatform.iOS) {
       return Container(
+        color: Colors.red,
+        height: 500,
+        width: 500,
+        child: Stack(
+          alignment: Alignment.topLeft,
+          children: <Widget>[
+            Positioned(
+              bottom: -250,
+              child: ConstrainedBox(
+                constraints: new BoxConstraints(
+                  maxHeight: 300.0,
+                  maxWidth: 300.0,
+                ),
+                child: UiKitView(
+                  viewType: _getChannelRegisterId(),
+                  onPlatformViewCreated: _onNativeAdViewCreated,
+                  creationParamsCodec: StandardMessageCodec(),
+                  creationParams: <String, dynamic>{
+                    "id": widget.placementId,
+                    "ad_type": widget.adType.index,
+                    "banner_ad": widget.adType == NativeAdType.NATIVE_BANNER_AD
+                        ? true
+                        : false,
+                    "height": widget.adType == NativeAdType.NATIVE_BANNER_AD
+                        ? widget.bannerAdSize.height
+                        : widget.height,
+                    "bg_color": widget.backgroundColor == null
+                        ? null
+                        : _getHexStringFromColor(widget.backgroundColor),
+                    "title_color": widget.titleColor == null
+                        ? null
+                        : _getHexStringFromColor(widget.titleColor),
+                    "desc_color": widget.descriptionColor == null
+                        ? null
+                        : _getHexStringFromColor(widget.descriptionColor),
+                    "label_color": widget.labelColor == null
+                        ? null
+                        : _getHexStringFromColor(widget.labelColor),
+                    "button_color": widget.buttonColor == null
+                        ? null
+                        : _getHexStringFromColor(widget.buttonColor),
+                    "button_title_color": widget.buttonTitleColor == null
+                        ? null
+                        : _getHexStringFromColor(widget.buttonTitleColor),
+                    "button_border_color": widget.buttonBorderColor == null
+                        ? null
+                        : _getHexStringFromColor(widget.buttonBorderColor),
+                    "is_media_cover": widget.isMediaCover,
+                  },
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+
+      return Container(
         width: widget.width,
-        height: widget.height,
-        child: Text("Native Ads iOS is currently not supported."),
+        color: Colors.red,
+        alignment: Alignment.bottomCenter,
+        height: (widget.adType == NativeAdType.NATIVE_BANNER_AD)
+            ? widget.bannerAdSize.height.toDouble()
+            : isAdReady
+                ? widget.height
+                : widget
+                    .height, //widget.collapseWhileLoading ? containerHeight : widget.height,
+        child: FractionallySizedBox(
+          heightFactor: 1,
+          child: UiKitView(
+            viewType: _getChannelRegisterId(),
+            onPlatformViewCreated: _onNativeAdViewCreated,
+            creationParamsCodec: StandardMessageCodec(),
+            creationParams: <String, dynamic>{
+              "id": widget.placementId,
+              "ad_type": widget.adType.index,
+              "banner_ad":
+                  widget.adType == NativeAdType.NATIVE_BANNER_AD ? true : false,
+              "height": widget.adType == NativeAdType.NATIVE_BANNER_AD
+                  ? widget.bannerAdSize.height
+                  : widget.height,
+              "bg_color": widget.backgroundColor == null
+                  ? null
+                  : _getHexStringFromColor(widget.backgroundColor),
+              "title_color": widget.titleColor == null
+                  ? null
+                  : _getHexStringFromColor(widget.titleColor),
+              "desc_color": widget.descriptionColor == null
+                  ? null
+                  : _getHexStringFromColor(widget.descriptionColor),
+              "label_color": widget.labelColor == null
+                  ? null
+                  : _getHexStringFromColor(widget.labelColor),
+              "button_color": widget.buttonColor == null
+                  ? null
+                  : _getHexStringFromColor(widget.buttonColor),
+              "button_title_color": widget.buttonTitleColor == null
+                  ? null
+                  : _getHexStringFromColor(widget.buttonTitleColor),
+              "button_border_color": widget.buttonBorderColor == null
+                  ? null
+                  : _getHexStringFromColor(widget.buttonBorderColor),
+              "is_media_cover": widget.isMediaCover,
+            },
+          ),
+        ),
       );
     } else {
       return Container(
         width: widget.width,
         height: widget.height,
         child: Text("Banner Ads for this platform is currently not supported"),
+      );
+    }
+  }
+
+  Widget buildPlatformView() {
+    if (defaultTargetPlatform == TargetPlatform.android) {
+      return Container(
+        width: widget.width,
+        height: widget.adType == NativeAdType.NATIVE_AD
+            ? (isAdReady
+                ? widget.height
+                : widget.keepExpanedWhileLoading ? containerHeight : widget.height)
+            : widget.bannerAdSize.height.toDouble(),
+        child: AndroidView(
+          viewType: NATIVE_AD_CHANNEL,
+          onPlatformViewCreated: _onNativeAdViewCreated,
+          creationParamsCodec: StandardMessageCodec(),
+          creationParams: <String, dynamic>{
+            "id": widget.placementId,
+            "banner_ad":
+                widget.adType == NativeAdType.NATIVE_BANNER_AD ? true : false,
+            // height param is only for Banner Ads. Native Ad's height is
+            // governed by container.
+            "height": widget.bannerAdSize.height,
+            "bg_color": widget.backgroundColor == null
+                ? null
+                : _getHexStringFromColor(widget.backgroundColor),
+            "title_color": widget.titleColor == null
+                ? null
+                : _getHexStringFromColor(widget.titleColor),
+            "desc_color": widget.descriptionColor == null
+                ? null
+                : _getHexStringFromColor(widget.descriptionColor),
+            "label_color": widget.labelColor == null
+                ? null
+                : _getHexStringFromColor(widget.labelColor),
+            "button_color": widget.buttonColor == null
+                ? null
+                : _getHexStringFromColor(widget.buttonColor),
+            "button_title_color": widget.buttonTitleColor == null
+                ? null
+                : _getHexStringFromColor(widget.buttonTitleColor),
+            "button_border_color": widget.buttonBorderColor == null
+                ? null
+                : _getHexStringFromColor(widget.buttonBorderColor),
+          },
+        ),
+      );
+    } else if (defaultTargetPlatform == TargetPlatform.iOS) {
+      return ConstrainedBox(
+        constraints: new BoxConstraints(
+          maxWidth: widget.width,
+          maxHeight: widget.adType == NativeAdType.NATIVE_AD
+              ? widget.height
+              : widget.bannerAdSize.height.toDouble(),
+        ),
+        child: UiKitView(
+          viewType: _getChannelRegisterId(),
+          onPlatformViewCreated: _onNativeAdViewCreated,
+          creationParamsCodec: StandardMessageCodec(),
+          creationParams: <String, dynamic>{
+            "id": widget.placementId,
+            "ad_type": widget.adType.index,
+            "banner_ad":
+                widget.adType == NativeAdType.NATIVE_BANNER_AD ? true : false,
+            "height": widget.adType == NativeAdType.NATIVE_BANNER_AD
+                ? widget.bannerAdSize.height
+                : widget.height,
+            "bg_color": widget.backgroundColor == null
+                ? null
+                : _getHexStringFromColor(widget.backgroundColor),
+            "title_color": widget.titleColor == null
+                ? null
+                : _getHexStringFromColor(widget.titleColor),
+            "desc_color": widget.descriptionColor == null
+                ? null
+                : _getHexStringFromColor(widget.descriptionColor),
+            "label_color": widget.labelColor == null
+                ? null
+                : _getHexStringFromColor(widget.labelColor),
+            "button_color": widget.buttonColor == null
+                ? null
+                : _getHexStringFromColor(widget.buttonColor),
+            "button_title_color": widget.buttonTitleColor == null
+                ? null
+                : _getHexStringFromColor(widget.buttonTitleColor),
+            "button_border_color": widget.buttonBorderColor == null
+                ? null
+                : _getHexStringFromColor(widget.buttonBorderColor),
+            "is_media_cover": widget.isMediaCover,
+          },
+        ),
       );
     }
   }
@@ -190,15 +439,24 @@ class _FacebookNativeAdState extends State<FacebookNativeAd>
         case LOADED_METHOD:
           if (widget.listener != null)
             widget.listener(NativeAdResult.LOADED, call.arguments);
+
+          if (!isAdReady) {
+            Future.delayed(Duration(seconds: 0)).then((value) {
+              setState(() {
+                isAdReady = true;
+              });
+            });
+          }
+
           /// ISSUE: Changing height on Ad load causes the ad button to not work
           /*setState(() {
             containerHeight = widget.height;
           });*/
-           break;
+          break;
         case LOAD_SUCCESS_METHOD:
-          if(!isLoadStart){
+          if (!isAdReady) {
             setState(() {
-              isLoadStart = true;
+              isAdReady = true;
             });
           }
           break;

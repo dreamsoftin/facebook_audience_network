@@ -105,13 +105,23 @@ class _FacebookBannerAdState extends State<FacebookBannerAd>
         ),
       );
     } else if (defaultTargetPlatform == TargetPlatform.iOS) {
-      //TODO: Implement BannerAd for iOS once supported.
       return Container(
-        height: widget.bannerSize.height <= -1
-            ? double.infinity
-            : widget.bannerSize.height.toDouble(),
-        child: Center(
-          child: Text("Banner Ads for iOS is currently not supported"),
+        height: containerHeight,
+        color: Colors.transparent,
+        child: Container(
+          width: widget.bannerSize.width.toDouble(),
+          child: Center(
+            child: UiKitView(
+              viewType: BANNER_AD_CHANNEL,
+              onPlatformViewCreated: _onBannerAdViewCreated,
+              creationParams: <String, dynamic>{
+                "id": widget.placementId,
+                "width": widget.bannerSize.width,
+                "height": widget.bannerSize.height,
+              },
+              creationParamsCodec: StandardMessageCodec(),
+            ),
+          ),
         ),
       );
     } else {
@@ -129,7 +139,7 @@ class _FacebookBannerAdState extends State<FacebookBannerAd>
 
   void _onBannerAdViewCreated(int id) async {
     final channel = MethodChannel('${BANNER_AD_CHANNEL}_$id');
-
+    
     channel.setMethodCallHandler((MethodCall call) {
       switch (call.method) {
         case ERROR_METHOD:

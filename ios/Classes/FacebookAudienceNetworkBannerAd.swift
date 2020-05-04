@@ -50,7 +50,7 @@ class FacebookAudienceNetworkBannerAdView: NSObject, FlutterPlatformView, FBAdVi
         registrar = _registrar
         params = _params!
         channel = FlutterMethodChannel(
-            name: "\(FbConstant.BANNER_AD_CHANNEL)_\(viewId)",
+            name: "\(FANConstant.BANNER_AD_CHANNEL)_\(viewId)",
             binaryMessenger: registrar.messenger()
         )
         
@@ -164,10 +164,10 @@ class FacebookAudienceNetworkBannerAdView: NSObject, FlutterPlatformView, FBAdVi
         let placement_id: String = adView.placementID
         let invalidated: Bool = adView.isAdValid
         let arg: [String: Any] = [
-            FbConstant.PLACEMENT_ID_ARG: placement_id,
-            FbConstant.INVALIDATED_ARG: invalidated,
+            FANConstant.PLACEMENT_ID_ARG: placement_id,
+            FANConstant.INVALIDATED_ARG: invalidated,
         ]
-        self.channel.invokeMethod(FbConstant.CLICKED_METHOD, arguments: arg)
+        self.channel.invokeMethod(FANConstant.CLICKED_METHOD, arguments: arg)
     }
     /**
      When an ad is clicked, the modal view will be presented. And when the user finishes the
@@ -192,10 +192,10 @@ class FacebookAudienceNetworkBannerAdView: NSObject, FlutterPlatformView, FBAdVi
         let placement_id: String = adView.placementID
         let invalidated: Bool = adView.isAdValid
         let arg: [String: Any] = [
-            FbConstant.PLACEMENT_ID_ARG: placement_id,
-            FbConstant.INVALIDATED_ARG: invalidated,
+            FANConstant.PLACEMENT_ID_ARG: placement_id,
+            FANConstant.INVALIDATED_ARG: invalidated,
         ]
-        self.channel.invokeMethod(FbConstant.LOADED_METHOD, arguments: arg)
+        self.channel.invokeMethod(FANConstant.LOADED_METHOD, arguments: arg)
     }
     /**
      Sent after an FBAdView fails to load the ad.
@@ -207,13 +207,13 @@ class FacebookAudienceNetworkBannerAdView: NSObject, FlutterPlatformView, FBAdVi
         print("BannerAdView > adView")
         let placement_id: String = adView.placementID
         let invalidated: Bool = adView.isAdValid
-        let errorStr: String = error as! String
+        let errorStr: String = error.localizedDescription
         let arg: [String: Any] = [
-            FbConstant.PLACEMENT_ID_ARG: placement_id,
-            FbConstant.INVALIDATED_ARG: invalidated,
-            FbConstant.ERROR_ARG:errorStr
+            FANConstant.PLACEMENT_ID_ARG: placement_id,
+            FANConstant.INVALIDATED_ARG: invalidated,
+            FANConstant.ERROR_ARG:errorStr
         ]
-        self.channel.invokeMethod(FbConstant.ERROR_METHOD, arguments: arg)
+        self.channel.invokeMethod(FANConstant.ERROR_METHOD, arguments: arg)
     }
     
     /**
@@ -226,10 +226,10 @@ class FacebookAudienceNetworkBannerAdView: NSObject, FlutterPlatformView, FBAdVi
         let placement_id: String = adView.placementID
         let invalidated: Bool = adView.isAdValid
         let arg: [String: Any] = [
-            FbConstant.PLACEMENT_ID_ARG: placement_id,
-            FbConstant.INVALIDATED_ARG: invalidated,
+            FANConstant.PLACEMENT_ID_ARG: placement_id,
+            FANConstant.INVALIDATED_ARG: invalidated,
         ]
-        self.channel.invokeMethod(FbConstant.LOGGING_IMPRESSION_METHOD, arguments: arg)
+        self.channel.invokeMethod(FANConstant.LOGGING_IMPRESSION_METHOD, arguments: arg)
     }
 }
 

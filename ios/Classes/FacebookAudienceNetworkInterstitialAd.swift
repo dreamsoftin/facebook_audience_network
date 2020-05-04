@@ -91,10 +91,10 @@ class FacebookAudienceNetworkInterstitialAdPlugin: NSObject, FBInterstitialAdDel
         let placement_id: String = interstitialAd.placementID
         let invalidated: Bool = interstitialAd.isAdValid
         let arg: [String: Any] = [
-            FbConstant.PLACEMENT_ID_ARG: placement_id,
-            FbConstant.INVALIDATED_ARG: invalidated,
+            FANConstant.PLACEMENT_ID_ARG: placement_id,
+            FANConstant.INVALIDATED_ARG: invalidated,
         ]
-        self.channel.invokeMethod(FbConstant.CLICKED_METHOD, arguments: arg)
+        self.channel.invokeMethod(FANConstant.CLICKED_METHOD, arguments: arg)
     }
     
     /**
@@ -127,10 +127,10 @@ class FacebookAudienceNetworkInterstitialAdPlugin: NSObject, FBInterstitialAdDel
         let placement_id: String = interstitialAd.placementID
         let invalidated: Bool = interstitialAd.isAdValid
         let arg: [String: Any] = [
-            FbConstant.PLACEMENT_ID_ARG: placement_id,
-            FbConstant.INVALIDATED_ARG: invalidated,
+            FANConstant.PLACEMENT_ID_ARG: placement_id,
+            FANConstant.INVALIDATED_ARG: invalidated,
         ]
-        self.channel.invokeMethod(FbConstant.LOADED_METHOD, arguments: arg)
+        self.channel.invokeMethod(FANConstant.LOADED_METHOD, arguments: arg)
     }
     
     /**
@@ -140,15 +140,16 @@ class FacebookAudienceNetworkInterstitialAdPlugin: NSObject, FBInterstitialAdDel
      @param error An error object containing details of the error.
      */
     func interstitialAd(_ interstitialAd :FBInterstitialAd, didFailWithError error: Error) {
-        print("InterstitialAdView > interstitialAd")
+        print("InterstitialAdView > interstitialAd failed")
+        print(error.localizedDescription)
         
         let placement_id: String = interstitialAd.placementID
         let invalidated: Bool = interstitialAd.isAdValid
         let arg: [String: Any] = [
-            FbConstant.PLACEMENT_ID_ARG: placement_id,
-            FbConstant.INVALIDATED_ARG: invalidated,
+            FANConstant.PLACEMENT_ID_ARG: placement_id,
+            FANConstant.INVALIDATED_ARG: invalidated,
         ]
-        self.channel.invokeMethod(FbConstant.ERROR_METHOD, arguments: arg)
+        self.channel.invokeMethod(FANConstant.ERROR_METHOD, arguments: arg)
     }
     
     /**
@@ -162,9 +163,9 @@ class FacebookAudienceNetworkInterstitialAdPlugin: NSObject, FBInterstitialAdDel
         let placement_id: String = interstitialAd.placementID
         let invalidated: Bool = interstitialAd.isAdValid
         let arg: [String: Any] = [
-            FbConstant.PLACEMENT_ID_ARG: placement_id,
-            FbConstant.INVALIDATED_ARG: invalidated,
+            FANConstant.PLACEMENT_ID_ARG: placement_id,
+            FANConstant.INVALIDATED_ARG: invalidated,
         ]
-        self.channel.invokeMethod(FbConstant.LOGGING_IMPRESSION_METHOD, arguments: arg)
+        self.channel.invokeMethod(FANConstant.LOGGING_IMPRESSION_METHOD, arguments: arg)
     }
 }
