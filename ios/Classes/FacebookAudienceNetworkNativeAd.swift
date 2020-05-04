@@ -126,7 +126,7 @@ class FacebookAudienceNetworkNativeAdView: NSObject, FlutterPlatformView, FBNati
         print("NativeAd > init initView")
 
         self.mainView = UIView(frame: self.frame)
-        self.mainView.backgroundColor = UIColor.white
+        self.mainView.backgroundColor = UIColor.clear
     }
 
 
