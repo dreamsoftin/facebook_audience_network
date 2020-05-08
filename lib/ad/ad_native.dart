@@ -98,7 +98,7 @@ class FacebookNativeAd extends StatefulWidget {
   final bool keepAlive;
 
   /// This defines if the ad view should be collapsed while loading
-  final bool keepExpanedWhileLoading;
+  final bool keepExpandedWhileLoading;
 
   /// Expand animation duration in milliseconds
   final int expandAnimationDuraion;
@@ -122,7 +122,7 @@ class FacebookNativeAd extends StatefulWidget {
     this.buttonBorderColor,
     this.isMediaCover = false,
     this.keepAlive = false,
-    this.keepExpanedWhileLoading = true,
+    this.keepExpandedWhileLoading = true,
     this.expandAnimationDuraion = 0,
   }) : super(key: key);
 
@@ -153,13 +153,13 @@ class _FacebookNativeAdState extends State<FacebookNativeAd>
     return AnimatedContainer(
       color: Colors.transparent,
       width: width,
-      height: isAdReady || widget.keepExpanedWhileLoading ? widget.height : containerHeight,
+      height: isAdReady || widget.keepExpandedWhileLoading ? widget.height : containerHeight,
       duration: Duration(milliseconds: widget.expandAnimationDuraion),
       child: Stack(
         alignment: Alignment.center,
         children: <Widget>[
           Positioned.fill(
-            top: isAdReady || widget.keepExpanedWhileLoading
+            top: isAdReady || widget.keepExpandedWhileLoading
                 ? 0
                 : -(widget.height - containerHeight),
             child: ConstrainedBox(

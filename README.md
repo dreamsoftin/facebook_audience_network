@@ -3,10 +3,7 @@
    <img alt="Awesome Flutter" src="https://img.shields.io/badge/Awesome-Flutter-blue.svg?longCache=true&style=flat-square" />
 </a>
 
-[Facebook Audience Network](https://developers.facebook.com/docs/audience-network) plugin for Flutter applications.
-
-**Note: Currently only Android platform is supported.** 
-
+[Facebook Audience Network](https://developers.facebook.com/docs/audience-network) plugin for Flutter applications (Android & iOS).
 
 | Banner Ad | Native Banner Ad | Native Ad |
 | - | - | - |
@@ -31,7 +28,7 @@ The hased id will be in printed to the logcat. Paste that onto the `testingId` p
 
 ```dart
 FacebookAudienceNetwork.init(
-  testingId: "37b1da9d-b48c-4103-a393-2e095e734bd6",
+  testingId: "37b1da9d-b48c-4103-a393-2e095e734bd6", //optional
 );
 ```
 ### 2. Show Banner Ad:
@@ -40,7 +37,7 @@ FacebookAudienceNetwork.init(
 Container(
   alignment: Alignment(0.5, 1),
   child: FacebookBannerAd(
-    placementId: "YOUR_PLACEMENT_ID",
+    placementId: Platform.isAndroid ? "YOUR_ANDROID_PLACEMENT_ID" : "YOUR_IOS_PLACEMENT_ID",
     bannerSize: BannerSize.STANDARD,
     listener: (result, value) {
       switch (result) {
@@ -74,6 +71,7 @@ FacebookInterstitialAd.loadInterstitialAd(
 );
 ```
 ### 4. Show Rewarded Video Ad:
+(Android Only)
 
 ```dart
 FacebookRewardedVideoAd.loadRewardedVideoAd(
@@ -88,6 +86,7 @@ FacebookRewardedVideoAd.loadRewardedVideoAd(
 ```
 
 ### 5. Show In-Stream Video Ad:
+(Android Only)
 Make sure the width and height is 300 at minimum.
 
 ```dart
@@ -118,6 +117,9 @@ FacebookNativeAd(
   buttonColor: Colors.deepPurple,
   buttonTitleColor: Colors.white,
   buttonBorderColor: Colors.white,
+  keepAlive: true, //set true if you do not want adview to refresh on widget rebuild
+  keepExpandedWhileLoading: false, // set false if you want to collapse the native ad view when the ad is loading 
+  expandAnimationDuraion: 300, //in milliseconds. Expands the adview with animation when ad is loaded
   listener: (result, value) {
     print("Native Ad: $result --> $value");
   },
@@ -147,6 +149,8 @@ FacebookNativeAd(
 
 **Check out the [example](https://github.com/dreamsoftin/facebook_audience_network/tree/master/example) for complete implementation.**
 
+iOS wrapper code contribution by **lolqplay team from birdgang**
+
 ## Future Work
-Implement for iOS platform.
+Implement Rewarded & Instream video for iOS platform.
 
