@@ -31,6 +31,11 @@ FacebookAudienceNetwork.init(
   testingId: "37b1da9d-b48c-4103-a393-2e095e734bd6", //optional
 );
 ```
+#####IOS Setup
+In Pod file, set the IOS deployment target version to 9.0
+
+*IN iOS, Banner, Interstital and Native Ads are supported* 
+
 ### 2. Show Banner Ad:
 
 ```dart
@@ -104,7 +109,7 @@ FacebookInStreamVideoAd(
 ```
 
 ### 6. Show Native Ad:
-
+- NativeAdType NATIVE_AD_HORIZONTAL & NATIVE_AD_VERTICAL ad types are supported only in iOS. In Android use NATIVE_AD.
 ```dart
 FacebookNativeAd(
   placementId: "YOUR_PLACEMENT_ID",

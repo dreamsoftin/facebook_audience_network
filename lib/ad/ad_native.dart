@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -133,7 +135,7 @@ class FacebookNativeAd extends StatefulWidget {
 
 class _FacebookNativeAdState extends State<FacebookNativeAd>
     with AutomaticKeepAliveClientMixin {
-  final double containerHeight = 0.1;
+  final double containerHeight = Platform.isAndroid ? 1.0 : 0.1;
   bool isAdReady = false;
   @override
   bool get wantKeepAlive => widget.keepAlive;

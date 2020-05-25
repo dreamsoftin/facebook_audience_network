@@ -1,3 +1,6 @@
+## 0.6.0
+* Added iOS Support (Banner, Interstital & Native)
+
 ## 0.5.0
 * Bumped up audience network sdk version to 5.7.1
 

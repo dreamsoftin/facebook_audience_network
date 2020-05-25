@@ -199,8 +199,8 @@ class AdsPageState extends State<AdsPage> {
   _showBannerAd() {
     setState(() {
       _currentAd = FacebookBannerAd(
-        placementId:
-            "IMG_16_9_APP_INSTALL#2312433698835503_2964944860251047", //testid
+        // placementId:
+        //     "IMG_16_9_APP_INSTALL#2312433698835503_2964944860251047", //testid
         bannerSize: BannerSize.STANDARD,
         listener: (result, value) {
           print("Banner Ad: $result -->  $value");
@@ -217,7 +217,7 @@ class AdsPageState extends State<AdsPage> {
 
   Widget _nativeBannerAd() {
     return FacebookNativeAd(
-      placementId: "IMG_16_9_APP_INSTALL#2312433698835503_2964953543583512",
+      // placementId: "IMG_16_9_APP_INSTALL#2312433698835503_2964953543583512",
       adType: NativeAdType.NATIVE_BANNER_AD,
       bannerAdSize: NativeBannerAdSize.HEIGHT_100,
       width: double.infinity,
@@ -241,7 +241,7 @@ class AdsPageState extends State<AdsPage> {
 
   Widget _nativeAd() {
     return FacebookNativeAd(
-      placementId: "IMG_16_9_APP_INSTALL#2312433698835503_2964952163583650",
+      // placementId: "IMG_16_9_APP_INSTALL#2312433698835503_2964952163583650",
       adType: NativeAdType.NATIVE_AD,
       width: double.infinity,
       height: 300,
