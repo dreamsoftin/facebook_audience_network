@@ -254,7 +254,7 @@ class AdsPageState extends State<AdsPage> {
       listener: (result, value) {
         print("Native Ad: $result --> $value");
       },
-      keepExpanedWhileLoading: false,
+      keepExpandedWhileLoading: false,
       expandAnimationDuraion: 1000,
     );
   }

@@ -10,6 +10,7 @@ enum NativeAdType {
 
   /// Customizable Native Banner Ad.
   NATIVE_BANNER_AD,
+  //ios Only
   NATIVE_AD_HORIZONTAL,
   NATIVE_AD_VERTICAL,
 }
@@ -153,7 +154,9 @@ class _FacebookNativeAdState extends State<FacebookNativeAd>
     return AnimatedContainer(
       color: Colors.transparent,
       width: width,
-      height: isAdReady || widget.keepExpandedWhileLoading ? widget.height : containerHeight,
+      height: isAdReady || widget.keepExpandedWhileLoading
+          ? widget.height
+          : containerHeight,
       duration: Duration(milliseconds: widget.expandAnimationDuraion),
       child: Stack(
         alignment: Alignment.center,
@@ -179,7 +182,9 @@ class _FacebookNativeAdState extends State<FacebookNativeAd>
     if (defaultTargetPlatform == TargetPlatform.android) {
       return Container(
         width: width,
-        height: widget.adType == NativeAdType.NATIVE_AD
+        height: widget.adType == NativeAdType.NATIVE_AD ||
+                widget.adType == NativeAdType.NATIVE_AD_HORIZONTAL ||
+                widget.adType == NativeAdType.NATIVE_AD_VERTICAL
             ? widget.height
             : widget.bannerAdSize.height.toDouble(),
         child: AndroidView(
