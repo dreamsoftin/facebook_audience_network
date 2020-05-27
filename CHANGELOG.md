@@ -1,3 +1,6 @@
+## 0.6.1
+* iOS Bug Fix
+
 ## 0.6.0
 * Added iOS Support (Banner, Interstital & Native)
 
