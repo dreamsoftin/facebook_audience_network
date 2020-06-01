@@ -53,7 +53,8 @@ class FacebookAudienceNetworkInterstitialAdPlugin: NSObject, FBInterstitialAdDel
         let args: NSDictionary = call.arguments as! NSDictionary
         let delay: Int = args["delay"] as! Int
         
-        self.interstitialAd.show(fromRootViewController: UIApplication.shared.keyWindow?.rootViewController)
+        //MARK:- Need to remove because it' already called with delay.
+        //self.interstitialAd.show(fromRootViewController: UIApplication.shared.keyWindow?.rootViewController)
         
         print("@@@ delay %d", delay)
         
@@ -105,6 +106,14 @@ class FacebookAudienceNetworkInterstitialAdPlugin: NSObject, FBInterstitialAdDel
      */
     func interstitialAdDidClose(_ interstitialAd: FBInterstitialAd) {
         print("InterstitialAdView > interstitialAdDidClose")
+        //Add event for Interstitial dismissed.
+        let placement_id: String = interstitialAd.placementID
+        let invalidated: Bool = interstitialAd.isAdValid
+        let arg: [String: Any] = [
+            FANConstant.PLACEMENT_ID_ARG: placement_id,
+            FANConstant.INVALIDATED_ARG: invalidated,
+        ]
+        self.channel.invokeMethod(FANConstant.DISMISSED_METHOD, arguments: arg)
     }
     
     /**
