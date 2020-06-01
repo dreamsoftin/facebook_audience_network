@@ -10,6 +10,7 @@ struct FANConstant{
     static let ERROR_METHOD = "error";
     static let LOADED_METHOD = "loaded";
     static let CLICKED_METHOD = "clicked";
+    static let DISMISSED_METHOD = "dismissed"; //Add dismissed event constant
     static let LOGGING_IMPRESSION_METHOD = "logging_impression";
     
     static let PLACEMENT_ID_ARG = "placement_id";
