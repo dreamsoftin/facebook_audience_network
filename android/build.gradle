@@ -35,6 +35,6 @@ android {
 
 dependencies {
     implementation 'androidx.lifecycle:lifecycle-runtime:2.2.0'
-    implementation 'com.facebook.android:audience-network-sdk:5.7.1'
+    implementation 'com.facebook.android:audience-network-sdk:5.10.0'
     implementation 'androidx.annotation:annotation:1.0.0'
 }
