@@ -1,3 +1,6 @@
+## 0.7.0
+* Add dismissed event (Contribution by dharmesh304)
+
 ## 0.6.2
 * Add dismissed event (Contribution by dharmesh304)
 
