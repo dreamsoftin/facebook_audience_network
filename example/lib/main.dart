@@ -90,7 +90,7 @@ class AdsPageState extends State<AdsPage> {
         /// Once a Rewarded Ad has been closed and becomes invalidated,
         /// load a fresh Ad by calling this function.
         if (result == RewardedVideoAdResult.VIDEO_CLOSED &&
-            value["invalidated"] == true) {
+            (value == true || value["invalidated"] == true)) {
           _isRewardedAdLoaded = false;
           _loadRewardedVideoAd();
         }
@@ -242,7 +242,7 @@ class AdsPageState extends State<AdsPage> {
   Widget _nativeAd() {
     return FacebookNativeAd(
       // placementId: "IMG_16_9_APP_INSTALL#2312433698835503_2964952163583650",
-      adType: NativeAdType.NATIVE_AD,
+      adType: NativeAdType.NATIVE_AD_VERTICAL,
       width: double.infinity,
       height: 300,
       backgroundColor: Colors.blue,
@@ -254,7 +254,7 @@ class AdsPageState extends State<AdsPage> {
       listener: (result, value) {
         print("Native Ad: $result --> $value");
       },
-      keepExpandedWhileLoading: false,
+      keepExpandedWhileLoading: true,
       expandAnimationDuraion: 1000,
     );
   }
