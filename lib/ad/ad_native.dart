@@ -304,6 +304,7 @@ class _FacebookNativeAdState extends State<FacebookNativeAd>
           });*/
           break;
         case LOAD_SUCCESS_METHOD:
+          if (!mounted) return;
           if (!isAdReady) {
             setState(() {
               isAdReady = true;
