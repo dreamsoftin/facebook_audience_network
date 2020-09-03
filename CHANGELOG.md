@@ -1,3 +1,6 @@
+## 0.7.1
+* Update iOS SDK version to 5.10.1
+
 ## 0.7.0
 * Add dismissed event (Contribution by dharmesh304)
 
