@@ -15,7 +15,6 @@ import 'ad/ad_rewarded.dart';
 export 'ad/ad_banner.dart';
 export 'ad/ad_interstitial.dart';
 export 'ad/ad_rewarded.dart';
-export 'ad/ad_instream.dart';
 export 'ad/ad_native.dart';
 
 /// All non-widget functions such as initialization, loading interstitial,
