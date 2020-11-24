@@ -137,6 +137,7 @@ class _FacebookNativeAdState extends State<FacebookNativeAd>
     with AutomaticKeepAliveClientMixin {
   final double containerHeight = Platform.isAndroid ? 1.0 : 0.1;
   bool isAdReady = false;
+
   @override
   bool get wantKeepAlive => widget.keepAlive;
 
@@ -230,7 +231,7 @@ class _FacebookNativeAdState extends State<FacebookNativeAd>
         width: width,
         height: widget.adType == NativeAdType.NATIVE_AD
             ? widget.height
-            : widget.bannerAdSize.height.toInt(),
+            : widget.bannerAdSize.height.toInt().toDouble(),
         child: UiKitView(
           viewType: _getChannelRegisterId(),
           onPlatformViewCreated: _onNativeAdViewCreated,
