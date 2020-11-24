@@ -60,8 +60,8 @@ class AdsPageState extends State<AdsPage> {
 
   void _loadInterstitialAd() {
     FacebookInterstitialAd.loadInterstitialAd(
-      placementId:
-          "IMG_16_9_APP_INSTALL#2312433698835503_2650502525028617", //"IMG_16_9_APP_INSTALL#2312433698835503_2650502525028617" YOUR_PLACEMENT_ID
+      placementId: "IMG_16_9_APP_INSTALL#2312433698835503_2650502525028617",
+      //"IMG_16_9_APP_INSTALL#2312433698835503_2650502525028617" YOUR_PLACEMENT_ID
       listener: (result, value) {
         print(">> FAN > Interstitial Ad: $result --> $value");
         if (result == InterstitialAdResult.LOADED)
@@ -145,7 +145,7 @@ class AdsPageState extends State<AdsPage> {
         _getRaisedButton(
             title: "Intestitial Ad", onPressed: _showInterstitialAd),
         _getRaisedButton(title: "Rewarded Ad", onPressed: _showRewardedAd),
-        _getRaisedButton(title: "InStream Ad", onPressed: _showInStreamAd),
+        //  _getRaisedButton(title: "InStream Ad", onPressed: _showInStreamAd),
       ],
     );
   }
@@ -177,7 +177,7 @@ class AdsPageState extends State<AdsPage> {
       print("Rewarded Ad not yet loaded!");
   }
 
-  _showInStreamAd() {
+  /*_showInStreamAd() {
     setState(() {
       _currentAd = FacebookInStreamVideoAd(
         height: 300,
@@ -194,7 +194,7 @@ class AdsPageState extends State<AdsPage> {
         },
       );
     });
-  }
+  }*/
 
   _showBannerAd() {
     setState(() {

@@ -1,4 +1,5 @@
 package com.dsi.facebook_audience_network;
+/*
 
 import android.content.Context;
 import android.view.View;
@@ -121,3 +122,4 @@ class FacebookInStreamVideoAdView implements PlatformView, InstreamVideoAdListen
         channel.invokeMethod(FacebookConstants.LOGGING_IMPRESSION_METHOD, args);
     }
 }
+*/

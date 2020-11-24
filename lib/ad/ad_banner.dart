@@ -88,6 +88,7 @@ class _FacebookBannerAdState extends State<FacebookBannerAd>
   bool get wantKeepAlive => widget.keepAlive;
 
   @override
+  // ignore: must_call_super
   Widget build(BuildContext context) {
     if (defaultTargetPlatform == TargetPlatform.android) {
       return Container(
@@ -139,7 +140,8 @@ class _FacebookBannerAdState extends State<FacebookBannerAd>
 
   void _onBannerAdViewCreated(int id) async {
     final channel = MethodChannel('${BANNER_AD_CHANNEL}_$id');
-    
+
+    // ignore: missing_return
     channel.setMethodCallHandler((MethodCall call) {
       switch (call.method) {
         case ERROR_METHOD:
@@ -153,15 +155,16 @@ class _FacebookBannerAdState extends State<FacebookBannerAd>
                 : widget.bannerSize.height.toDouble();
           });
           if (widget.listener != null)
-            widget.listener(BannerAdResult.LOADED, call.arguments);
+            widget?.listener?.call(BannerAdResult.LOADED, call.arguments);
           break;
         case CLICKED_METHOD:
           if (widget.listener != null)
-            widget.listener(BannerAdResult.CLICKED, call.arguments);
+            widget?.listener?.call(BannerAdResult.CLICKED, call.arguments);
           break;
         case LOGGING_IMPRESSION_METHOD:
           if (widget.listener != null)
-            widget.listener(BannerAdResult.LOGGING_IMPRESSION, call.arguments);
+            widget?.listener
+                ?.call(BannerAdResult.LOGGING_IMPRESSION, call.arguments);
           break;
       }
     });

@@ -54,10 +54,10 @@ public class FacebookAudienceNetworkPlugin implements MethodCallHandler {
                         new FacebookBannerAdPlugin(registrar.messenger()));
 
         // InStream Video Ad PlatformView channel
-        registrar.
+       /* registrar.
                 platformViewRegistry().
                 registerViewFactory(FacebookConstants.IN_STREAM_VIDEO_CHANNEL,
-                        new FacebookInStreamVideoAdPlugin(registrar.messenger()));
+                        new FacebookInStreamVideoAdPlugin(registrar.messenger()));*/
 
         // Native Ad PlatformView channel
         registrar.

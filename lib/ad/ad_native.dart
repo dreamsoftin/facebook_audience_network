@@ -149,6 +149,7 @@ class _FacebookNativeAdState extends State<FacebookNativeAd>
     return channel;
   }
 
+  // ignore: must_call_super
   Widget build(BuildContext context) {
     double width = widget.width == double.infinity
         ? MediaQuery.of(context).size.width
@@ -282,6 +283,7 @@ class _FacebookNativeAdState extends State<FacebookNativeAd>
   void _onNativeAdViewCreated(int id) {
     final channel = MethodChannel('${NATIVE_AD_CHANNEL}_$id');
 
+    // ignore: missing_return
     channel.setMethodCallHandler((MethodCall call) {
       switch (call.method) {
         case ERROR_METHOD:
