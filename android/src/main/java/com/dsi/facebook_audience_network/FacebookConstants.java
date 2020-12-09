@@ -6,7 +6,6 @@ final class FacebookConstants {
     static final String INTERSTITIAL_AD_CHANNEL = MAIN_CHANNEL + "/interstitialAd";
     static final String NATIVE_AD_CHANNEL = MAIN_CHANNEL + "/nativeAd";
     static final String REWARDED_VIDEO_CHANNEL = MAIN_CHANNEL + "/rewardedAd";
-    static final String IN_STREAM_VIDEO_CHANNEL = MAIN_CHANNEL + "/inStreamAd";
 
     static final String INIT_METHOD = "init";
     static final String SHOW_INTERSTITIAL_METHOD = "showInterstitialAd";
@@ -25,8 +24,6 @@ final class FacebookConstants {
     static final String LOGGING_IMPRESSION_METHOD = "logging_impression";
     static final String REWARDED_VIDEO_COMPLETE_METHOD = "rewarded_complete";
     static final String REWARDED_VIDEO_CLOSED_METHOD = "rewarded_closed";
-
-    static final String IN_STREAM_VIDEO_COMPLETE_METHOD = "in_stream_complete";
 
     static final String MEDIA_DOWNLOADED_METHOD = "media_downloaded";
     static final String LOAD_SUCCESS_METHOD = "load_success";
