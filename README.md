@@ -9,9 +9,9 @@
 | - | - | - |
 | ![Banner Ad](https://raw.githubusercontent.com/dreamsoftin/facebook_audience_network/master/example/gifs/banner.gif "Banner Ad") | ![Native Banner Ad](https://raw.githubusercontent.com/dreamsoftin/facebook_audience_network/master/example/gifs/native_banner.gif "Native Banner Ad") | ![Native Ad](https://raw.githubusercontent.com/dreamsoftin/facebook_audience_network/master/example/gifs/native.gif "Native Ad") |
 
-| Interstitial Ad | Rewarded Video Ad | In-Stream Video Ad |
-| - | - | - |
-| ![Interstitial Ad](https://raw.githubusercontent.com/dreamsoftin/facebook_audience_network/master/example/gifs/interstitial.gif "Interstitial Ad") | ![Rewarded Ad](https://raw.githubusercontent.com/dreamsoftin/facebook_audience_network/master/example/gifs/rewarded.gif "Rewarded Video Ad") | ![InStream Ad](https://raw.githubusercontent.com/dreamsoftin/facebook_audience_network/master/example/gifs/instream.gif "InStream Video Ad") |
+| Interstitial Ad | Rewarded Video Ad |
+| - | - |
+| ![Interstitial Ad](https://raw.githubusercontent.com/dreamsoftin/facebook_audience_network/master/example/gifs/interstitial.gif "Interstitial Ad") | ![Rewarded Ad](https://raw.githubusercontent.com/dreamsoftin/facebook_audience_network/master/example/gifs/rewarded.gif "Rewarded Video Ad") |
 
 
 ## Getting Started
@@ -90,25 +90,7 @@ FacebookRewardedVideoAd.loadRewardedVideoAd(
 );
 ```
 
-### 5. Show In-Stream Video Ad:
-(Android Only)
-Make sure the width and height is 300 at minimum.
-
-```dart
-FacebookInStreamVideoAd(
-  placementId: "YOUR_PLACEMENT_ID",
-  height: 300,
-  listener: (result, value) {
-    if (result == InStreamVideoAdResult.VIDEO_COMPLETE) {
-      setState(() {
-        _videoComplete = true;
-      });
-    }
-  },
-)
-```
-
-### 6. Show Native Ad:
+### 5. Show Native Ad:
 - NativeAdType NATIVE_AD_HORIZONTAL & NATIVE_AD_VERTICAL ad types are supported only in iOS. In Android use NATIVE_AD.
 ```dart
 FacebookNativeAd(
@@ -131,7 +113,7 @@ FacebookNativeAd(
 ),
 ```
 
-### 7. Show Native Banner Ad:
+### 6. Show Native Banner Ad:
 Use `NativeBannerAdSize` to choose the height for Native banner ads. `height` property is ignored for native banner ads.
 
 ```dart
@@ -156,6 +138,8 @@ FacebookNativeAd(
 
 iOS wrapper code contribution by **lolqplay team from birdgang**
 
+### Note: Instream video ad has been removed by Facebook. Read more [here](https://www.facebook.com/business/help/645132129564436?id=211412110064838)
+
 ## Future Work
-Implement Rewarded & Instream video for iOS platform.
+Implement Rewarded video for iOS platform.
 

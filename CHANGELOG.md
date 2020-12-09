@@ -1,3 +1,8 @@
+## 0.8.0
+* Bumped up Audience Network SDK to v6.2.0
+* In Stream video ad has been removed by Facebook. Read more here: https://www.facebook.com/business/help/645132129564436?id=211412110064838
+* Updated example app to v2 flutter embedding
+
 ## 0.7.0
 * Add dismissed event (Contribution by dharmesh304)
 

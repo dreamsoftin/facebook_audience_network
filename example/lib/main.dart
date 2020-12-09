@@ -145,7 +145,6 @@ class AdsPageState extends State<AdsPage> {
         _getRaisedButton(
             title: "Intestitial Ad", onPressed: _showInterstitialAd),
         _getRaisedButton(title: "Rewarded Ad", onPressed: _showRewardedAd),
-        _getRaisedButton(title: "InStream Ad", onPressed: _showInStreamAd),
       ],
     );
   }
@@ -175,25 +174,6 @@ class AdsPageState extends State<AdsPage> {
       FacebookRewardedVideoAd.showRewardedVideoAd();
     else
       print("Rewarded Ad not yet loaded!");
-  }
-
-  _showInStreamAd() {
-    setState(() {
-      _currentAd = FacebookInStreamVideoAd(
-        height: 300,
-        listener: (result, value) {
-          print("In-Stream Ad: $result -->  $value");
-          if (result == InStreamVideoAdResult.VIDEO_COMPLETE) {
-            setState(() {
-              _currentAd = SizedBox(
-                height: 0,
-                width: 0,
-              );
-            });
-          }
-        },
-      );
-    });
   }
 
   _showBannerAd() {
