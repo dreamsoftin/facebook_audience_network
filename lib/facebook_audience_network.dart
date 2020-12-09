@@ -8,15 +8,14 @@ library facebook_audience_network;
 
 import 'package:flutter/services.dart';
 
-import 'constants.dart';
 import 'ad/ad_interstitial.dart';
 import 'ad/ad_rewarded.dart';
+import 'constants.dart';
 
 export 'ad/ad_banner.dart';
 export 'ad/ad_interstitial.dart';
-export 'ad/ad_rewarded.dart';
-export 'ad/ad_instream.dart';
 export 'ad/ad_native.dart';
+export 'ad/ad_rewarded.dart';
 
 /// All non-widget functions such as initialization, loading interstitial,
 /// in-stream and reward video ads are enclosed in this class.

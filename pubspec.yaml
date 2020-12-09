@@ -3,7 +3,7 @@ description:
   Facebook Audience Network plugin for Flutter apps. You can show Facebook Banner
   ads, Interstitial ads, Rewarded video ads and Native ads though this plugin.
 
-version: 0.7.0
+version: 0.8.0
 # authors:
 #   - Suraj Shettigar <suraj@dreamsoftin.com>
 #   - Sachin Ganesh <sachin@dreamsoftin.com>
