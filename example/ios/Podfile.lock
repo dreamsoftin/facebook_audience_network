@@ -1,15 +1,15 @@
 PODS:
   - facebook_audience_network (0.0.1):
-    - FBAudienceNetwork (= 6.2.0)
+    - FBAudienceNetwork (~> 6.3)
     - Flutter
-  - FBAudienceNetwork (6.2.0):
+  - FBAudienceNetwork (6.3.0):
     - FBSDKCoreKit/Basics (>= 7.0.1)
-  - FBSDKCoreKit/Basics (8.2.0)
+  - FBSDKCoreKit/Basics (9.0.1)
   - Flutter (1.0.0)
 
 DEPENDENCIES:
   - facebook_audience_network (from `.symlinks/plugins/facebook_audience_network/ios`)
-  - Flutter (from `.symlinks/flutter/ios`)
+  - Flutter (from `.symlinks/flutter/ios-release`)
 
 SPEC REPOS:
   trunk:
@@ -20,12 +20,12 @@ EXTERNAL SOURCES:
   facebook_audience_network:
     :path: ".symlinks/plugins/facebook_audience_network/ios"
   Flutter:
-    :path: ".symlinks/flutter/ios"
+    :path: ".symlinks/flutter/ios-release"
 
 SPEC CHECKSUMS:
-  facebook_audience_network: c301da57bbb0b8ac9c6dd058eda03055ffd1c150
-  FBAudienceNetwork: 69193f0362accc40305703fb3265342416971446
-  FBSDKCoreKit: 4afd6ff53d8133a433dbcda44451c9498f8c6ce4
+  facebook_audience_network: bb22bdda913d419d8c3247c9570bda4563302417
+  FBAudienceNetwork: 58b4d0f2359783e5bc9ee59f138b4fda43173ac4
+  FBSDKCoreKit: fada1a6a0076724678993ff05a633848765ff18c
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
 
 PODFILE CHECKSUM: ff9c4084272e4bf9a2fd115110c5cf1876ef2908
