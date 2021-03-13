@@ -149,7 +149,7 @@ class AdsPageState extends State<AdsPage> {
     );
   }
 
-  Widget _getRaisedButton({String title, void Function() onPressed}) {
+  Widget _getRaisedButton({required String title, void Function()? onPressed}) {
     return Padding(
       padding: EdgeInsets.all(8),
       child: RaisedButton(

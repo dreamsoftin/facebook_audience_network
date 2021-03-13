@@ -41,7 +41,7 @@ enum NativeAdResult {
 /// * [HEIGHT_100] (Includes: Icon, Title, Context and CTA button)
 /// * [HEIGHT_120] (Includes: Icon, Title, Context, Description and CTA button)
 class NativeBannerAdSize {
-  final int height;
+  final int? height;
 
   static const NativeBannerAdSize HEIGHT_50 = NativeBannerAdSize(height: 50);
   static const NativeBannerAdSize HEIGHT_100 = NativeBannerAdSize(height: 100);
@@ -55,7 +55,7 @@ class FacebookNativeAd extends StatefulWidget {
   final String placementId;
 
   /// Native Ad listener.
-  final void Function(NativeAdResult, dynamic) listener;
+  final void Function(NativeAdResult, dynamic)? listener;
 
   /// Choose between [NativeAdType.NATIVE_AD] and
   /// [NativeAdType.NATIVE_BANNER_AD]
@@ -75,25 +75,25 @@ class FacebookNativeAd extends StatefulWidget {
   final double height;
 
   /// This defines the background color of the Native Ad.
-  final Color backgroundColor;
+  final Color? backgroundColor;
 
   /// This defines the title text color of the Native Ad.
-  final Color titleColor;
+  final Color? titleColor;
 
   /// This defines the description text color of the Native Ad.
-  final Color descriptionColor;
+  final Color? descriptionColor;
 
   /// This defines the button color of the Native Ad.
-  final Color labelColor;
+  final Color? labelColor;
 
   /// This defines the button color of the Native Ad.
-  final Color buttonColor;
+  final Color? buttonColor;
 
   /// This defines the button text color of the Native Ad.
-  final Color buttonTitleColor;
+  final Color? buttonTitleColor;
 
   /// This defines the button border color of the Native Ad.
-  final Color buttonBorderColor;
+  final Color? buttonBorderColor;
 
   final bool isMediaCover;
 
@@ -109,10 +109,10 @@ class FacebookNativeAd extends StatefulWidget {
   /// This widget can be used to display customizable native ads and native
   /// banner ads.
   FacebookNativeAd({
-    Key key,
+    Key? key,
     this.placementId = "YOUR_PLACEMENT_ID",
     this.listener,
-    @required this.adType,
+    required this.adType,
     this.bannerAdSize = NativeBannerAdSize.HEIGHT_50,
     this.width = double.infinity,
     this.height = 250,
@@ -188,7 +188,7 @@ class _FacebookNativeAdState extends State<FacebookNativeAd>
                 widget.adType == NativeAdType.NATIVE_AD_HORIZONTAL ||
                 widget.adType == NativeAdType.NATIVE_AD_VERTICAL
             ? widget.height
-            : widget.bannerAdSize.height.toDouble(),
+            : widget.bannerAdSize.height!.toDouble(),
         child: AndroidView(
           viewType: NATIVE_AD_CHANNEL,
           onPlatformViewCreated: _onNativeAdViewCreated,
@@ -202,25 +202,25 @@ class _FacebookNativeAdState extends State<FacebookNativeAd>
             "height": widget.bannerAdSize.height,
             "bg_color": widget.backgroundColor == null
                 ? null
-                : _getHexStringFromColor(widget.backgroundColor),
+                : _getHexStringFromColor(widget.backgroundColor!),
             "title_color": widget.titleColor == null
                 ? null
-                : _getHexStringFromColor(widget.titleColor),
+                : _getHexStringFromColor(widget.titleColor!),
             "desc_color": widget.descriptionColor == null
                 ? null
-                : _getHexStringFromColor(widget.descriptionColor),
+                : _getHexStringFromColor(widget.descriptionColor!),
             "label_color": widget.labelColor == null
                 ? null
-                : _getHexStringFromColor(widget.labelColor),
+                : _getHexStringFromColor(widget.labelColor!),
             "button_color": widget.buttonColor == null
                 ? null
-                : _getHexStringFromColor(widget.buttonColor),
+                : _getHexStringFromColor(widget.buttonColor!),
             "button_title_color": widget.buttonTitleColor == null
                 ? null
-                : _getHexStringFromColor(widget.buttonTitleColor),
+                : _getHexStringFromColor(widget.buttonTitleColor!),
             "button_border_color": widget.buttonBorderColor == null
                 ? null
-                : _getHexStringFromColor(widget.buttonBorderColor),
+                : _getHexStringFromColor(widget.buttonBorderColor!),
           },
         ),
       );
@@ -229,7 +229,7 @@ class _FacebookNativeAdState extends State<FacebookNativeAd>
         width: width,
         height: widget.adType == NativeAdType.NATIVE_AD
             ? widget.height
-            : widget.bannerAdSize.height.toDouble(),
+            : widget.bannerAdSize.height!.toDouble(),
         child: UiKitView(
           viewType: _getChannelRegisterId(),
           onPlatformViewCreated: _onNativeAdViewCreated,
@@ -244,25 +244,25 @@ class _FacebookNativeAdState extends State<FacebookNativeAd>
                 : widget.height,
             "bg_color": widget.backgroundColor == null
                 ? null
-                : _getHexStringFromColor(widget.backgroundColor),
+                : _getHexStringFromColor(widget.backgroundColor!),
             "title_color": widget.titleColor == null
                 ? null
-                : _getHexStringFromColor(widget.titleColor),
+                : _getHexStringFromColor(widget.titleColor!),
             "desc_color": widget.descriptionColor == null
                 ? null
-                : _getHexStringFromColor(widget.descriptionColor),
+                : _getHexStringFromColor(widget.descriptionColor!),
             "label_color": widget.labelColor == null
                 ? null
-                : _getHexStringFromColor(widget.labelColor),
+                : _getHexStringFromColor(widget.labelColor!),
             "button_color": widget.buttonColor == null
                 ? null
-                : _getHexStringFromColor(widget.buttonColor),
+                : _getHexStringFromColor(widget.buttonColor!),
             "button_title_color": widget.buttonTitleColor == null
                 ? null
-                : _getHexStringFromColor(widget.buttonTitleColor),
+                : _getHexStringFromColor(widget.buttonTitleColor!),
             "button_border_color": widget.buttonBorderColor == null
                 ? null
-                : _getHexStringFromColor(widget.buttonBorderColor),
+                : _getHexStringFromColor(widget.buttonBorderColor!),
             "is_media_cover": widget.isMediaCover,
           },
         ),
@@ -286,11 +286,11 @@ class _FacebookNativeAdState extends State<FacebookNativeAd>
       switch (call.method) {
         case ERROR_METHOD:
           if (widget.listener != null)
-            widget.listener(NativeAdResult.ERROR, call.arguments);
+            widget.listener!(NativeAdResult.ERROR, call.arguments);
           break;
         case LOADED_METHOD:
           if (widget.listener != null)
-            widget.listener(NativeAdResult.LOADED, call.arguments);
+            widget.listener!(NativeAdResult.LOADED, call.arguments);
 
           if (!isAdReady) {
             setState(() {
@@ -313,17 +313,17 @@ class _FacebookNativeAdState extends State<FacebookNativeAd>
           break;
         case CLICKED_METHOD:
           if (widget.listener != null)
-            widget.listener(NativeAdResult.CLICKED, call.arguments);
+            widget.listener!(NativeAdResult.CLICKED, call.arguments);
           break;
         case LOGGING_IMPRESSION_METHOD:
           if (widget.listener != null)
-            widget.listener(NativeAdResult.LOGGING_IMPRESSION, call.arguments);
+            widget.listener!(NativeAdResult.LOGGING_IMPRESSION, call.arguments);
           break;
         case MEDIA_DOWNLOADED_METHOD:
           if (widget.listener != null)
-            widget.listener(NativeAdResult.MEDIA_DOWNLOADED, call.arguments);
+            widget.listener!(NativeAdResult.MEDIA_DOWNLOADED, call.arguments);
           break;
       }
-    });
+    } as Future<dynamic> Function(MethodCall)?);
   }
 }

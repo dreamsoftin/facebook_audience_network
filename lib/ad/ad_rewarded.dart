@@ -25,7 +25,7 @@ enum RewardedVideoAdResult {
 }
 
 class FacebookRewardedVideoAd {
-  static void Function(RewardedVideoAdResult, dynamic) _listener;
+  static void Function(RewardedVideoAdResult, dynamic)? _listener;
 
   static const _channel = const MethodChannel(REWARDED_VIDEO_CHANNEL);
 
@@ -45,9 +45,9 @@ class FacebookRewardedVideoAd {
   ///   'error\_message': "No internet connection",
   /// }
   /// ```
-  static Future<bool> loadRewardedVideoAd({
+  static Future<bool?> loadRewardedVideoAd({
     String placementId = "YOUR_PLACEMENT_ID",
-    Function(RewardedVideoAdResult, dynamic) listener,
+    Function(RewardedVideoAdResult, dynamic)? listener,
   }) async {
     try {
       final args = <String, dynamic>{
@@ -84,7 +84,7 @@ class FacebookRewardedVideoAd {
   ///   },
   /// );
   /// ```
-  static Future<bool> showRewardedVideoAd({int delay = 0}) async {
+  static Future<bool?> showRewardedVideoAd({int delay = 0}) async {
     try {
       final args = <String, dynamic>{
         "delay": delay,
@@ -102,7 +102,7 @@ class FacebookRewardedVideoAd {
   }
 
   /// Removes the rewarded video Ad.
-  static Future<bool> destroyRewardedVideoAd() async {
+  static Future<bool?> destroyRewardedVideoAd() async {
     try {
       final result = await _channel.invokeMethod(DESTROY_REWARDED_VIDEO_METHOD);
       return result;
@@ -115,27 +115,27 @@ class FacebookRewardedVideoAd {
     switch (call.method) {
       case REWARDED_VIDEO_COMPLETE_METHOD:
         if (_listener != null)
-          _listener(RewardedVideoAdResult.VIDEO_COMPLETE, call.arguments);
+          _listener!(RewardedVideoAdResult.VIDEO_COMPLETE, call.arguments);
         break;
       case REWARDED_VIDEO_CLOSED_METHOD:
         if (_listener != null)
-          _listener(RewardedVideoAdResult.VIDEO_CLOSED, call.arguments);
+          _listener!(RewardedVideoAdResult.VIDEO_CLOSED, call.arguments);
         break;
       case ERROR_METHOD:
         if (_listener != null)
-          _listener(RewardedVideoAdResult.ERROR, call.arguments);
+          _listener!(RewardedVideoAdResult.ERROR, call.arguments);
         break;
       case LOADED_METHOD:
         if (_listener != null)
-          _listener(RewardedVideoAdResult.LOADED, call.arguments);
+          _listener!(RewardedVideoAdResult.LOADED, call.arguments);
         break;
       case CLICKED_METHOD:
         if (_listener != null)
-          _listener(RewardedVideoAdResult.CLICKED, call.arguments);
+          _listener!(RewardedVideoAdResult.CLICKED, call.arguments);
         break;
       case LOGGING_IMPRESSION_METHOD:
         if (_listener != null)
-          _listener(RewardedVideoAdResult.LOGGING_IMPRESSION, call.arguments);
+          _listener!(RewardedVideoAdResult.LOGGING_IMPRESSION, call.arguments);
         break;
     }
     return Future.value(true);
