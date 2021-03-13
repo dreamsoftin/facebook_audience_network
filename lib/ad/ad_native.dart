@@ -304,7 +304,7 @@ class _FacebookNativeAdState extends State<FacebookNativeAd>
           });*/
           break;
         case LOAD_SUCCESS_METHOD:
-          if (!mounted) return;
+          if (!mounted) Future<dynamic>.value(true);
           if (!isAdReady) {
             setState(() {
               isAdReady = true;
@@ -324,6 +324,9 @@ class _FacebookNativeAdState extends State<FacebookNativeAd>
             widget.listener!(NativeAdResult.MEDIA_DOWNLOADED, call.arguments);
           break;
       }
-    } as Future<dynamic> Function(MethodCall)?);
+
+      return Future<dynamic>.value(true);
+
+    });
   }
 }

@@ -141,6 +141,7 @@ class _FacebookBannerAdState extends State<FacebookBannerAd>
     final channel = MethodChannel('${BANNER_AD_CHANNEL}_$id');
     
     channel.setMethodCallHandler((MethodCall call) {
+
       switch (call.method) {
         case ERROR_METHOD:
           if (widget.listener != null)
@@ -164,6 +165,8 @@ class _FacebookBannerAdState extends State<FacebookBannerAd>
             widget.listener!(BannerAdResult.LOGGING_IMPRESSION, call.arguments);
           break;
       }
-    } as Future<dynamic> Function(MethodCall)?);
+
+      return Future<dynamic>.value(true);
+    });
   }
 }

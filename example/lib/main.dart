@@ -1,11 +1,12 @@
-import 'package:facebook_audience_network/facebook_audience_network.dart';
 import 'package:flutter/material.dart';
+import 'package:facebook_audience_network/facebook_audience_network.dart';
 
 void main() => runApp(AdExampleApp());
 
 class AdExampleApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'FB Audience Network Example',
@@ -26,9 +27,17 @@ class AdExampleApp extends StatelessWidget {
       ),
     );
   }
+
+
 }
 
+
 class AdsPage extends StatefulWidget {
+
+  final String idfa;
+
+  const AdsPage({Key? key, this.idfa=''}) : super(key: key);
+
   @override
   AdsPageState createState() => AdsPageState();
 }
@@ -50,9 +59,11 @@ class AdsPageState extends State<AdsPage> {
   void initState() {
     super.initState();
 
+
     FacebookAudienceNetwork.init(
-      testingId: "b9f2908b-1a6b-4a5b-b862-ded7ce289e41",
+      testingId: "a77955ee-3304-4635-be65-81029b0f5201",
     );
+
 
     _loadInterstitialAd();
     _loadRewardedVideoAd();
@@ -61,7 +72,7 @@ class AdsPageState extends State<AdsPage> {
   void _loadInterstitialAd() {
     FacebookInterstitialAd.loadInterstitialAd(
       placementId:
-          "IMG_16_9_APP_INSTALL#2312433698835503_2650502525028617", //"IMG_16_9_APP_INSTALL#2312433698835503_2650502525028617" YOUR_PLACEMENT_ID
+      "YOUR_PLACEMENT_ID", //"IMG_16_9_APP_INSTALL#2312433698835503_2650502525028617" YOUR_PLACEMENT_ID
       listener: (result, value) {
         print(">> FAN > Interstitial Ad: $result --> $value");
         if (result == InterstitialAdResult.LOADED)
@@ -178,7 +189,7 @@ class AdsPageState extends State<AdsPage> {
 
   _showBannerAd() {
     setState(() {
-      _currentAd = FacebookBannerAd(
+      _currentAd = FacebookBannerAd(placementId: "YOUR_PLACEMENT_ID",
         // placementId:
         //     "IMG_16_9_APP_INSTALL#2312433698835503_2964944860251047", //testid
         bannerSize: BannerSize.STANDARD,
@@ -196,7 +207,7 @@ class AdsPageState extends State<AdsPage> {
   }
 
   Widget _nativeBannerAd() {
-    return FacebookNativeAd(
+    return FacebookNativeAd(placementId: "YOUR_PLACEMENT_ID",
       // placementId: "IMG_16_9_APP_INSTALL#2312433698835503_2964953543583512",
       adType: NativeAdType.NATIVE_BANNER_AD,
       bannerAdSize: NativeBannerAdSize.HEIGHT_100,
@@ -239,3 +250,4 @@ class AdsPageState extends State<AdsPage> {
     );
   }
 }
+
