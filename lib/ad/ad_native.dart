@@ -150,6 +150,7 @@ class _FacebookNativeAdState extends State<FacebookNativeAd>
   }
 
   Widget build(BuildContext context) {
+    super.build(context);
     double width = widget.width == double.infinity
         ? MediaQuery.of(context).size.width
         : widget.width;

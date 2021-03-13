@@ -45,7 +45,6 @@ class AdsPage extends StatefulWidget {
 class AdsPageState extends State<AdsPage> {
   bool _isInterstitialAdLoaded = false;
   bool _isRewardedAdLoaded = false;
-  bool _isRewardedVideoComplete = false;
 
   /// All widget ads are stored in this variable. When a button is pressed, its
   /// respective ad widget is set to this variable and the view is rebuilt using
@@ -60,6 +59,8 @@ class AdsPageState extends State<AdsPage> {
     super.initState();
 
 
+    /// please add your own device testingId
+    /// (testingId will print in console if you don't provide  )
     FacebookAudienceNetwork.init(
       testingId: "a77955ee-3304-4635-be65-81029b0f5201",
     );
@@ -96,7 +97,6 @@ class AdsPageState extends State<AdsPage> {
         print("Rewarded Ad: $result --> $value");
         if (result == RewardedVideoAdResult.LOADED) _isRewardedAdLoaded = true;
         if (result == RewardedVideoAdResult.VIDEO_COMPLETE)
-          _isRewardedVideoComplete = true;
 
         /// Once a Rewarded Ad has been closed and becomes invalidated,
         /// load a fresh Ad by calling this function.
@@ -163,7 +163,7 @@ class AdsPageState extends State<AdsPage> {
   Widget _getRaisedButton({required String title, void Function()? onPressed}) {
     return Padding(
       padding: EdgeInsets.all(8),
-      child: RaisedButton(
+      child: ElevatedButton(
         onPressed: onPressed,
         child: Text(
           title,

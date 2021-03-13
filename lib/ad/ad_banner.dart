@@ -89,6 +89,7 @@ class _FacebookBannerAdState extends State<FacebookBannerAd>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     if (defaultTargetPlatform == TargetPlatform.android) {
       return Container(
         height: containerHeight,
