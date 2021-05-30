@@ -1,7 +1,4 @@
-import 'dart:io';
-
 import 'package:flutter/services.dart';
-
 import 'package:facebook_audience_network/constants.dart';
 
 enum InterstitialAdResult {
@@ -25,7 +22,7 @@ enum InterstitialAdResult {
 }
 
 class FacebookInterstitialAd {
-  static void Function(InterstitialAdResult, dynamic) _listener;
+  static void Function(InterstitialAdResult, dynamic)? _listener;
 
   static const _channel = const MethodChannel(INTERSTITIAL_AD_CHANNEL);
 
@@ -45,9 +42,9 @@ class FacebookInterstitialAd {
   ///   'error\_message': "No internet connection",
   /// }
   /// ```
-  static Future<bool> loadInterstitialAd({
+  static Future<bool?> loadInterstitialAd({
     String placementId = "YOUR_PLACEMENT_ID",
-    Function(InterstitialAdResult, dynamic) listener,
+    Function(InterstitialAdResult, dynamic)? listener,
   }) async {
     try {
       final args = <String, dynamic>{
@@ -81,7 +78,7 @@ class FacebookInterstitialAd {
   ///   },
   /// );
   /// ```
-  static Future<bool> showInterstitialAd({int delay = 0}) async {
+  static Future<bool?> showInterstitialAd({int? delay = 0}) async {
     try {
       final args = <String, dynamic>{
         "delay": delay,
@@ -99,7 +96,7 @@ class FacebookInterstitialAd {
   }
 
   /// Removes the Ad.
-  static Future<bool> destroyInterstitialAd() async {
+  static Future<bool?> destroyInterstitialAd() async {
     try {
       final result = await _channel.invokeMethod(DESTROY_INTERSTITIAL_METHOD);
       return result;
@@ -112,27 +109,27 @@ class FacebookInterstitialAd {
     switch (call.method) {
       case DISPLAYED_METHOD:
         if (_listener != null)
-          _listener(InterstitialAdResult.DISPLAYED, call.arguments);
+          _listener!(InterstitialAdResult.DISPLAYED, call.arguments);
         break;
       case DISMISSED_METHOD:
         if (_listener != null)
-          _listener(InterstitialAdResult.DISMISSED, call.arguments);
+          _listener!(InterstitialAdResult.DISMISSED, call.arguments);
         break;
       case ERROR_METHOD:
         if (_listener != null)
-          _listener(InterstitialAdResult.ERROR, call.arguments);
+          _listener!(InterstitialAdResult.ERROR, call.arguments);
         break;
       case LOADED_METHOD:
         if (_listener != null)
-          _listener(InterstitialAdResult.LOADED, call.arguments);
+          _listener!(InterstitialAdResult.LOADED, call.arguments);
         break;
       case CLICKED_METHOD:
         if (_listener != null)
-          _listener(InterstitialAdResult.CLICKED, call.arguments);
+          _listener!(InterstitialAdResult.CLICKED, call.arguments);
         break;
       case LOGGING_IMPRESSION_METHOD:
         if (_listener != null)
-          _listener(InterstitialAdResult.LOGGING_IMPRESSION, call.arguments);
+          _listener!(InterstitialAdResult.LOGGING_IMPRESSION, call.arguments);
         break;
     }
     return Future.value(true);

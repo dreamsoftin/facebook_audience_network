@@ -1,4 +1,6 @@
 PODS:
+  - app_tracking_transparency (0.0.1):
+    - Flutter
   - facebook_audience_network (0.0.1):
     - FBAudienceNetwork (~> 6.3)
     - Flutter
@@ -8,8 +10,9 @@ PODS:
   - Flutter (1.0.0)
 
 DEPENDENCIES:
+  - app_tracking_transparency (from `.symlinks/plugins/app_tracking_transparency/ios`)
   - facebook_audience_network (from `.symlinks/plugins/facebook_audience_network/ios`)
-  - Flutter (from `.symlinks/flutter/ios-release`)
+  - Flutter (from `Flutter`)
 
 SPEC REPOS:
   trunk:
@@ -17,17 +20,20 @@ SPEC REPOS:
     - FBSDKCoreKit
 
 EXTERNAL SOURCES:
+  app_tracking_transparency:
+    :path: ".symlinks/plugins/app_tracking_transparency/ios"
   facebook_audience_network:
     :path: ".symlinks/plugins/facebook_audience_network/ios"
   Flutter:
-    :path: ".symlinks/flutter/ios-release"
+    :path: Flutter
 
 SPEC CHECKSUMS:
+  app_tracking_transparency: 5b1745ef9ade815f7455cb6a0848349589afb7c5
   facebook_audience_network: bb22bdda913d419d8c3247c9570bda4563302417
   FBAudienceNetwork: 58b4d0f2359783e5bc9ee59f138b4fda43173ac4
   FBSDKCoreKit: fada1a6a0076724678993ff05a633848765ff18c
-  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
 
-PODFILE CHECKSUM: ff9c4084272e4bf9a2fd115110c5cf1876ef2908
+PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
 
-COCOAPODS: 1.10.0
+COCOAPODS: 1.10.1

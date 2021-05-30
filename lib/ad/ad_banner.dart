@@ -39,7 +39,7 @@ enum BannerAdResult {
 }
 
 class FacebookBannerAd extends StatefulWidget {
-  final Key key;
+  final Key? key;
 
   /// Replace the default one with your placement ID for the release build.
   final String placementId;
@@ -48,7 +48,7 @@ class FacebookBannerAd extends StatefulWidget {
   final BannerSize bannerSize;
 
   /// Banner Ad listener
-  final void Function(BannerAdResult, dynamic) listener;
+  final void Function(BannerAdResult, dynamic)? listener;
 
   /// This defines if the ad view to be kept alive.
   final bool keepAlive;
@@ -89,6 +89,7 @@ class _FacebookBannerAdState extends State<FacebookBannerAd>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     if (defaultTargetPlatform == TargetPlatform.android) {
       return Container(
         height: containerHeight,
@@ -141,10 +142,11 @@ class _FacebookBannerAdState extends State<FacebookBannerAd>
     final channel = MethodChannel('${BANNER_AD_CHANNEL}_$id');
     
     channel.setMethodCallHandler((MethodCall call) {
+
       switch (call.method) {
         case ERROR_METHOD:
           if (widget.listener != null)
-            widget.listener(BannerAdResult.ERROR, call.arguments);
+            widget.listener!(BannerAdResult.ERROR, call.arguments);
           break;
         case LOADED_METHOD:
           setState(() {
@@ -153,17 +155,19 @@ class _FacebookBannerAdState extends State<FacebookBannerAd>
                 : widget.bannerSize.height.toDouble();
           });
           if (widget.listener != null)
-            widget.listener(BannerAdResult.LOADED, call.arguments);
+            widget.listener!(BannerAdResult.LOADED, call.arguments);
           break;
         case CLICKED_METHOD:
           if (widget.listener != null)
-            widget.listener(BannerAdResult.CLICKED, call.arguments);
+            widget.listener!(BannerAdResult.CLICKED, call.arguments);
           break;
         case LOGGING_IMPRESSION_METHOD:
           if (widget.listener != null)
-            widget.listener(BannerAdResult.LOGGING_IMPRESSION, call.arguments);
+            widget.listener!(BannerAdResult.LOGGING_IMPRESSION, call.arguments);
           break;
       }
+
+      return Future<dynamic>.value(true);
     });
   }
 }

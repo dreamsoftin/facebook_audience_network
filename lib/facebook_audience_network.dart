@@ -30,8 +30,8 @@ class FacebookAudienceNetwork {
   ///
   /// [testingId] can be obtained by running the app once without the testingId.
   /// Check the log to obtain the [testingId] for your device.
-  static Future<bool> init({String testingId}) async {
-    Map<String, String> initValues = {
+  static Future<bool?> init({String? testingId}) async {
+    Map<String, String?> initValues = {
       "testingId": testingId,
     };
 
@@ -59,9 +59,9 @@ class FacebookAudienceNetwork {
   ///   'error_message': "No internet connection",
   /// }
   /// ```
-  static Future<bool> loadInterstitialAd({
+  static Future<bool?> loadInterstitialAd({
     String placementId = "YOUR_PLACEMENT_ID",
-    Function(InterstitialAdResult, dynamic) listener,
+    Function(InterstitialAdResult, dynamic)? listener,
   }) async {
     return await FacebookInterstitialAd.loadInterstitialAd(
       placementId: placementId,
@@ -83,12 +83,12 @@ class FacebookAudienceNetwork {
   ///   },
   /// );
   /// ```
-  static Future<bool> showInterstitialAd({int delay}) async {
+  static Future<bool?> showInterstitialAd({int? delay}) async {
     return await FacebookInterstitialAd.showInterstitialAd(delay: delay);
   }
 
   /// Removes the Ad.
-  static Future<bool> destroyInterstitialAd() async {
+  static Future<bool?> destroyInterstitialAd() async {
     return await FacebookInterstitialAd.destroyInterstitialAd();
   }
 
@@ -108,9 +108,9 @@ class FacebookAudienceNetwork {
   ///   'error\_message': "No internet connection",
   /// }
   /// ```
-  static Future<bool> loadRewardedVideoAd({
+  static Future<bool?> loadRewardedVideoAd({
     String placementId = "YOUR_PLACEMENT_ID",
-    Function(RewardedVideoAdResult, dynamic) listener,
+    Function(RewardedVideoAdResult, dynamic)? listener,
   }) async {
     return await FacebookRewardedVideoAd.loadRewardedVideoAd(
       placementId: placementId,
@@ -132,12 +132,12 @@ class FacebookAudienceNetwork {
   ///   },
   /// );
   /// ```
-  static Future<bool> showRewardedVideoAd({int delay = 0}) async {
+  static Future<bool?> showRewardedVideoAd({int delay = 0}) async {
     return await FacebookRewardedVideoAd.showRewardedVideoAd(delay: delay);
   }
 
   /// Removes the rewarded video Ad.
-  static Future<bool> destroyRewardedVideoAd() async {
+  static Future<bool?> destroyRewardedVideoAd() async {
     return await FacebookRewardedVideoAd.destroyRewardedVideoAd();
   }
 }
