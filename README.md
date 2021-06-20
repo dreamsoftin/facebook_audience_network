@@ -13,7 +13,7 @@
 | - | - |
 | ![Interstitial Ad](https://raw.githubusercontent.com/dreamsoftin/facebook_audience_network/master/example/gifs/interstitial.gif "Interstitial Ad") | ![Rewarded Ad](https://raw.githubusercontent.com/dreamsoftin/facebook_audience_network/master/example/gifs/rewarded.gif "Rewarded Video Ad") |
 
-
+---
 ## Getting Started
 
 ### 1. Initialization:
@@ -29,6 +29,7 @@ The hased id will be in printed to the logcat. Paste that onto the `testingId` p
 ```dart
 FacebookAudienceNetwork.init(
   testingId: "37b1da9d-b48c-4103-a393-2e095e734bd6", //optional
+  iOSAdvertiserTrackingEnabled: true //default false
 );
 ```
 ##### IOS Setup
@@ -36,6 +37,7 @@ In Pod file, set the IOS deployment target version to 9.0
 
 *IN iOS, Banner, Interstital and Native Ads are supported* 
 
+---
 ### 2. Show Banner Ad:
 
 ```dart
@@ -63,7 +65,7 @@ Container(
   ),
 )
 ```
-
+---
 ### 3. Show Interstitial Ad:
 
 ```dart
@@ -75,6 +77,7 @@ FacebookInterstitialAd.loadInterstitialAd(
   },
 );
 ```
+---
 ### 4. Show Rewarded Video Ad:
 (Android Only)
 
@@ -89,7 +92,7 @@ FacebookRewardedVideoAd.loadRewardedVideoAd(
   },
 );
 ```
-
+---
 ### 5. Show Native Ad:
 - NativeAdType NATIVE_AD_HORIZONTAL & NATIVE_AD_VERTICAL ad types are supported only in iOS. In Android use NATIVE_AD.
 ```dart
@@ -112,7 +115,7 @@ FacebookNativeAd(
   },
 ),
 ```
-
+---
 ### 6. Show Native Banner Ad:
 Use `NativeBannerAdSize` to choose the height for Native banner ads. `height` property is ignored for native banner ads.
 
@@ -133,7 +136,7 @@ FacebookNativeAd(
   },
 ),
 ```
-
+---
 **Check out the [example](https://github.com/dreamsoftin/facebook_audience_network/tree/master/example) for complete implementation.**
 
 iOS wrapper code contribution by **lolqplay team from birdgang**

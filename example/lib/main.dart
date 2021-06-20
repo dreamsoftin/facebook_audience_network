@@ -6,7 +6,6 @@ void main() => runApp(AdExampleApp());
 class AdExampleApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'FB Audience Network Example',
@@ -27,16 +26,12 @@ class AdExampleApp extends StatelessWidget {
       ),
     );
   }
-
-
 }
 
-
 class AdsPage extends StatefulWidget {
-
   final String idfa;
 
-  const AdsPage({Key? key, this.idfa=''}) : super(key: key);
+  const AdsPage({Key? key, this.idfa = ''}) : super(key: key);
 
   @override
   AdsPageState createState() => AdsPageState();
@@ -58,13 +53,12 @@ class AdsPageState extends State<AdsPage> {
   void initState() {
     super.initState();
 
-
     /// please add your own device testingId
     /// (testingId will print in console if you don't provide  )
     FacebookAudienceNetwork.init(
       testingId: "a77955ee-3304-4635-be65-81029b0f5201",
+      iOSAdvertiserTrackingEnabled: true,
     );
-
 
     _loadInterstitialAd();
     _loadRewardedVideoAd();
@@ -72,8 +66,8 @@ class AdsPageState extends State<AdsPage> {
 
   void _loadInterstitialAd() {
     FacebookInterstitialAd.loadInterstitialAd(
-      placementId:
-      "YOUR_PLACEMENT_ID", //"IMG_16_9_APP_INSTALL#2312433698835503_2650502525028617" YOUR_PLACEMENT_ID
+      // placementId: "YOUR_PLACEMENT_ID",
+      placementId: "IMG_16_9_APP_INSTALL#2312433698835503_2650502525028617",
       listener: (result, value) {
         print(">> FAN > Interstitial Ad: $result --> $value");
         if (result == InterstitialAdResult.LOADED)
@@ -189,9 +183,10 @@ class AdsPageState extends State<AdsPage> {
 
   _showBannerAd() {
     setState(() {
-      _currentAd = FacebookBannerAd(placementId: "YOUR_PLACEMENT_ID",
-        // placementId:
-        //     "IMG_16_9_APP_INSTALL#2312433698835503_2964944860251047", //testid
+      _currentAd = FacebookBannerAd(
+        // placementId: "YOUR_PLACEMENT_ID",
+        placementId:
+            "IMG_16_9_APP_INSTALL#2312433698835503_2964944860251047", //testid
         bannerSize: BannerSize.STANDARD,
         listener: (result, value) {
           print("Banner Ad: $result -->  $value");
@@ -207,8 +202,9 @@ class AdsPageState extends State<AdsPage> {
   }
 
   Widget _nativeBannerAd() {
-    return FacebookNativeAd(placementId: "YOUR_PLACEMENT_ID",
-      // placementId: "IMG_16_9_APP_INSTALL#2312433698835503_2964953543583512",
+    return FacebookNativeAd(
+      // placementId: "YOUR_PLACEMENT_ID",
+      placementId: "IMG_16_9_APP_INSTALL#2312433698835503_2964953543583512",
       adType: NativeAdType.NATIVE_BANNER_AD,
       bannerAdSize: NativeBannerAdSize.HEIGHT_100,
       width: double.infinity,
@@ -232,7 +228,7 @@ class AdsPageState extends State<AdsPage> {
 
   Widget _nativeAd() {
     return FacebookNativeAd(
-      // placementId: "IMG_16_9_APP_INSTALL#2312433698835503_2964952163583650",
+      placementId: "IMG_16_9_APP_INSTALL#2312433698835503_2964952163583650",
       adType: NativeAdType.NATIVE_AD_VERTICAL,
       width: double.infinity,
       height: 300,
@@ -250,4 +246,3 @@ class AdsPageState extends State<AdsPage> {
     );
   }
 }
-

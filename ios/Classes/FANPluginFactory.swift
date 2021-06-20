@@ -12,9 +12,14 @@ class FANPluginFactory: NSObject {
         
         super.init()
         
-        channel.setMethodCallHandler { (call, result) in
+        channel.setMethodCallHandler { (_ call : FlutterMethodCall, result : @escaping FlutterResult) in
             switch call.method{
             case "init":
+                if #available(iOS 14.0, *) {
+                    let iOSAdvertiserTrackingEnabled = ((call.arguments as! Dictionary<String,AnyObject>)["iOSAdvertiserTrackingEnabled"] as! NSString).boolValue
+                    print("FANPluginFactory > iOSAdvertiserTrackingEnabled: " + String(iOSAdvertiserTrackingEnabled))
+                    FBAdSettings.setAdvertiserTrackingEnabled(iOSAdvertiserTrackingEnabled)
+                }
                 print("FANPluginFactory > init")
                 result(true)
             default:

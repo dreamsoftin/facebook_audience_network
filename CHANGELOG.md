@@ -1,5 +1,8 @@
-## 0.9.0
+## 1.0.0-nullsafety.0
+- Add nullsafety - PR by @RR-Reddy
+- Add support for iOSAdvertiserTrackingEnabled flag - default: false
 
+## 0.9.0
 - Bumped up Audience Network SDK to v6.3.0
 
 ## 0.8.0
