@@ -141,8 +141,6 @@ class FacebookAudienceNetworkBannerAdView: NSObject, FlutterPlatformView, FBAdVi
 			adSize = kFBAdSizeHeight90Banner
 		}
 		
-        //let adSize: FBAdSize = FBAdSize.init(size: CGSize.init(width: width, height: height))
-        
         if (existsId) {
             self.bannerAd = FBAdView.init(placementID: valueId, adSize: adSize, rootViewController: UIApplication.shared.keyWindow?.rootViewController)
             self.bannerAd.delegate = self
