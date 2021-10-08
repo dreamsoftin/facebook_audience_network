@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
 import 'package:facebook_audience_network/constants.dart';
@@ -133,8 +135,7 @@ class FacebookNativeAd extends StatefulWidget {
   _FacebookNativeAdState createState() => _FacebookNativeAdState();
 }
 
-class _FacebookNativeAdState extends State<FacebookNativeAd>
-    with AutomaticKeepAliveClientMixin {
+class _FacebookNativeAdState extends State<FacebookNativeAd> with AutomaticKeepAliveClientMixin {
   final double containerHeight = Platform.isAndroid ? 1.0 : 0.1;
   bool isAdReady = false;
   @override
@@ -142,8 +143,7 @@ class _FacebookNativeAdState extends State<FacebookNativeAd>
 
   String _getChannelRegisterId() {
     String channel = NATIVE_AD_CHANNEL;
-    if (defaultTargetPlatform == TargetPlatform.iOS &&
-        widget.adType == NativeAdType.NATIVE_BANNER_AD) {
+    if (defaultTargetPlatform == TargetPlatform.iOS && widget.adType == NativeAdType.NATIVE_BANNER_AD) {
       channel = NATIVE_BANNER_AD_CHANNEL;
     }
     return channel;
@@ -151,23 +151,17 @@ class _FacebookNativeAdState extends State<FacebookNativeAd>
 
   Widget build(BuildContext context) {
     super.build(context);
-    double width = widget.width == double.infinity
-        ? MediaQuery.of(context).size.width
-        : widget.width;
+    double width = widget.width == double.infinity ? MediaQuery.of(context).size.width : widget.width;
     return AnimatedContainer(
       color: Colors.transparent,
       width: width,
-      height: isAdReady || widget.keepExpandedWhileLoading
-          ? widget.height
-          : containerHeight,
+      height: isAdReady || widget.keepExpandedWhileLoading ? widget.height : containerHeight,
       duration: Duration(milliseconds: widget.expandAnimationDuraion),
       child: Stack(
         alignment: Alignment.center,
         children: <Widget>[
           Positioned.fill(
-            top: isAdReady || widget.keepExpandedWhileLoading
-                ? 0
-                : -(widget.height - containerHeight),
+            top: isAdReady || widget.keepExpandedWhileLoading ? 0 : -(widget.height - containerHeight),
             child: ConstrainedBox(
               constraints: new BoxConstraints(
                 maxHeight: widget.height,
@@ -182,6 +176,22 @@ class _FacebookNativeAdState extends State<FacebookNativeAd>
   }
 
   Widget buildPlatformView(double width) {
+    final Map<String, dynamic> creationParams = <String, dynamic>{
+      "id": widget.placementId,
+      "ad_type": widget.adType.index,
+      "banner_ad": widget.adType == NativeAdType.NATIVE_BANNER_AD ? true : false,
+      "height": widget.adType == NativeAdType.NATIVE_BANNER_AD ? widget.bannerAdSize.height : widget.height,
+      "bg_color": widget.backgroundColor == null ? null : _getHexStringFromColor(widget.backgroundColor!),
+      "title_color": widget.titleColor == null ? null : _getHexStringFromColor(widget.titleColor!),
+      "desc_color": widget.descriptionColor == null ? null : _getHexStringFromColor(widget.descriptionColor!),
+      "label_color": widget.labelColor == null ? null : _getHexStringFromColor(widget.labelColor!),
+      "button_color": widget.buttonColor == null ? null : _getHexStringFromColor(widget.buttonColor!),
+      "button_title_color": widget.buttonTitleColor == null ? null : _getHexStringFromColor(widget.buttonTitleColor!),
+      "button_border_color":
+          widget.buttonBorderColor == null ? null : _getHexStringFromColor(widget.buttonBorderColor!),
+      "is_media_cover": widget.isMediaCover,
+    };
+
     if (defaultTargetPlatform == TargetPlatform.android) {
       return Container(
         width: width,
@@ -190,82 +200,41 @@ class _FacebookNativeAdState extends State<FacebookNativeAd>
                 widget.adType == NativeAdType.NATIVE_AD_VERTICAL
             ? widget.height
             : widget.bannerAdSize.height!.toDouble(),
-        child: AndroidView(
+        child: PlatformViewLink(
           viewType: NATIVE_AD_CHANNEL,
-          onPlatformViewCreated: _onNativeAdViewCreated,
-          creationParamsCodec: StandardMessageCodec(),
-          creationParams: <String, dynamic>{
-            "id": widget.placementId,
-            "banner_ad":
-                widget.adType == NativeAdType.NATIVE_BANNER_AD ? true : false,
-            // height param is only for Banner Ads. Native Ad's height is
-            // governed by container.
-            "height": widget.bannerAdSize.height,
-            "bg_color": widget.backgroundColor == null
-                ? null
-                : _getHexStringFromColor(widget.backgroundColor!),
-            "title_color": widget.titleColor == null
-                ? null
-                : _getHexStringFromColor(widget.titleColor!),
-            "desc_color": widget.descriptionColor == null
-                ? null
-                : _getHexStringFromColor(widget.descriptionColor!),
-            "label_color": widget.labelColor == null
-                ? null
-                : _getHexStringFromColor(widget.labelColor!),
-            "button_color": widget.buttonColor == null
-                ? null
-                : _getHexStringFromColor(widget.buttonColor!),
-            "button_title_color": widget.buttonTitleColor == null
-                ? null
-                : _getHexStringFromColor(widget.buttonTitleColor!),
-            "button_border_color": widget.buttonBorderColor == null
-                ? null
-                : _getHexStringFromColor(widget.buttonBorderColor!),
+          surfaceFactory: (BuildContext context, PlatformViewController controller) {
+            return AndroidViewSurface(
+              controller: controller as AndroidViewController,
+              gestureRecognizers: const <Factory<OneSequenceGestureRecognizer>>{},
+              hitTestBehavior: PlatformViewHitTestBehavior.opaque,
+            );
+          },
+          onCreatePlatformView: (PlatformViewCreationParams params) {
+            return PlatformViewsService.initSurfaceAndroidView(
+              id: params.id,
+              viewType: NATIVE_AD_CHANNEL,
+              layoutDirection: TextDirection.ltr,
+              creationParams: creationParams,
+              creationParamsCodec: StandardMessageCodec(),
+              onFocus: () {
+                params.onFocusChanged(true);
+              },
+            )
+              ..addOnPlatformViewCreatedListener(params.onPlatformViewCreated)
+              ..addOnPlatformViewCreatedListener(_onNativeAdViewCreated)
+              ..create();
           },
         ),
       );
     } else if (defaultTargetPlatform == TargetPlatform.iOS) {
       return Container(
         width: width,
-        height: widget.adType == NativeAdType.NATIVE_AD
-            ? widget.height
-            : widget.bannerAdSize.height!.toDouble(),
+        height: widget.adType == NativeAdType.NATIVE_AD ? widget.height : widget.bannerAdSize.height!.toDouble(),
         child: UiKitView(
           viewType: _getChannelRegisterId(),
           onPlatformViewCreated: _onNativeAdViewCreated,
           creationParamsCodec: StandardMessageCodec(),
-          creationParams: <String, dynamic>{
-            "id": widget.placementId,
-            "ad_type": widget.adType.index,
-            "banner_ad":
-                widget.adType == NativeAdType.NATIVE_BANNER_AD ? true : false,
-            "height": widget.adType == NativeAdType.NATIVE_BANNER_AD
-                ? widget.bannerAdSize.height
-                : widget.height,
-            "bg_color": widget.backgroundColor == null
-                ? null
-                : _getHexStringFromColor(widget.backgroundColor!),
-            "title_color": widget.titleColor == null
-                ? null
-                : _getHexStringFromColor(widget.titleColor!),
-            "desc_color": widget.descriptionColor == null
-                ? null
-                : _getHexStringFromColor(widget.descriptionColor!),
-            "label_color": widget.labelColor == null
-                ? null
-                : _getHexStringFromColor(widget.labelColor!),
-            "button_color": widget.buttonColor == null
-                ? null
-                : _getHexStringFromColor(widget.buttonColor!),
-            "button_title_color": widget.buttonTitleColor == null
-                ? null
-                : _getHexStringFromColor(widget.buttonTitleColor!),
-            "button_border_color": widget.buttonBorderColor == null
-                ? null
-                : _getHexStringFromColor(widget.buttonBorderColor!),
-            "is_media_cover": widget.isMediaCover,
-          },
+          creationParams: creationParams,
         ),
       );
     } else {
@@ -277,8 +246,7 @@ class _FacebookNativeAdState extends State<FacebookNativeAd>
     }
   }
 
-  String _getHexStringFromColor(Color color) =>
-      '#${color.value.toRadixString(16)}';
+  String _getHexStringFromColor(Color color) => '#${color.value.toRadixString(16)}';
 
   void _onNativeAdViewCreated(int id) {
     final channel = MethodChannel('${NATIVE_AD_CHANNEL}_$id');
@@ -286,12 +254,10 @@ class _FacebookNativeAdState extends State<FacebookNativeAd>
     channel.setMethodCallHandler((MethodCall call) {
       switch (call.method) {
         case ERROR_METHOD:
-          if (widget.listener != null)
-            widget.listener!(NativeAdResult.ERROR, call.arguments);
+          if (widget.listener != null) widget.listener!(NativeAdResult.ERROR, call.arguments);
           break;
         case LOADED_METHOD:
-          if (widget.listener != null)
-            widget.listener!(NativeAdResult.LOADED, call.arguments);
+          if (widget.listener != null) widget.listener!(NativeAdResult.LOADED, call.arguments);
 
           if (!isAdReady) {
             setState(() {
@@ -313,21 +279,17 @@ class _FacebookNativeAdState extends State<FacebookNativeAd>
           }
           break;
         case CLICKED_METHOD:
-          if (widget.listener != null)
-            widget.listener!(NativeAdResult.CLICKED, call.arguments);
+          if (widget.listener != null) widget.listener!(NativeAdResult.CLICKED, call.arguments);
           break;
         case LOGGING_IMPRESSION_METHOD:
-          if (widget.listener != null)
-            widget.listener!(NativeAdResult.LOGGING_IMPRESSION, call.arguments);
+          if (widget.listener != null) widget.listener!(NativeAdResult.LOGGING_IMPRESSION, call.arguments);
           break;
         case MEDIA_DOWNLOADED_METHOD:
-          if (widget.listener != null)
-            widget.listener!(NativeAdResult.MEDIA_DOWNLOADED, call.arguments);
+          if (widget.listener != null) widget.listener!(NativeAdResult.MEDIA_DOWNLOADED, call.arguments);
           break;
       }
 
       return Future<dynamic>.value(true);
-
     });
   }
 }
