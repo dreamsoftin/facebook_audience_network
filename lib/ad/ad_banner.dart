@@ -20,7 +20,8 @@ class BannerSize {
 
   static const BannerSize STANDARD = BannerSize(width: 320, height: 50);
   static const BannerSize LARGE = BannerSize(width: 320, height: 90);
-  static const BannerSize MEDIUM_RECTANGLE = BannerSize(width: 320, height: 250);
+  static const BannerSize MEDIUM_RECTANGLE =
+      BannerSize(width: 320, height: 250);
 
   const BannerSize({this.width = 320, this.height = 50});
 }
@@ -81,7 +82,8 @@ class FacebookBannerAd extends StatefulWidget {
   _FacebookBannerAdState createState() => _FacebookBannerAdState();
 }
 
-class _FacebookBannerAdState extends State<FacebookBannerAd> with AutomaticKeepAliveClientMixin {
+class _FacebookBannerAdState extends State<FacebookBannerAd>
+    with AutomaticKeepAliveClientMixin {
   double containerHeight = 0.5;
 
   @override
@@ -102,10 +104,12 @@ class _FacebookBannerAdState extends State<FacebookBannerAd> with AutomaticKeepA
         color: Colors.transparent,
         child: PlatformViewLink(
           viewType: BANNER_AD_CHANNEL,
-          surfaceFactory: (BuildContext context, PlatformViewController controller) {
+          surfaceFactory:
+              (BuildContext context, PlatformViewController controller) {
             return AndroidViewSurface(
               controller: controller as AndroidViewController,
-              gestureRecognizers: const <Factory<OneSequenceGestureRecognizer>>{},
+              gestureRecognizers: const <
+                  Factory<OneSequenceGestureRecognizer>>{},
               hitTestBehavior: PlatformViewHitTestBehavior.opaque,
             );
           },
@@ -139,9 +143,12 @@ class _FacebookBannerAdState extends State<FacebookBannerAd> with AutomaticKeepA
       );
     } else {
       return Container(
-        height: widget.bannerSize.height <= -1 ? double.infinity : widget.bannerSize.height.toDouble(),
+        height: widget.bannerSize.height <= -1
+            ? double.infinity
+            : widget.bannerSize.height.toDouble(),
         child: Center(
-          child: Text("Banner Ads for this platform is currently not supported"),
+          child:
+              Text("Banner Ads for this platform is currently not supported"),
         ),
       );
     }
@@ -153,19 +160,25 @@ class _FacebookBannerAdState extends State<FacebookBannerAd> with AutomaticKeepA
     channel.setMethodCallHandler((MethodCall call) {
       switch (call.method) {
         case ERROR_METHOD:
-          if (widget.listener != null) widget.listener!(BannerAdResult.ERROR, call.arguments);
+          if (widget.listener != null)
+            widget.listener!(BannerAdResult.ERROR, call.arguments);
           break;
         case LOADED_METHOD:
           setState(() {
-            containerHeight = widget.bannerSize.height <= -1 ? double.infinity : widget.bannerSize.height.toDouble();
+            containerHeight = widget.bannerSize.height <= -1
+                ? double.infinity
+                : widget.bannerSize.height.toDouble();
           });
-          if (widget.listener != null) widget.listener!(BannerAdResult.LOADED, call.arguments);
+          if (widget.listener != null)
+            widget.listener!(BannerAdResult.LOADED, call.arguments);
           break;
         case CLICKED_METHOD:
-          if (widget.listener != null) widget.listener!(BannerAdResult.CLICKED, call.arguments);
+          if (widget.listener != null)
+            widget.listener!(BannerAdResult.CLICKED, call.arguments);
           break;
         case LOGGING_IMPRESSION_METHOD:
-          if (widget.listener != null) widget.listener!(BannerAdResult.LOGGING_IMPRESSION, call.arguments);
+          if (widget.listener != null)
+            widget.listener!(BannerAdResult.LOGGING_IMPRESSION, call.arguments);
           break;
       }
 
