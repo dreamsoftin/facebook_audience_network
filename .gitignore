@@ -4,7 +4,8 @@
 .packages
 .pub/
 .idea/
-.vscode/
+
 
 build/
 example/.flutter-plugins-dependencies
+

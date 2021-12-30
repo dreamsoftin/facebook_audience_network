@@ -1,3 +1,6 @@
+## 1.0.1
+- Support Android V2 embedding - PR by @anil-shrestha
+
 ## 1.0.0-nullsafety.0
 - Add nullsafety - PR by @RR-Reddy
 - Add support for iOSAdvertiserTrackingEnabled flag - default: false
