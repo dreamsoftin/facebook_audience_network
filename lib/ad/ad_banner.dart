@@ -109,20 +109,15 @@ class _FacebookBannerAdState extends State<FacebookBannerAd>
       return Container(
         height: containerHeight,
         color: Colors.transparent,
-        child: Container(
-          width: widget.bannerSize.width.toDouble(),
-          child: Center(
-            child: UiKitView(
-              viewType: BANNER_AD_CHANNEL,
-              onPlatformViewCreated: _onBannerAdViewCreated,
-              creationParams: <String, dynamic>{
-                "id": widget.placementId,
-                "width": widget.bannerSize.width,
-                "height": widget.bannerSize.height,
-              },
-              creationParamsCodec: StandardMessageCodec(),
-            ),
-          ),
+        child: UiKitView(
+          viewType: BANNER_AD_CHANNEL,
+          onPlatformViewCreated: _onBannerAdViewCreated,
+          creationParams: <String, dynamic>{
+            "id": widget.placementId,
+            "width": widget.bannerSize.width,
+            "height": widget.bannerSize.height,
+          },
+          creationParamsCodec: StandardMessageCodec(),
         ),
       );
     } else {
