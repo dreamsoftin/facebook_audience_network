@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
 import 'package:facebook_audience_network/constants.dart';
@@ -182,6 +184,38 @@ class _FacebookNativeAdState extends State<FacebookNativeAd>
   }
 
   Widget buildPlatformView(double width) {
+    final Map<String, dynamic> creationParams = <String, dynamic>{
+      "id": widget.placementId,
+      "ad_type": widget.adType.index,
+      "banner_ad":
+          widget.adType == NativeAdType.NATIVE_BANNER_AD ? true : false,
+      "height": widget.adType == NativeAdType.NATIVE_BANNER_AD
+          ? widget.bannerAdSize.height
+          : widget.height,
+      "bg_color": widget.backgroundColor == null
+          ? null
+          : _getHexStringFromColor(widget.backgroundColor!),
+      "title_color": widget.titleColor == null
+          ? null
+          : _getHexStringFromColor(widget.titleColor!),
+      "desc_color": widget.descriptionColor == null
+          ? null
+          : _getHexStringFromColor(widget.descriptionColor!),
+      "label_color": widget.labelColor == null
+          ? null
+          : _getHexStringFromColor(widget.labelColor!),
+      "button_color": widget.buttonColor == null
+          ? null
+          : _getHexStringFromColor(widget.buttonColor!),
+      "button_title_color": widget.buttonTitleColor == null
+          ? null
+          : _getHexStringFromColor(widget.buttonTitleColor!),
+      "button_border_color": widget.buttonBorderColor == null
+          ? null
+          : _getHexStringFromColor(widget.buttonBorderColor!),
+      "is_media_cover": widget.isMediaCover,
+    };
+
     if (defaultTargetPlatform == TargetPlatform.android) {
       return Container(
         width: width,
@@ -190,38 +224,31 @@ class _FacebookNativeAdState extends State<FacebookNativeAd>
                 widget.adType == NativeAdType.NATIVE_AD_VERTICAL
             ? widget.height
             : widget.bannerAdSize.height!.toDouble(),
-        child: AndroidView(
+        child: PlatformViewLink(
           viewType: NATIVE_AD_CHANNEL,
-          onPlatformViewCreated: _onNativeAdViewCreated,
-          creationParamsCodec: StandardMessageCodec(),
-          creationParams: <String, dynamic>{
-            "id": widget.placementId,
-            "banner_ad":
-                widget.adType == NativeAdType.NATIVE_BANNER_AD ? true : false,
-            // height param is only for Banner Ads. Native Ad's height is
-            // governed by container.
-            "height": widget.bannerAdSize.height,
-            "bg_color": widget.backgroundColor == null
-                ? null
-                : _getHexStringFromColor(widget.backgroundColor!),
-            "title_color": widget.titleColor == null
-                ? null
-                : _getHexStringFromColor(widget.titleColor!),
-            "desc_color": widget.descriptionColor == null
-                ? null
-                : _getHexStringFromColor(widget.descriptionColor!),
-            "label_color": widget.labelColor == null
-                ? null
-                : _getHexStringFromColor(widget.labelColor!),
-            "button_color": widget.buttonColor == null
-                ? null
-                : _getHexStringFromColor(widget.buttonColor!),
-            "button_title_color": widget.buttonTitleColor == null
-                ? null
-                : _getHexStringFromColor(widget.buttonTitleColor!),
-            "button_border_color": widget.buttonBorderColor == null
-                ? null
-                : _getHexStringFromColor(widget.buttonBorderColor!),
+          surfaceFactory:
+              (BuildContext context, PlatformViewController controller) {
+            return AndroidViewSurface(
+              controller: controller as AndroidViewController,
+              gestureRecognizers: const <
+                  Factory<OneSequenceGestureRecognizer>>{},
+              hitTestBehavior: PlatformViewHitTestBehavior.opaque,
+            );
+          },
+          onCreatePlatformView: (PlatformViewCreationParams params) {
+            return PlatformViewsService.initSurfaceAndroidView(
+              id: params.id,
+              viewType: NATIVE_AD_CHANNEL,
+              layoutDirection: TextDirection.ltr,
+              creationParams: creationParams,
+              creationParamsCodec: StandardMessageCodec(),
+              onFocus: () {
+                params.onFocusChanged(true);
+              },
+            )
+              ..addOnPlatformViewCreatedListener(params.onPlatformViewCreated)
+              ..addOnPlatformViewCreatedListener(_onNativeAdViewCreated)
+              ..create();
           },
         ),
       );
@@ -235,37 +262,7 @@ class _FacebookNativeAdState extends State<FacebookNativeAd>
           viewType: _getChannelRegisterId(),
           onPlatformViewCreated: _onNativeAdViewCreated,
           creationParamsCodec: StandardMessageCodec(),
-          creationParams: <String, dynamic>{
-            "id": widget.placementId,
-            "ad_type": widget.adType.index,
-            "banner_ad":
-                widget.adType == NativeAdType.NATIVE_BANNER_AD ? true : false,
-            "height": widget.adType == NativeAdType.NATIVE_BANNER_AD
-                ? widget.bannerAdSize.height
-                : widget.height,
-            "bg_color": widget.backgroundColor == null
-                ? null
-                : _getHexStringFromColor(widget.backgroundColor!),
-            "title_color": widget.titleColor == null
-                ? null
-                : _getHexStringFromColor(widget.titleColor!),
-            "desc_color": widget.descriptionColor == null
-                ? null
-                : _getHexStringFromColor(widget.descriptionColor!),
-            "label_color": widget.labelColor == null
-                ? null
-                : _getHexStringFromColor(widget.labelColor!),
-            "button_color": widget.buttonColor == null
-                ? null
-                : _getHexStringFromColor(widget.buttonColor!),
-            "button_title_color": widget.buttonTitleColor == null
-                ? null
-                : _getHexStringFromColor(widget.buttonTitleColor!),
-            "button_border_color": widget.buttonBorderColor == null
-                ? null
-                : _getHexStringFromColor(widget.buttonBorderColor!),
-            "is_media_cover": widget.isMediaCover,
-          },
+          creationParams: creationParams,
         ),
       );
     } else {
@@ -327,7 +324,6 @@ class _FacebookNativeAdState extends State<FacebookNativeAd>
       }
 
       return Future<dynamic>.value(true);
-
     });
   }
 }

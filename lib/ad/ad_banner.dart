@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
 import 'package:facebook_audience_network/constants.dart';
@@ -90,39 +92,53 @@ class _FacebookBannerAdState extends State<FacebookBannerAd>
   @override
   Widget build(BuildContext context) {
     super.build(context);
+    final Map<String, dynamic> creationParams = <String, dynamic>{
+      "id": widget.placementId,
+      "width": widget.bannerSize.width,
+      "height": widget.bannerSize.height,
+    };
+
     if (defaultTargetPlatform == TargetPlatform.android) {
       return Container(
         height: containerHeight,
         color: Colors.transparent,
-        child: AndroidView(
+        child: PlatformViewLink(
           viewType: BANNER_AD_CHANNEL,
-          onPlatformViewCreated: _onBannerAdViewCreated,
-          creationParams: <String, dynamic>{
-            "id": widget.placementId,
-            "width": widget.bannerSize.width,
-            "height": widget.bannerSize.height,
+          surfaceFactory:
+              (BuildContext context, PlatformViewController controller) {
+            return AndroidViewSurface(
+              controller: controller as AndroidViewController,
+              gestureRecognizers: const <
+                  Factory<OneSequenceGestureRecognizer>>{},
+              hitTestBehavior: PlatformViewHitTestBehavior.opaque,
+            );
           },
-          creationParamsCodec: StandardMessageCodec(),
+          onCreatePlatformView: (PlatformViewCreationParams params) {
+            return PlatformViewsService.initSurfaceAndroidView(
+              id: params.id,
+              viewType: BANNER_AD_CHANNEL,
+              layoutDirection: TextDirection.ltr,
+              creationParams: creationParams,
+              creationParamsCodec: StandardMessageCodec(),
+              onFocus: () {
+                params.onFocusChanged(true);
+              },
+            )
+              ..addOnPlatformViewCreatedListener(params.onPlatformViewCreated)
+              ..addOnPlatformViewCreatedListener(_onBannerAdViewCreated)
+              ..create();
+          },
         ),
       );
     } else if (defaultTargetPlatform == TargetPlatform.iOS) {
       return Container(
         height: containerHeight,
         color: Colors.transparent,
-        child: Container(
-          width: widget.bannerSize.width.toDouble(),
-          child: Center(
-            child: UiKitView(
-              viewType: BANNER_AD_CHANNEL,
-              onPlatformViewCreated: _onBannerAdViewCreated,
-              creationParams: <String, dynamic>{
-                "id": widget.placementId,
-                "width": widget.bannerSize.width,
-                "height": widget.bannerSize.height,
-              },
-              creationParamsCodec: StandardMessageCodec(),
-            ),
-          ),
+        child: UiKitView(
+          viewType: BANNER_AD_CHANNEL,
+          onPlatformViewCreated: _onBannerAdViewCreated,
+          creationParams: creationParams,
+          creationParamsCodec: StandardMessageCodec(),
         ),
       );
     } else {
@@ -140,9 +156,8 @@ class _FacebookBannerAdState extends State<FacebookBannerAd>
 
   void _onBannerAdViewCreated(int id) async {
     final channel = MethodChannel('${BANNER_AD_CHANNEL}_$id');
-    
-    channel.setMethodCallHandler((MethodCall call) {
 
+    channel.setMethodCallHandler((MethodCall call) {
       switch (call.method) {
         case ERROR_METHOD:
           if (widget.listener != null)
