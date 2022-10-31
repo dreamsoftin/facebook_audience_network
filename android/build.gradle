@@ -36,7 +36,11 @@ android {
 
 dependencies {
     implementation 'androidx.lifecycle:lifecycle-runtime:2.2.0'
-    implementation 'com.facebook.android:audience-network-sdk:6.+'
+    implementation('com.facebook.android:audience-network-sdk') {
+        version {
+            strictly '6.11.0'
+        }
+    }
     implementation 'androidx.annotation:annotation:1.1.0'
     compileOnly files('tempLibs/flutter.jar')
 }
