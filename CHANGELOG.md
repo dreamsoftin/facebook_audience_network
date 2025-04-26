@@ -1,11 +1,21 @@
+## 1.0.2
+
+- Upgraded to Flutter 3.27.3
+- Updated Android build configuration (Gradle 8.4, AndroidX libraries, Java 17)
+- Updated iOS dependencies (iOS 12.0 minimum, FBAudienceNetwork 6.14.0)
+- Updated Dart SDK constraints and dependencies
+
 ## 1.0.1
+
 - Support Android V2 embedding - PR by @anil-shrestha
 
 ## 1.0.0-nullsafety.0
+
 - Add nullsafety - PR by @RR-Reddy
 - Add support for iOSAdvertiserTrackingEnabled flag - default: false
 
 ## 0.9.0
+
 - Bumped up Audience Network SDK to v6.3.0
 
 ## 0.8.0

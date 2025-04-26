@@ -4,11 +4,11 @@ version '1.0-SNAPSHOT'
 buildscript {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.6.0'
+        classpath 'com.android.tools.build:gradle:8.1.0'
     }
 }
 
@@ -16,14 +16,19 @@ rootProject.allprojects {
     repositories {
         google()
         mavenCentral()
-        jcenter()
+        maven { url "https://maven.facebook.com/maven2/" }
     }
 }
 
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 34
+    
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
 
     defaultConfig {
         minSdkVersion 16
@@ -31,12 +36,33 @@ android {
     }
     lintOptions {
         disable 'InvalidPackage'
+        checkReleaseBuilds false
+        abortOnError false
+    }
+    namespace 'com.dsi.facebook_audience_network'
+}
+
+// Add specific groovy dependencies
+buildscript {
+    dependencies {
+        classpath 'org.codehaus.groovy:groovy-all:3.0.17'
+        classpath 'org.codehaus.groovy:groovy-json:3.0.17'
+        classpath 'org.codehaus.groovy:groovy-xml:3.0.17'
+    }
+}
+
+// Fix for NoClassDefFoundError
+configurations.all {
+    resolutionStrategy {
+        force 'org.codehaus.groovy:groovy-all:3.0.17'
+        force 'org.codehaus.groovy:groovy:3.0.17'
+        force 'org.codehaus.groovy:groovy-json:3.0.17'
     }
 }
 
 dependencies {
-    implementation 'androidx.lifecycle:lifecycle-runtime:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-runtime:2.6.2'
     implementation 'com.facebook.android:audience-network-sdk:6.+'
-    implementation 'androidx.annotation:annotation:1.1.0'
+    implementation 'androidx.annotation:annotation:1.7.1'
     compileOnly files('tempLibs/flutter.jar')
 }

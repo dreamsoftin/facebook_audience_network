@@ -1,9 +1,10 @@
 name: facebook_audience_network_example
 description: Demonstrates how to use the facebook_audience_network plugin.
-publish_to: 'none'
+publish_to: "none"
 
 environment:
-  sdk: '>=2.12.0 <3.0.0'
+  sdk: ">=2.17.0 <4.0.0"
+  flutter: ">=3.0.0"
 
 dependencies:
   flutter:
@@ -11,7 +12,7 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^0.1.2
+  cupertino_icons: ^1.0.5
 
 dev_dependencies:
   flutter_test:
@@ -20,13 +21,11 @@ dev_dependencies:
   facebook_audience_network:
     path: ../
 
-
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec
 
 # The following section is specific to Flutter.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

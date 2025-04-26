@@ -82,7 +82,17 @@ class FacebookBannerAd extends StatefulWidget {
 
 class _FacebookBannerAdState extends State<FacebookBannerAd>
     with AutomaticKeepAliveClientMixin {
-  double containerHeight = 0.5;
+  late double containerHeight;
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize container height to match the requested banner size
+    containerHeight = widget.bannerSize.height <= -1
+        ? double.infinity
+        : widget.bannerSize.height.toDouble();
+    print("containerHeight: $containerHeight");
+  }
 
   @override
   bool get wantKeepAlive => widget.keepAlive;
@@ -140,20 +150,19 @@ class _FacebookBannerAdState extends State<FacebookBannerAd>
 
   void _onBannerAdViewCreated(int id) async {
     final channel = MethodChannel('${BANNER_AD_CHANNEL}_$id');
-    
-    channel.setMethodCallHandler((MethodCall call) {
 
+    channel.setMethodCallHandler((MethodCall call) {
       switch (call.method) {
         case ERROR_METHOD:
           if (widget.listener != null)
             widget.listener!(BannerAdResult.ERROR, call.arguments);
           break;
         case LOADED_METHOD:
-          setState(() {
-            containerHeight = widget.bannerSize.height <= -1
-                ? double.infinity
-                : widget.bannerSize.height.toDouble();
-          });
+          // setState(() {
+          // containerHeight = widget.bannerSize.height <= -1
+          //     ? double.infinity
+          //     : widget.bannerSize.height.toDouble();
+          // });
           if (widget.listener != null)
             widget.listener!(BannerAdResult.LOADED, call.arguments);
           break;

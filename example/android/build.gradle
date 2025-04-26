@@ -1,18 +1,29 @@
 buildscript {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.6.1'
+        classpath 'com.android.tools.build:gradle:8.1.0'
     }
 }
 
 allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
+        maven { url "https://maven.facebook.com/maven2/" }
+    }
+
+    // Fix for Kotlin version conflicts
+    configurations.all {
+        resolutionStrategy {
+            force 'org.jetbrains.kotlin:kotlin-stdlib:1.8.10'
+            force 'org.jetbrains.kotlin:kotlin-stdlib-common:1.8.10'
+            force 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.10'
+            force 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.10'
+        }
     }
 }
 
@@ -24,6 +35,6 @@ subprojects {
     project.evaluationDependsOn(':app')
 }
 
-task clean(type: Delete) {
+tasks.register("clean", Delete) {
     delete rootProject.buildDir
 }
